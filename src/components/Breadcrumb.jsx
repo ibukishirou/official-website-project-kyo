@@ -8,7 +8,7 @@ const Breadcrumb = () => {
   const breadcrumbNameMap = {
     '': 'HOME',
     'profile': 'プロフィール',
-    'events': 'イベント実績',
+    'events': '実績',
     'guidelines': 'ガイドライン',
     'qa': 'Q&A',
     'commission': 'コミッション',

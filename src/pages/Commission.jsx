@@ -122,7 +122,7 @@ const Commission = () => {
             <h2 className={styles.sectionTitle}>注意事項</h2>
             
             <div className={styles.noticeSection}>
-              <h3 className={styles.noticeTitle}>▼お願い事項</h3>
+              <h3 className={styles.notesTitle}>お願い事項</h3>
               <ul className={styles.noticeList}>
                 <li>作成したい動画の縦横比にあった素材をご提出ください<br />　※意図的なものは除く(横動画をショートで使用など)</li>
                 <li>音声のみの素材は wavまたはmp3 でご提出ください</li>
@@ -131,7 +131,7 @@ const Commission = () => {
             </div>
 
             <div className={styles.noticeSection}>
-              <h3 className={styles.noticeTitle}>▼出来ない事項</h3>
+              <h3 className={styles.notesTitle}>出来ない事項</h3>
               <ul className={styles.noticeList}>
                 <li>３Dを使用するMV</li>
                 <li>完成後の修正<br />　※テロップミスなどは除く</li>
@@ -140,7 +140,7 @@ const Commission = () => {
             </div>
 
             <div className={styles.noticeSection}>
-              <h3 className={styles.noticeTitle}>▼キャンセルについて</h3>
+              <h3 className={styles.notesTitle}>キャンセルについて</h3>
               <p>基本的にお支払い後のキャンセルは受け付けておりません。</p>
             </div>
           </div>

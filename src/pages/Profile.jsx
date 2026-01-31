@@ -5,7 +5,7 @@ const Profile = () => {
   return (
     <div className={styles.profile}>
       <div className="container">
-        <h1 className={`section-title ${styles.gradientText}`}>プロフィール</h1>
+        <h1 className="section-title" style={{color: '#000000', fontWeight: 800}}>プロフィール</h1>
 
         {/* 画像セクション */}
         <section className={styles.imageSection}>

@@ -24,10 +24,7 @@
   font-size: 1.8rem;
   font-weight: 700;
   margin-bottom: var(--spacing-lg);
-  background: var(--gradient-primary);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: #000000;
 }
 
 .ruleList {

@@ -19,7 +19,7 @@ const Contact = () => {
   return (
     <div className={styles.contact}>
       <div className="container">
-        <h1 className={`section-title ${styles.gradientText}`}>問い合わせ</h1>
+        <h1 className="section-title" style={{color: '#000000', fontWeight: 800}}>問い合わせ</h1>
 
         <div className={styles.card}>
           <div className={styles.content}>

@@ -5,15 +5,18 @@
     "items": [
       {
         "title": "ときぱれ!Vol.15～VTuber ときめきパレード～",
-        "client": "株式会社Donuts"
+        "client": "株式会社Donuts",
+        "url": ""
       },
       {
         "title": "第二回トークライブ＆レジトーク Fandom Namba",
-        "client": "VTuberコネクション"
+        "client": "VTuberコネクション",
+        "url": ""
       },
       {
         "title": "東京ゲームショウ2025 クリエイターラウンジ招待",
-        "client": "レッドブルジャパン/TikTokLIVE"
+        "client": "レッドブルジャパン/TikTokLIVE",
+        "url": ""
       }
     ]
   },
@@ -23,11 +26,13 @@
     "items": [
       {
         "title": "TikTok LIVE Game Cup パズドラランキング",
-        "client": "TikTokLIVE"
+        "client": "TikTokLIVE",
+        "url": ""
       },
       {
         "title": "プロサックPR動画/冷却ファンPR動画",
-        "client": "株式会社しまリス堂"
+        "client": "株式会社しまリス堂",
+        "url": ""
       }
     ]
   }

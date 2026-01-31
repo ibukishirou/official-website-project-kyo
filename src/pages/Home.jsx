@@ -64,7 +64,7 @@ const Home = () => {
       {/* 自己紹介 */}
       <section className={`${styles.section} ${styles.introduction}`}>
         <div className="container">
-          <h2 className={`section-title ${styles.gradientText}`}>電脳少女 Kyo</h2>
+          <h2 className="section-title" style={{color: '#000000', fontWeight: 800}}>電脳少女 Kyo</h2>
           <div className={styles.introContent}>
             <p>
               2次元と3次元を行き来できる元気なお姉さん系電脳少女。
@@ -87,7 +87,7 @@ const Home = () => {
       {/* 歌ってみた */}
       <section className={`${styles.section} ${styles.songs}`}>
         <div className="container">
-          <h2 className={`section-title ${styles.gradientText}`}>歌ってみた</h2>
+          <h2 className="section-title" style={{color: '#000000', fontWeight: 800}}>歌ってみた</h2>
           <div className={styles.songsGrid}>
             {songsData.map((song) => (
               <a
@@ -114,7 +114,7 @@ const Home = () => {
       {/* リンク集 */}
       <section className={`${styles.section} ${styles.links}`}>
         <div className="container">
-          <h2 className={`section-title ${styles.gradientText}`}>リンク集</h2>
+          <h2 className="section-title" style={{color: '#000000', fontWeight: 800}}>リンク集</h2>
           <div className={styles.linksGrid}>
             {linksData.map((link) => (
               <a

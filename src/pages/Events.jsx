@@ -15,10 +15,39 @@ const Events = () => {
     return acc;
   }, {});
 
+  const renderItemCard = (item, index) => {
+    const CardContent = (
+      <>
+        <h4 className={styles.itemTitle}>{item.title}</h4>
+        <p className={styles.itemClient}>{item.client} 様</p>
+      </>
+    );
+
+    if (item.url) {
+      return (
+        <a
+          key={index}
+          href={item.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          className={styles.itemCard}
+        >
+          {CardContent}
+        </a>
+      );
+    }
+
+    return (
+      <div key={index} className={styles.itemCard}>
+        {CardContent}
+      </div>
+    );
+  };
+
   return (
     <div className={styles.events}>
       <div className="container">
-        <h1 className={`section-title ${styles.gradientText}`}>イベント実績</h1>
+        <h1 className="section-title" style={{color: '#000000', fontWeight: 800}}>実績</h1>
 
         <div className={styles.content}>
           <p className={styles.pageDescription}>
@@ -33,12 +62,7 @@ const Events = () => {
                 <div className={styles.categorySection}>
                   <h3 className={styles.categoryTitle}>イベント</h3>
                   <div className={styles.itemsGrid}>
-                    {data.events.map((item, index) => (
-                      <div key={index} className={styles.itemCard}>
-                        <h4 className={styles.itemTitle}>{item.title}</h4>
-                        <p className={styles.itemClient}>{item.client} 様</p>
-                      </div>
-                    ))}
+                    {data.events.map((item, index) => renderItemCard(item, index))}
                   </div>
                 </div>
               )}
@@ -47,12 +71,7 @@ const Events = () => {
                 <div className={styles.categorySection}>
                   <h3 className={styles.categoryTitle}>案件</h3>
                   <div className={styles.itemsGrid}>
-                    {data.projects.map((item, index) => (
-                      <div key={index} className={styles.itemCard}>
-                        <h4 className={styles.itemTitle}>{item.title}</h4>
-                        <p className={styles.itemClient}>{item.client} 様</p>
-                      </div>
-                    ))}
+                    {data.projects.map((item, index) => renderItemCard(item, index))}
                   </div>
                 </div>
               )}

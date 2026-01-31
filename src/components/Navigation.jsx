@@ -9,7 +9,7 @@ const Navigation = () => {
   const navItems = [
     { path: '/', label: 'HOME' },
     { path: '/profile', label: 'プロフィール' },
-    { path: '/events', label: 'イベント実績' },
+    { path: '/events', label: '実績' },
     { path: '/guidelines', label: 'ガイドライン' },
     { path: '/qa', label: 'Q&A' },
     { path: '/commission', label: 'コミッション' },
