@@ -4,7 +4,7 @@ const Guidelines = () => {
   return (
     <div className={styles.guidelines}>
       <div className="container">
-        <h1 className="section-title" style={{color: '#000000', fontWeight: 800}}>各種ガイドライン</h1>
+        <h1 className="section-title" style={{color: '#333333', fontWeight: 800}}>各種ガイドライン</h1>
 
         {/* 配信ルール */}
         <section className={styles.section}>

@@ -17,10 +17,7 @@
   font-size: 1.8rem;
   font-weight: 700;
   margin-bottom: var(--spacing-lg);
-  background: var(--gradient-primary);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: #333333;
 }
 
 /* メニュー */
@@ -188,7 +185,7 @@
 
 /* 注意事項 */
 .noticeSection {
-  margin-bottom: var(--spacing-lg);
+  margin-bottom: var(--spacing-xl);
 }
 
 .noticeSection:last-child {
@@ -202,16 +199,34 @@
   color: var(--text-primary);
 }
 
+.notesTitle {
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-bottom: var(--spacing-md);
+  color: #333333;
+}
+
+.noticeSection p {
+  padding: var(--spacing-md);
+  background: var(--bg-secondary);
+  border-radius: var(--border-radius-sm);
+  border-left: 4px solid transparent;
+  border-image: var(--gradient-primary) 1;
+  line-height: 1.6;
+}
+
 .noticeList {
   list-style: none;
-  padding-left: 0;
+  padding: 0;
 }
 
 .noticeList li {
-  padding: var(--spacing-sm) var(--spacing-md);
-  border-left: 3px solid transparent;
-  border-image: var(--gradient-primary) 1;
+  padding: var(--spacing-md);
   margin-bottom: var(--spacing-sm);
+  background: var(--bg-secondary);
+  border-radius: var(--border-radius-sm);
+  border-left: 4px solid transparent;
+  border-image: var(--gradient-primary) 1;
   line-height: 1.6;
 }
 

@@ -56,7 +56,7 @@ const Commission = () => {
   return (
     <div className={styles.commission}>
       <div className="container">
-        <h1 className={`section-title ${styles.gradientText}`}>コミッション</h1>
+        <h1 className="section-title" style={{color: '#333333', fontWeight: 800}}>コミッション</h1>
 
         {/* メニュー */}
         <section className={styles.section}>

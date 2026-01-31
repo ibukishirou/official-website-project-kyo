@@ -47,7 +47,7 @@ const Events = () => {
   return (
     <div className={styles.events}>
       <div className="container">
-        <h1 className="section-title" style={{color: '#000000', fontWeight: 800}}>実績</h1>
+        <h1 className="section-title" style={{color: '#333333', fontWeight: 800}}>実績</h1>
 
         <div className={styles.content}>
           <p className={styles.pageDescription}>

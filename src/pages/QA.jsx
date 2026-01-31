@@ -5,7 +5,7 @@ const QA = () => {
   return (
     <div className={styles.qa}>
       <div className="container">
-        <h1 className="section-title" style={{color: '#000000', fontWeight: 800}}>Q&A</h1>
+        <h1 className="section-title" style={{color: '#333333', fontWeight: 800}}>Q&A</h1>
 
         <div className={styles.qaList}>
           {qaData.map((item) => (
