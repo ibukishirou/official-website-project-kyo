@@ -146,10 +146,10 @@ const Profile = () => {
                       rel="noopener noreferrer"
                       className={styles.creditLink}
                     >
-                      {creditsData.characterDesign.name}
+                      {creditsData.characterDesign.name}様
                     </a>
                   ) : (
-                    creditsData.characterDesign.name
+                    `${creditsData.characterDesign.name}様`
                   )}
                 </dd>
               </div>
@@ -163,10 +163,10 @@ const Profile = () => {
                       rel="noopener noreferrer"
                       className={styles.creditLink}
                     >
-                      {creditsData.live2dIllustration.name}
+                      {creditsData.live2dIllustration.name}様
                     </a>
                   ) : (
-                    creditsData.live2dIllustration.name
+                    `${creditsData.live2dIllustration.name}様`
                   )}
                 </dd>
               </div>
@@ -180,10 +180,10 @@ const Profile = () => {
                       rel="noopener noreferrer"
                       className={styles.creditLink}
                     >
-                      {creditsData.modeling.name}
+                      {creditsData.modeling.name}様
                     </a>
                   ) : (
-                    creditsData.modeling.name
+                    `${creditsData.modeling.name}様`
                   )}
                 </dd>
               </div>
@@ -197,10 +197,10 @@ const Profile = () => {
                       rel="noopener noreferrer"
                       className={styles.creditLink}
                     >
-                      {creditsData.logo.name}
+                      {creditsData.logo.name}様
                     </a>
                   ) : (
-                    creditsData.logo.name
+                    `${creditsData.logo.name}様`
                   )}
                 </dd>
               </div>

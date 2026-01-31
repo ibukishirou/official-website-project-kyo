@@ -19,6 +19,21 @@ const Home = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  const getIconName = (serviceName) => {
+    const iconMap = {
+      'TikTok': 'tiktok',
+      'YouTube': 'youtube',
+      'Instagram': 'instagram',
+      'Bluesky': 'globe',
+      'X (main)': 'x',
+      'X (交流)': 'x',
+      'Booth': 'shopping-bag',
+      '欲しいものリスト': 'gift',
+      'マシュマロ': 'message-circle'
+    };
+    return iconMap[serviceName] || 'link';
+  };
+
   const getYouTubeVideoId = (url) => {
     const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
     const match = url.match(regExp);
@@ -108,19 +123,10 @@ const Home = () => {
                 target="_blank"
                 rel="noopener noreferrer"
                 className={styles.linkCard}
+                title={link.name}
               >
+                <i className={`ei ei-${getIconName(link.name)} ${styles.linkIcon}`}></i>
                 <span className={styles.linkName}>{link.name}</span>
-                <svg
-                  className={styles.linkIcon}
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                >
-                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
-                  <polyline points="15 3 21 3 21 9" />
-                  <line x1="10" y1="14" x2="21" y2="3" />
-                </svg>
               </a>
             ))}
           </div>

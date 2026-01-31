@@ -2,6 +2,57 @@ import commissionData from '../data/commission.json';
 import styles from './Commission.module.css';
 
 const Commission = () => {
+  const getYouTubeVideoId = (url) => {
+    const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
+    const match = url.match(regExp);
+    return match && match[2].length === 11 ? match[2] : null;
+  };
+
+  const getTikTokVideoId = (url) => {
+    const match = url.match(/video\/(\d+)/);
+    return match ? match[1] : null;
+  };
+
+  const renderPreview = (url) => {
+    if (!url) return null;
+
+    if (url.includes('youtube.com') || url.includes('youtu.be')) {
+      const videoId = getYouTubeVideoId(url);
+      if (videoId) {
+        return (
+          <div className={styles.videoPreview}>
+            <iframe
+              src={`https://www.youtube.com/embed/${videoId}`}
+              title="YouTube video"
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+              className={styles.videoIframe}
+            ></iframe>
+          </div>
+        );
+      }
+    }
+
+    if (url.includes('tiktok.com')) {
+      return (
+        <div className={styles.videoPreview}>
+          <a 
+            href={url} 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className={styles.tiktokLink}
+          >
+            <i className="ei ei-tiktok" style={{ fontSize: '3rem' }}></i>
+            <span>TikTokで見る</span>
+          </a>
+        </div>
+      );
+    }
+
+    return null;
+  };
+
   return (
     <div className={styles.commission}>
       <div className="container">
@@ -11,24 +62,31 @@ const Commission = () => {
         <section className={styles.section}>
           <h2 className={styles.sectionTitle}>メニュー</h2>
           <div className={styles.menuGrid}>
-            {commissionData.map((item) => (
-              <div key={item.id} className={styles.menuCard}>
-                <div className={styles.menuHeader}>
-                  <h3 className={styles.menuName}>{item.menuName}</h3>
-                  {item.price && <p className={styles.menuPrice}>{item.price}</p>}
-                </div>
-                <p className={styles.menuDescription} style={{ whiteSpace: 'pre-line' }}>
-                  {item.description}
-                </p>
-                {item.referenceUrl && (
-                  <div className={styles.referenceLink}>
-                    <a href={item.referenceUrl} target="_blank" rel="noopener noreferrer">
-                      {item.referenceTitle || '参考作品を見る'}
-                    </a>
+            {commissionData.map((item) => {
+              const hasPreview = item.referenceUrl && item.id <= 4;
+              
+              return (
+                <div key={item.id} className={`${styles.menuCard} ${hasPreview ? styles.menuCardWithPreview : ''}`}>
+                  <div className={styles.menuContent}>
+                    <div className={styles.menuHeader}>
+                      <h3 className={styles.menuName}>{item.menuName}</h3>
+                      {item.price && <p className={styles.menuPrice}>{item.price}</p>}
+                    </div>
+                    <p className={styles.menuDescription} style={{ whiteSpace: 'pre-line' }}>
+                      {item.description}
+                    </p>
+                    {item.referenceUrl && !hasPreview && (
+                      <div className={styles.referenceLink}>
+                        <a href={item.referenceUrl} target="_blank" rel="noopener noreferrer">
+                          {item.referenceTitle || '参考作品を見る'}
+                        </a>
+                      </div>
+                    )}
                   </div>
-                )}
-              </div>
-            ))}
+                  {hasPreview && renderPreview(item.referenceUrl)}
+                </div>
+              );
+            })}
           </div>
         </section>
 
@@ -37,11 +95,11 @@ const Commission = () => {
           <div className={styles.card}>
             <h2 className={styles.sectionTitle}>ご依頼の流れ</h2>
             <ol className={styles.flowList}>
-              <li>ご依頼内容の確認/お見積り</li>
-              <li>お支払い</li>
-              <li>着手</li>
-              <li>提出/修正</li>
-              <li>納品</li>
+              <li><span className={styles.flowNumber}>1</span><span className={styles.flowText}>ご依頼内容の確認/お見積り</span></li>
+              <li><span className={styles.flowNumber}>2</span><span className={styles.flowText}>お支払い</span></li>
+              <li><span className={styles.flowNumber}>3</span><span className={styles.flowText}>着手</span></li>
+              <li><span className={styles.flowNumber}>4</span><span className={styles.flowText}>提出/修正</span></li>
+              <li><span className={styles.flowNumber}>5</span><span className={styles.flowText}>納品</span></li>
             </ol>
           </div>
         </section>

@@ -28,7 +28,17 @@ const Navigation = () => {
     <nav className={styles.nav}>
       <div className={styles.container}>
         <Link to="/" className={styles.logo}>
-          <span className={styles.logoText}>響-Kyo-</span>
+          <img 
+            src="/official-website-project-kyo/images/logo-header.webp" 
+            alt="響-Kyo-" 
+            className={styles.logoImage}
+            onError={(e) => {
+              // フォールバック: 画像が読み込めない場合はテキストを表示
+              e.target.style.display = 'none';
+              e.target.nextElementSibling.style.display = 'block';
+            }}
+          />
+          <span className={styles.logoText} style={{ display: 'none' }}>響-Kyo-</span>
         </Link>
 
         {/* デスクトップメニュー */}

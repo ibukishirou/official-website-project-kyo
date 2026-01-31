@@ -10,24 +10,20 @@
 }
 
 .content {
-  background: var(--bg-primary);
-  border-radius: var(--border-radius-lg);
-  padding: var(--spacing-xl);
-  box-shadow: var(--shadow-md);
+  max-width: 1000px;
+  margin: 0 auto;
 }
 
-.mainTitle {
-  font-size: 1.8rem;
-  font-weight: 700;
-  margin-bottom: var(--spacing-xl);
-  background: var(--gradient-primary);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+.pageDescription {
+  text-align: center;
+  font-size: 1.1rem;
+  color: var(--text-secondary);
+  margin-bottom: var(--spacing-3xl);
+  line-height: 1.8;
 }
 
 .yearSection {
-  margin-bottom: var(--spacing-xl);
+  margin-bottom: var(--spacing-3xl);
 }
 
 .yearSection:last-child {
@@ -35,51 +31,83 @@
 }
 
 .yearTitle {
-  font-size: 1.5rem;
-  font-weight: 700;
-  margin-bottom: var(--spacing-lg);
-  color: var(--text-primary);
+  font-size: 2rem;
+  font-weight: 800;
+  margin-bottom: var(--spacing-xl);
+  text-align: center;
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .categorySection {
-  margin-bottom: var(--spacing-lg);
+  margin-bottom: var(--spacing-2xl);
+}
+
+.categorySection:last-child {
+  margin-bottom: 0;
 }
 
 .categoryTitle {
-  font-size: 1.2rem;
+  font-size: 1.5rem;
   font-weight: 700;
-  margin-bottom: var(--spacing-md);
-  color: var(--text-secondary);
+  margin-bottom: var(--spacing-lg);
+  padding-bottom: var(--spacing-sm);
+  border-bottom: 3px solid transparent;
+  border-image: var(--gradient-primary) 1;
+  display: inline-block;
 }
 
-.itemList {
-  padding-left: var(--spacing-md);
+.itemsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: var(--spacing-lg);
 }
 
-.item {
-  margin-bottom: var(--spacing-md);
-  line-height: 1.6;
+.itemCard {
+  background: var(--bg-primary);
+  padding: var(--spacing-lg);
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--shadow-sm);
+  transition: all var(--transition-base);
+  border-left: 4px solid transparent;
+  border-image: var(--gradient-primary) 1;
+}
+
+.itemCard:hover {
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-4px);
 }
 
 .itemTitle {
-  font-weight: 500;
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: var(--spacing-sm);
+  line-height: 1.5;
+  color: var(--text-primary);
 }
 
 .itemClient {
-  color: var(--text-secondary);
   font-size: 0.95rem;
+  color: var(--text-secondary);
+  font-weight: 500;
 }
 
 @media (max-width: 768px) {
-  .mainTitle {
+  .yearTitle {
     font-size: 1.5rem;
   }
 
-  .yearTitle {
+  .categoryTitle {
     font-size: 1.3rem;
   }
 
-  .categoryTitle {
-    font-size: 1.1rem;
+  .itemsGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .pageDescription {
+    font-size: 1rem;
   }
 }

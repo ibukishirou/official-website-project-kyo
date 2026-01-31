@@ -26,7 +26,7 @@
 /* メニュー */
 .menuGrid {
   display: grid;
-  gap: var(--spacing-lg);
+  gap: var(--spacing-xl);
 }
 
 .menuCard {
@@ -37,16 +37,29 @@
   transition: transform var(--transition-base), box-shadow var(--transition-base);
 }
 
+.menuCardWithPreview {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--spacing-xl);
+  align-items: start;
+}
+
 .menuCard:hover {
   transform: translateY(-4px);
   box-shadow: var(--shadow-lg);
+}
+
+.menuContent {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
 }
 
 .menuHeader {
   display: flex;
   justify-content: space-between;
   align-items: baseline;
-  margin-bottom: var(--spacing-md);
+  margin-bottom: var(--spacing-sm);
   flex-wrap: wrap;
   gap: var(--spacing-sm);
 }
@@ -65,7 +78,40 @@
 .menuDescription {
   line-height: 1.8;
   color: var(--text-secondary);
-  margin-bottom: var(--spacing-md);
+  font-weight: 500;
+}
+
+.videoPreview {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: var(--border-radius-md);
+  overflow: hidden;
+  background: var(--bg-secondary);
+}
+
+.videoIframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+.tiktokLink {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-md);
+  background: var(--gradient-primary);
+  color: var(--text-white);
+  font-weight: 700;
+  font-size: 1.1rem;
+  transition: opacity var(--transition-base);
+}
+
+.tiktokLink:hover {
+  opacity: 0.8;
 }
 
 .referenceLink a {
@@ -74,7 +120,7 @@
   background: var(--gradient-primary);
   color: var(--text-white);
   border-radius: var(--border-radius-full);
-  font-weight: 500;
+  font-weight: 600;
   transition: opacity var(--transition-fast);
 }
 
@@ -99,28 +145,31 @@
 }
 
 .flowList li {
-  counter-increment: flow-counter;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-lg);
   padding: var(--spacing-md);
-  padding-left: var(--spacing-2xl);
   background: var(--bg-secondary);
   border-radius: var(--border-radius-sm);
-  position: relative;
-  font-weight: 500;
 }
 
-.flowList li::before {
-  content: counter(flow-counter);
-  position: absolute;
-  left: var(--spacing-md);
-  width: 32px;
-  height: 32px;
+.flowNumber {
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
   background: var(--gradient-primary);
   color: var(--text-white);
   border-radius: var(--border-radius-full);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-weight: 700;
+  font-weight: 800;
+  font-size: 1.2rem;
+}
+
+.flowText {
+  font-weight: 600;
+  flex: 1;
 }
 
 /* 支払いリスト */
@@ -134,7 +183,7 @@
   padding: var(--spacing-md);
   background: var(--bg-secondary);
   border-radius: var(--border-radius-sm);
-  font-weight: 500;
+  font-weight: 600;
 }
 
 /* 注意事項 */
@@ -159,8 +208,7 @@
 }
 
 .noticeList li {
-  padding: var(--spacing-sm) 0;
-  padding-left: var(--spacing-md);
+  padding: var(--spacing-sm) var(--spacing-md);
   border-left: 3px solid transparent;
   border-image: var(--gradient-primary) 1;
   margin-bottom: var(--spacing-sm);
@@ -199,6 +247,13 @@
 .linkCard p {
   font-size: 1rem;
   opacity: 0.9;
+  font-weight: 500;
+}
+
+@media (max-width: 1024px) {
+  .menuCardWithPreview {
+    grid-template-columns: 1fr;
+  }
 }
 
 @media (max-width: 768px) {
