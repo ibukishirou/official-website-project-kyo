@@ -78,6 +78,7 @@
   width: 24px;
   height: 24px;
   color: var(--text-primary);
+  fill: currentColor;
 }
 
 .shareItem:hover {

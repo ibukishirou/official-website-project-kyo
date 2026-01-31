@@ -11,16 +11,21 @@ const Profile = () => {
         <section className={styles.imageSection}>
           <div className={styles.imageGrid}>
             <div className={styles.imageCard}>
-              <div className={styles.imagePlaceholder}>
-                {/* TODO: キービジュアル_00(通常).png */}
-                <p>立ち絵</p>
-              </div>
+              <picture>
+                <source media="(max-width: 768px)" srcSet="/images/key-visual-mobile.webp" />
+                <img 
+                  src="/images/key-visual.webp" 
+                  alt="響-Kyo- 立ち絵" 
+                  className={styles.characterImage}
+                />
+              </picture>
             </div>
             <div className={styles.imageCard}>
-              <div className={styles.imagePlaceholder}>
-                {/* TODO: 三面図_アビスモデル(AI学習防止).png */}
-                <p>三面図</p>
-              </div>
+              <img 
+                src="/images/three-view.webp" 
+                alt="響-Kyo- 三面図" 
+                className={styles.characterImage}
+              />
             </div>
           </div>
         </section>
@@ -33,10 +38,11 @@ const Profile = () => {
             rel="noopener noreferrer"
             className={styles.raidoriLink}
           >
-            <div className={styles.raidoriBanner}>
-              {/* TODO: ライドリ.png */}
-              <p>ライドリ - 支援サイト</p>
-            </div>
+            <img 
+              src="/images/raidori.webp" 
+              alt="ライドリ - 支援サイト" 
+              className={styles.raidoriImage}
+            />
           </a>
         </section>
 
@@ -146,10 +152,10 @@ const Profile = () => {
                       rel="noopener noreferrer"
                       className={styles.creditLink}
                     >
-                      {creditsData.characterDesign.name}様
+                      {creditsData.characterDesign.name} 様
                     </a>
                   ) : (
-                    `${creditsData.characterDesign.name}様`
+                    `${creditsData.characterDesign.name} 様`
                   )}
                 </dd>
               </div>
@@ -163,10 +169,10 @@ const Profile = () => {
                       rel="noopener noreferrer"
                       className={styles.creditLink}
                     >
-                      {creditsData.live2dIllustration.name}様
+                      {creditsData.live2dIllustration.name} 様
                     </a>
                   ) : (
-                    `${creditsData.live2dIllustration.name}様`
+                    `${creditsData.live2dIllustration.name} 様`
                   )}
                 </dd>
               </div>
@@ -180,10 +186,10 @@ const Profile = () => {
                       rel="noopener noreferrer"
                       className={styles.creditLink}
                     >
-                      {creditsData.modeling.name}様
+                      {creditsData.modeling.name} 様
                     </a>
                   ) : (
-                    `${creditsData.modeling.name}様`
+                    `${creditsData.modeling.name} 様`
                   )}
                 </dd>
               </div>
@@ -197,10 +203,10 @@ const Profile = () => {
                       rel="noopener noreferrer"
                       className={styles.creditLink}
                     >
-                      {creditsData.logo.name}様
+                      {creditsData.logo.name} 様
                     </a>
                   ) : (
-                    `${creditsData.logo.name}様`
+                    `${creditsData.logo.name} 様`
                   )}
                 </dd>
               </div>

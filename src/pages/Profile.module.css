@@ -26,16 +26,11 @@
   box-shadow: var(--shadow-md);
 }
 
-.imagePlaceholder {
+.characterImage {
   width: 100%;
-  aspect-ratio: 3 / 4;
-  background: var(--gradient-secondary);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--text-white);
-  font-size: 1.5rem;
-  font-weight: 700;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
 
 /* ライドリセクション */
@@ -58,16 +53,10 @@
   box-shadow: var(--shadow-xl);
 }
 
-.raidoriBanner {
+.raidoriImage {
   width: 100%;
-  aspect-ratio: 16 / 9;
-  background: var(--gradient-primary);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--text-white);
-  font-size: 1.5rem;
-  font-weight: 700;
+  height: auto;
+  display: block;
 }
 
 /* カード */

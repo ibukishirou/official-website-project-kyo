@@ -19,19 +19,19 @@ const Home = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const getIconName = (serviceName) => {
+  const getIconClass = (serviceName) => {
     const iconMap = {
-      'TikTok': 'tiktok',
-      'YouTube': 'youtube',
-      'Instagram': 'instagram',
-      'Bluesky': 'globe',
-      'X (main)': 'x',
-      'X (交流)': 'x',
-      'Booth': 'shopping-bag',
-      '欲しいものリスト': 'gift',
-      'マシュマロ': 'message-circle'
+      'TikTok': 'fa-brands fa-tiktok',
+      'YouTube': 'fa-brands fa-youtube',
+      'Instagram': 'fa-brands fa-instagram',
+      'Bluesky': 'fa-brands fa-bluesky',
+      'X (main)': 'fa-brands fa-x-twitter',
+      'X (交流)': 'fa-brands fa-x-twitter',
+      'Booth': 'fa-solid fa-store',
+      '欲しいものリスト': 'fa-solid fa-gift',
+      'マシュマロ': 'fa-solid fa-envelope'
     };
-    return iconMap[serviceName] || 'link';
+    return iconMap[serviceName] || 'fa-solid fa-link';
   };
 
   const getYouTubeVideoId = (url) => {
@@ -49,12 +49,14 @@ const Home = () => {
     <div className={styles.home}>
       {/* ファーストビュー */}
       <section className={styles.hero}>
-        <div className={styles.heroImage}>
-          {/* TODO: 画像を配置 - /project-kyo/イラスト/ディスプレイ_02.png */}
-          <div className={styles.heroPlaceholder}>
-            <p className={styles.heroText}>響-Kyo-</p>
-          </div>
-        </div>
+        <picture className={styles.heroImage}>
+          <source media="(max-width: 768px)" srcSet="/images/display-mobile.webp" />
+          <img 
+            src="/images/display.webp" 
+            alt="響-Kyo-" 
+            className={styles.heroImg}
+          />
+        </picture>
         <div className={styles.scrollIndicator}>
           <div className={styles.scrollMouse}></div>
           <p>Scroll</p>
@@ -125,7 +127,7 @@ const Home = () => {
                 className={styles.linkCard}
                 title={link.name}
               >
-                <i className={`ei ei-${getIconName(link.name)} ${styles.linkIcon}`}></i>
+                <i className={`${getIconClass(link.name)} ${styles.linkIcon}`}></i>
                 <span className={styles.linkName}>{link.name}</span>
               </a>
             ))}
