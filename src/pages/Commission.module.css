@@ -1,0 +1,220 @@
+.commission {
+  padding: var(--spacing-2xl) 0;
+}
+
+.gradientText {
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.section {
+  margin-bottom: var(--spacing-3xl);
+}
+
+.sectionTitle {
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-bottom: var(--spacing-lg);
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* メニュー */
+.menuGrid {
+  display: grid;
+  gap: var(--spacing-lg);
+}
+
+.menuCard {
+  background: var(--bg-primary);
+  border-radius: var(--border-radius-lg);
+  padding: var(--spacing-xl);
+  box-shadow: var(--shadow-md);
+  transition: transform var(--transition-base), box-shadow var(--transition-base);
+}
+
+.menuCard:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+.menuHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: var(--spacing-md);
+  flex-wrap: wrap;
+  gap: var(--spacing-sm);
+}
+
+.menuName {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.menuPrice {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--color-magenta);
+}
+
+.menuDescription {
+  line-height: 1.8;
+  color: var(--text-secondary);
+  margin-bottom: var(--spacing-md);
+}
+
+.referenceLink a {
+  display: inline-block;
+  padding: var(--spacing-sm) var(--spacing-lg);
+  background: var(--gradient-primary);
+  color: var(--text-white);
+  border-radius: var(--border-radius-full);
+  font-weight: 500;
+  transition: opacity var(--transition-fast);
+}
+
+.referenceLink a:hover {
+  opacity: 0.8;
+}
+
+/* カード */
+.card {
+  background: var(--bg-primary);
+  border-radius: var(--border-radius-lg);
+  padding: var(--spacing-xl);
+  box-shadow: var(--shadow-md);
+}
+
+/* フローリスト */
+.flowList {
+  list-style: none;
+  counter-reset: flow-counter;
+  display: grid;
+  gap: var(--spacing-md);
+}
+
+.flowList li {
+  counter-increment: flow-counter;
+  padding: var(--spacing-md);
+  padding-left: var(--spacing-2xl);
+  background: var(--bg-secondary);
+  border-radius: var(--border-radius-sm);
+  position: relative;
+  font-weight: 500;
+}
+
+.flowList li::before {
+  content: counter(flow-counter);
+  position: absolute;
+  left: var(--spacing-md);
+  width: 32px;
+  height: 32px;
+  background: var(--gradient-primary);
+  color: var(--text-white);
+  border-radius: var(--border-radius-full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+}
+
+/* 支払いリスト */
+.paymentList {
+  list-style: none;
+  display: grid;
+  gap: var(--spacing-sm);
+}
+
+.paymentList li {
+  padding: var(--spacing-md);
+  background: var(--bg-secondary);
+  border-radius: var(--border-radius-sm);
+  font-weight: 500;
+}
+
+/* 注意事項 */
+.noticeSection {
+  margin-bottom: var(--spacing-lg);
+}
+
+.noticeSection:last-child {
+  margin-bottom: 0;
+}
+
+.noticeTitle {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-bottom: var(--spacing-md);
+  color: var(--text-primary);
+}
+
+.noticeList {
+  list-style: none;
+  padding-left: 0;
+}
+
+.noticeList li {
+  padding: var(--spacing-sm) 0;
+  padding-left: var(--spacing-md);
+  border-left: 3px solid transparent;
+  border-image: var(--gradient-primary) 1;
+  margin-bottom: var(--spacing-sm);
+  line-height: 1.6;
+}
+
+/* リンクカード */
+.linkCards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--spacing-lg);
+}
+
+.linkCard {
+  background: var(--gradient-primary);
+  color: var(--text-white);
+  border-radius: var(--border-radius-lg);
+  padding: var(--spacing-xl);
+  box-shadow: var(--shadow-md);
+  transition: transform var(--transition-base), box-shadow var(--transition-base);
+  text-align: center;
+}
+
+.linkCard:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-xl);
+  opacity: 1;
+}
+
+.linkCard h3 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: var(--spacing-sm);
+}
+
+.linkCard p {
+  font-size: 1rem;
+  opacity: 0.9;
+}
+
+@media (max-width: 768px) {
+  .sectionTitle {
+    font-size: 1.5rem;
+  }
+
+  .menuName {
+    font-size: 1.3rem;
+  }
+
+  .menuPrice {
+    font-size: 1.1rem;
+  }
+
+  .linkCards {
+    grid-template-columns: 1fr;
+  }
+}

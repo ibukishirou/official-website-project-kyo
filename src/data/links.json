@@ -1,0 +1,47 @@
+[
+  {
+    "id": 1,
+    "name": "TikTok",
+    "url": "https://www.tiktok.com/@project_kyo"
+  },
+  {
+    "id": 2,
+    "name": "YouTube",
+    "url": "https://www.youtube.com/@project_kyo"
+  },
+  {
+    "id": 3,
+    "name": "Instagram",
+    "url": "https://www.instagram.com/project__kyo/"
+  },
+  {
+    "id": 4,
+    "name": "Bluesky",
+    "url": "https://bsky.app/profile/project-kyo.bsky.social"
+  },
+  {
+    "id": 5,
+    "name": "X (main)",
+    "url": "https://x.com/project__kyo"
+  },
+  {
+    "id": 6,
+    "name": "X (交流)",
+    "url": "https://x.com/Kyo_sub0630"
+  },
+  {
+    "id": 7,
+    "name": "Booth",
+    "url": "https://thedepthpins.booth.pm/"
+  },
+  {
+    "id": 8,
+    "name": "欲しいものリスト",
+    "url": "https://www.amazon.co.jp/hz/wishlist/ls/2OZXJE6Y0OZY8?ref_=wl_share"
+  },
+  {
+    "id": 9,
+    "name": "マシュマロ",
+    "url": "https://marshmallow-qa.com/kyo_120630"
+  }
+]
