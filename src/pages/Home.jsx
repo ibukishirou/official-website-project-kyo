@@ -65,7 +65,6 @@ const Home = () => {
       {/* 自己紹介 */}
       <section className={`${styles.section} ${styles.introduction}`}>
         <div className="container">
-          <h2 className="section-title" style={{color: '#333333', fontWeight: 800}}>電脳少女 Kyo</h2>
           <div className={styles.introContent}>
             <p>キミと歩む日々が、ボクを成長させる。</p>
           </div>

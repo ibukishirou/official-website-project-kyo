@@ -1,11 +1,21 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import styles from './FloatingIcons.module.css';
 
 const FloatingIcons = () => {
   const [shareMenuOpen, setShareMenuOpen] = useState(false);
+  const [isClosing, setIsClosing] = useState(false);
 
   const toggleShareMenu = () => {
-    setShareMenuOpen(!shareMenuOpen);
+    if (shareMenuOpen) {
+      // 閉じる時はアニメーション後に状態を変更
+      setIsClosing(true);
+      setTimeout(() => {
+        setShareMenuOpen(false);
+        setIsClosing(false);
+      }, 300); // アニメーション時間に合わせる
+    } else {
+      setShareMenuOpen(true);
+    }
   };
 
   const shareToLine = () => {
@@ -70,8 +80,8 @@ const FloatingIcons = () => {
         </button>
 
         {/* 共有メニュー */}
-        {shareMenuOpen && (
-          <div className={styles.shareMenu}>
+        {(shareMenuOpen || isClosing) && (
+          <div className={`${styles.shareMenu} ${isClosing ? styles.closing : ''}`}>
             <button onClick={shareToLine} className={styles.shareItem} title="LINE">
               <i className="fa-brands fa-line"></i>
             </button>

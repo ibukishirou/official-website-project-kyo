@@ -18,7 +18,8 @@
 }
 
 .mainImage,
-.subImage {
+.subImage,
+.raidoriImage {
   border-radius: var(--border-radius-lg);
   overflow: hidden;
   box-shadow: var(--shadow-md);
@@ -31,25 +32,36 @@
   display: block;
 }
 
-/* 右カラム：情報 */
-.rightColumn {
-  display: flex;
-  flex-direction: column;
-  gap: 0;
+/* 三面図拡大ヒント */
+.threeViewWrapper {
+  position: relative;
+  cursor: pointer;
+  transition: transform var(--transition-base), box-shadow var(--transition-base);
 }
 
-/* ライドリセクション */
-.raidoriSection {
-  margin-bottom: var(--spacing-3xl);
+.threeViewWrapper:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
 }
 
+.expandHint {
+  position: absolute;
+  bottom: var(--spacing-sm);
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.6);
+  color: white;
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border-radius: var(--border-radius-sm);
+  font-size: 0.75rem;
+  font-weight: 500;
+  opacity: 0.8;
+  pointer-events: none;
+}
+
+/* ライドリ画像 */
 .raidoriLink {
   display: block;
-  max-width: 600px;
-  margin: 0 auto;
-  border-radius: var(--border-radius-lg);
-  overflow: hidden;
-  box-shadow: var(--shadow-md);
   transition: transform var(--transition-base), box-shadow var(--transition-base);
 }
 
@@ -58,10 +70,17 @@
   box-shadow: var(--shadow-xl);
 }
 
-.raidoriImage {
+.raidoriLink img {
   width: 100%;
   height: auto;
   display: block;
+}
+
+/* 右カラム：情報 */
+.rightColumn {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
 }
 
 /* カード */
@@ -125,6 +144,72 @@
   opacity: 0.7;
 }
 
+/* モーダル */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  padding: var(--spacing-lg);
+  animation: modalFadeIn 0.3s ease;
+}
+
+@keyframes modalFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.modalContent {
+  position: relative;
+  max-width: 90vw;
+  max-height: 90vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modalImage {
+  max-width: 100%;
+  max-height: 90vh;
+  object-fit: contain;
+  border-radius: var(--border-radius-md);
+}
+
+.modalClose {
+  position: absolute;
+  top: -40px;
+  right: 0;
+  background: rgba(255, 255, 255, 0.9);
+  border: none;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  font-size: 24px;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition-fast);
+  color: var(--text-primary);
+  font-weight: 700;
+}
+
+.modalClose:hover {
+  background: white;
+  transform: scale(1.1);
+}
+
 /* レスポンシブ */
 @media (max-width: 1024px) {
   .mainContent {
@@ -139,12 +224,13 @@
     gap: var(--spacing-xl);
   }
 
+  /* SPビューでは画像を最上部に配置 */
   .leftColumn {
-    order: 2;
+    order: 1;
   }
 
   .rightColumn {
-    order: 1;
+    order: 2;
   }
 
   .infoItem {
@@ -158,5 +244,9 @@
 
   .description {
     font-size: 1rem;
+  }
+
+  .modalClose {
+    top: -50px;
   }
 }

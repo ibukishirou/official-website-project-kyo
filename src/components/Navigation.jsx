@@ -33,7 +33,7 @@ const Navigation = () => {
             alt="響-Kyo-" 
             className={styles.logoImage}
           />
-          <span className={styles.logoText}>響 -Kyo-</span>
+          <span className={styles.logoText}>Project Kyo</span>
         </Link>
 
         {/* デスクトップメニュー */}

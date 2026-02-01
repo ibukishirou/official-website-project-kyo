@@ -1,11 +1,22 @@
+import { useState } from 'react';
 import creditsData from '../data/credits.json';
 import styles from './Profile.module.css';
 
 const Profile = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+
   return (
     <div className={styles.profile}>
       <div className="container">
-        <h1 className="section-title" style={{color: '#333333', fontWeight: 800}}>響-Kyo-</h1>
+        <h1 className="section-title" style={{color: '#333333', fontWeight: 800}}>プロフィール</h1>
 
         {/* メインコンテンツ（2カラム） */}
         <div className={styles.mainContent}>
@@ -22,11 +33,37 @@ const Profile = () => {
               </picture>
             </div>
             <div className={styles.subImage}>
-              <img 
-                src="./images/three-view.webp" 
-                alt="響-Kyo- 三面図" 
-                className={styles.characterImage}
-              />
+              <div 
+                className={styles.threeViewWrapper}
+                onClick={openModal}
+                role="button"
+                tabIndex={0}
+                onKeyPress={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    openModal();
+                  }
+                }}
+              >
+                <img 
+                  src="./images/three-view.webp" 
+                  alt="響-Kyo- 三面図" 
+                  className={styles.characterImage}
+                />
+                <p className={styles.expandHint}>クリックで拡大表示</p>
+              </div>
+            </div>
+            <div className={styles.raidoriImage}>
+              <a
+                href="https://raidori.com/@project__kyo"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={styles.raidoriLink}
+              >
+                <img 
+                  src="./images/raidori.webp" 
+                  alt="ライドリ - 支援サイト" 
+                />
+              </a>
             </div>
           </div>
 
@@ -201,23 +238,23 @@ const Profile = () => {
             </section>
           </div>
         </div>
-
-        {/* ライドリ（独立セクション） */}
-        <section className={styles.raidoriSection}>
-          <a
-            href="https://raidori.com/@project__kyo"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.raidoriLink}
-          >
-            <img 
-              src="./images/raidori.webp" 
-              alt="ライドリ - 支援サイト" 
-              className={styles.raidoriImage}
-            />
-          </a>
-        </section>
       </div>
+
+      {/* 拡大表示モーダル */}
+      {isModalOpen && (
+        <div className={styles.modal} onClick={closeModal}>
+          <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
+            <button className={styles.modalClose} onClick={closeModal} aria-label="閉じる">
+              ×
+            </button>
+            <img 
+              src="./images/three-view-full.png" 
+              alt="響-Kyo- 三面図（拡大）" 
+              className={styles.modalImage}
+            />
+          </div>
+        </div>
+      )}
     </div>
   );
 };
