@@ -64,17 +64,35 @@ const Commission = () => {
           <div className={styles.menuGrid}>
             {commissionData.map((item) => {
               const hasPreview = item.referenceUrl && item.id <= 4;
+              const isOptionCard = item.id === 5;
               
               return (
-                <div key={item.id} className={`${styles.menuCard} ${hasPreview ? styles.menuCardWithPreview : ''}`}>
+                <div key={item.id} className={`${styles.menuCard} ${hasPreview ? styles.menuCardWithPreview : ''} ${isOptionCard ? styles.optionCard : ''}`}>
                   <div className={styles.menuContent}>
                     <div className={styles.menuHeader}>
                       <h3 className={styles.menuName}>{item.menuName}</h3>
                       {item.price && <p className={styles.menuPrice}>{item.price}</p>}
                     </div>
-                    <p className={styles.menuDescription} style={{ whiteSpace: 'pre-line' }}>
-                      {item.description}
-                    </p>
+                    {isOptionCard ? (
+                      <div className={styles.optionList}>
+                        {item.description.split('\n').map((line, index) => {
+                          const match = line.match(/^(.+?)(＋.+)$/);
+                          if (match) {
+                            return (
+                              <div key={index} className={styles.optionItem}>
+                                <span className={styles.optionLabel}>{match[1]}</span>
+                                <span className={styles.optionPrice}>{match[2]}</span>
+                              </div>
+                            );
+                          }
+                          return <div key={index} className={styles.optionItem}>{line}</div>;
+                        })}
+                      </div>
+                    ) : (
+                      <p className={styles.menuDescription} style={{ whiteSpace: 'pre-line' }}>
+                        {item.description}
+                      </p>
+                    )}
                     {item.referenceUrl && !hasPreview && (
                       <div className={styles.referenceLink}>
                         <a href={item.referenceUrl} target="_blank" rel="noopener noreferrer">
@@ -124,7 +142,7 @@ const Commission = () => {
             <div className={styles.noticeSection}>
               <h3 className={styles.notesTitle}>お願い事項</h3>
               <ul className={styles.noticeList}>
-                <li>作成したい動画の縦横比にあった素材をご提出ください<br />　※意図的なものは除く(横動画をショートで使用など)</li>
+                <li>作成したい動画の縦横比にあった素材をご提出ください<br />※意図的なものは除く(横動画をショートで使用など)</li>
                 <li>音声のみの素材は wavまたはmp3 でご提出ください</li>
                 <li>やり取りが遅くなると納品も遅れます、できる限り迅速なやり取りをお願いします</li>
               </ul>
@@ -134,7 +152,7 @@ const Commission = () => {
               <h3 className={styles.notesTitle}>出来ない事項</h3>
               <ul className={styles.noticeList}>
                 <li>３Dを使用するMV</li>
-                <li>完成後の修正<br />　※テロップミスなどは除く</li>
+                <li>完成後の修正<br />※テロップミスなどは除く</li>
                 <li>投稿後の再生数などの担保</li>
               </ul>
             </div>

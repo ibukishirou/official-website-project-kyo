@@ -78,6 +78,40 @@
   font-weight: 500;
 }
 
+/* オプション専用スタイル */
+.optionList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+}
+
+.optionItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: var(--spacing-sm) 0;
+  border-bottom: 1px solid var(--bg-secondary);
+  line-height: 1.6;
+}
+
+.optionItem:last-child {
+  border-bottom: none;
+}
+
+.optionLabel {
+  flex: 1;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.optionPrice {
+  font-weight: 700;
+  color: var(--color-magenta);
+  white-space: nowrap;
+  margin-left: var(--spacing-md);
+  text-align: right;
+}
+
 .videoPreview {
   width: 100%;
   aspect-ratio: 16 / 9;

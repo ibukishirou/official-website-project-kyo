@@ -2,25 +2,23 @@
   padding: var(--spacing-2xl) 0;
 }
 
-.gradientText {
-  background: var(--gradient-primary);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-/* 画像セクション */
-.imageSection {
+/* メインコンテンツ（2カラムレイアウト） */
+.mainContent {
+  display: grid;
+  grid-template-columns: 400px 1fr;
+  gap: var(--spacing-2xl);
   margin-bottom: var(--spacing-3xl);
 }
 
-.imageGrid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+/* 左カラム：画像 */
+.leftColumn {
+  display: flex;
+  flex-direction: column;
   gap: var(--spacing-xl);
 }
 
-.imageCard {
+.mainImage,
+.subImage {
   border-radius: var(--border-radius-lg);
   overflow: hidden;
   box-shadow: var(--shadow-md);
@@ -28,9 +26,16 @@
 
 .characterImage {
   width: 100%;
-  height: 100%;
+  height: auto;
   object-fit: cover;
   display: block;
+}
+
+/* 右カラム：情報 */
+.rightColumn {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
 }
 
 /* ライドリセクション */
@@ -120,9 +125,26 @@
   opacity: 0.7;
 }
 
+/* レスポンシブ */
+@media (max-width: 1024px) {
+  .mainContent {
+    grid-template-columns: 350px 1fr;
+    gap: var(--spacing-xl);
+  }
+}
+
 @media (max-width: 768px) {
-  .imageGrid {
+  .mainContent {
     grid-template-columns: 1fr;
+    gap: var(--spacing-xl);
+  }
+
+  .leftColumn {
+    order: 2;
+  }
+
+  .rightColumn {
+    order: 1;
   }
 
   .infoItem {

@@ -25,8 +25,7 @@ const Home = () => {
       'YouTube': 'fa-brands fa-youtube',
       'Instagram': 'fa-brands fa-instagram',
       'Bluesky': 'fa-brands fa-bluesky',
-      'X (main)': 'fa-brands fa-x-twitter',
-      'X (交流)': 'fa-brands fa-x-twitter',
+      'X': 'fa-brands fa-x-twitter',
       'Booth': 'fa-solid fa-store',
       '欲しいものリスト': 'fa-solid fa-gift',
       'マシュマロ': 'fa-solid fa-envelope'
@@ -50,9 +49,9 @@ const Home = () => {
       {/* ファーストビュー */}
       <section className={styles.hero}>
         <picture className={styles.heroImage}>
-          <source media="(max-width: 768px)" srcSet="./images/display-mobile.webp" />
+          <source media="(max-width: 768px)" srcSet="./images/hero-mobile.webp" />
           <img 
-            src="./images/display.webp" 
+            src="./images/hero.webp" 
             alt="響-Kyo-" 
             className={styles.heroImg}
           />
@@ -68,47 +67,31 @@ const Home = () => {
         <div className="container">
           <h2 className="section-title" style={{color: '#333333', fontWeight: 800}}>電脳少女 Kyo</h2>
           <div className={styles.introContent}>
-            <p>
-              2次元と3次元を行き来できる元気なお姉さん系電脳少女。
-              <br />
-              イヤリングの安全ピンをトリガーに電脳世界の扉が開き、身体が電脳化した。
-              <br />
-              電脳世界ではふよふよ生きており、身体は23歳で固定されている。
-            </p>
-            <p>
-              得意のテトリスを中心にTikTokで配信活動中。
-              <br />
-              夢は「武道館でテトリス！」そして「トップVTokerになる！」
-              <br />
-              この夢を叶える為に、日々いろんな活動をしている。
-            </p>
+            <p>キミと歩む日々が、ボクを成長させる。</p>
           </div>
         </div>
       </section>
 
-      {/* 歌ってみた */}
-      <section className={`${styles.section} ${styles.songs}`}>
+      {/* ティザーPV */}
+      <section className={`${styles.section} ${styles.teaser}`}>
         <div className="container">
-          <h2 className="section-title" style={{color: '#333333', fontWeight: 800}}>歌ってみた</h2>
-          <div className={styles.songsGrid}>
-            {songsData.map((song) => (
-              <a
-                key={song.id}
-                href={song.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={styles.songCard}
-              >
-                <div className={styles.songThumbnail}>
-                  <img
-                    src={getYouTubeThumbnail(song.url)}
-                    alt={song.title}
-                    loading="lazy"
-                  />
-                </div>
-                <h3 className={styles.songTitle}>{song.title}</h3>
-              </a>
-            ))}
+          <h2 className="section-title" style={{color: '#333333', fontWeight: 800}}>ティザーPV</h2>
+          <div className={styles.teaserContent}>
+            <a
+              href="https://youtu.be/Toi-VQ41PAk"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.teaserCard}
+            >
+              <div className={styles.teaserThumbnail}>
+                <img
+                  src="https://img.youtube.com/vi/Toi-VQ41PAk/maxresdefault.jpg"
+                  alt="ティザーPV"
+                  loading="lazy"
+                />
+              </div>
+              <h3 className={styles.teaserTitle}>響-Kyo- ティザーPV</h3>
+            </a>
           </div>
         </div>
       </section>
