@@ -16,11 +16,11 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
     <title>響-Kyo- 公式サイト</title>
     <script>
-      // GitHub Pages用のSPAリダイレクト（404からの復元）
+      // GitHub Pages SPA対応：404.htmlからのリダイレクトを復元
       (function() {
-        var redirect = sessionStorage.redirect;
-        delete sessionStorage.redirect;
-        if (redirect && redirect !== location.href) {
+        var redirect = sessionStorage.getItem('redirect');
+        if (redirect) {
+          sessionStorage.removeItem('redirect');
           history.replaceState(null, null, redirect);
         }
       })();

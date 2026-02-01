@@ -2,13 +2,36 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>響-Kyo- 公式サイト</title>
   <script>
-    // GitHub Pages用のSPAリダイレクト
-    // 現在のURLをsessionStorageに保存してindex.htmlにリダイレクト
-    sessionStorage.redirect = location.href;
+    // GitHub Pages SPA対応
+    // 画像・CSS・JSなどのアセットファイルは除外し、HTMLルートのみリダイレクト
+    (function() {
+      var path = window.location.pathname;
+      var search = window.location.search;
+      
+      // 拡張子チェック：画像、CSS、JS、フォントなどは除外
+      var isAsset = /\.(jpg|jpeg|png|gif|webp|svg|css|js|json|woff|woff2|ttf|eot|ico)$/i.test(path);
+      
+      // images/などのディレクトリも除外
+      var isImagePath = /\/(images|assets|fonts)\//i.test(path);
+      
+      if (!isAsset && !isImagePath) {
+        // SPAルートの場合のみリダイレクト
+        var redirect = window.location.pathname;
+        if (search) {
+          redirect += search;
+        }
+        sessionStorage.setItem('redirect', redirect);
+        window.location.replace('/');
+      } else {
+        // アセットファイルの場合は404エラーを表示
+        document.write('<h1>404 - File Not Found</h1>');
+        document.write('<p>The requested file could not be found.</p>');
+      }
+    })();
   </script>
-  <meta http-equiv="refresh" content="0;URL='/'">
 </head>
 <body>
 </body>
