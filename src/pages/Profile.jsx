@@ -12,9 +12,9 @@ const Profile = () => {
           <div className={styles.imageGrid}>
             <div className={styles.imageCard}>
               <picture>
-                <source media="(max-width: 768px)" srcSet="/images/key-visual-mobile.webp" />
+                <source media="(max-width: 768px)" srcSet="./images/key-visual-mobile.webp" />
                 <img 
-                  src="/images/key-visual.webp" 
+                  src="./images/key-visual.webp" 
                   alt="響-Kyo- 立ち絵" 
                   className={styles.characterImage}
                 />
@@ -22,7 +22,7 @@ const Profile = () => {
             </div>
             <div className={styles.imageCard}>
               <img 
-                src="/images/three-view.webp" 
+                src="./images/three-view.webp" 
                 alt="響-Kyo- 三面図" 
                 className={styles.characterImage}
               />
@@ -39,7 +39,7 @@ const Profile = () => {
             className={styles.raidoriLink}
           >
             <img 
-              src="/images/raidori.webp" 
+              src="./images/raidori.webp" 
               alt="ライドリ - 支援サイト" 
               className={styles.raidoriImage}
             />

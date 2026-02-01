@@ -41,10 +41,10 @@
 }
 
 .logoText {
-  background: var(--gradient-primary);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: #333333;
+  font-weight: 700;
+  font-size: 1.2rem;
+  white-space: nowrap;
 }
 
 .desktopMenu {
