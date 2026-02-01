@@ -72,7 +72,7 @@ const Profile = () => {
             {/* プロフィール文 */}
             <section className={styles.descriptionSection}>
               <div className={styles.card}>
-                <h2 className={styles.sectionTitle}>電脳少女 Kyo</h2>
+                <h2 className={styles.sectionTitle}>プロフィール</h2>
                 <p className={styles.description}>
                   2次元と3次元を行き来できる元気なお姉さん系電脳少女。
                   <br />
