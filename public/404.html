@@ -19,12 +19,14 @@
       
       if (!isAsset && !isImagePath) {
         // SPAルートの場合のみリダイレクト
-        var redirect = window.location.pathname;
+        // GitHub Pagesのサブディレクトリ構造に対応
+        var basePath = '/official-website-project-kyo/';
+        var redirect = path.replace(basePath, '/');
         if (search) {
           redirect += search;
         }
         sessionStorage.setItem('redirect', redirect);
-        window.location.replace('/');
+        window.location.replace(basePath);
       } else {
         // アセットファイルの場合は404エラーを表示
         document.write('<h1>404 - File Not Found</h1>');
