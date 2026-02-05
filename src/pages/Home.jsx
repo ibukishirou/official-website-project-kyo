@@ -49,9 +49,9 @@ const Home = () => {
       {/* ファーストビュー */}
       <section className={styles.hero}>
         <picture className={styles.heroImage}>
-          <source media="(max-width: 768px)" srcSet="./images/hero-mobile.webp" />
+          <source media="(max-width: 768px)" srcSet="/images/hero-mobile.webp" />
           <img 
-            src="./images/hero.webp" 
+            src="/images/hero.webp" 
             alt="響-Kyo-" 
             className={styles.heroImg}
           />

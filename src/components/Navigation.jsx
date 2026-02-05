@@ -29,7 +29,7 @@ const Navigation = () => {
       <div className={styles.container}>
         <Link to="/" className={styles.logo}>
           <img 
-            src="./images/logo-header.webp" 
+            src="/images/logo-header.webp" 
             alt="響-Kyo-" 
             className={styles.logoImage}
           />

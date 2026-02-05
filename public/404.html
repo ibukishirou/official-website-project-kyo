@@ -5,8 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>響-Kyo- 公式サイト</title>
   <script>
-    // GitHub Pages SPA対応
-    // 画像・CSS・JSなどのアセットファイルは除外し、HTMLルートのみリダイレクト
+    // GitHub Pages SPA対応（独自ドメイン用）
     (function() {
       var path = window.location.pathname;
       var search = window.location.search;
@@ -19,14 +18,8 @@
       
       if (!isAsset && !isImagePath) {
         // SPAルートの場合のみリダイレクト
-        // GitHub Pagesのサブディレクトリ構造に対応
-        var basePath = '/official-website-project-kyo/';
-        var redirect = path.replace(basePath, '/');
-        if (search) {
-          redirect += search;
-        }
-        sessionStorage.setItem('redirect', redirect);
-        window.location.replace(basePath);
+        sessionStorage.setItem('redirect', path + search);
+        window.location.replace('/');
       } else {
         // アセットファイルの場合は404エラーを表示
         document.write('<h1>404 - File Not Found</h1>');

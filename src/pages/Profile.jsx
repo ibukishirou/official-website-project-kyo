@@ -24,9 +24,9 @@ const Profile = () => {
           <div className={styles.leftColumn}>
             <div className={styles.mainImage}>
               <picture>
-                <source media="(max-width: 768px)" srcSet="./images/key-visual-mobile.webp" />
+                <source media="(max-width: 768px)" srcSet="/images/key-visual-mobile.webp" />
                 <img 
-                  src="./images/key-visual.webp" 
+                  src="/images/key-visual.webp" 
                   alt="響-Kyo- 立ち絵" 
                   className={styles.characterImage}
                 />
@@ -45,7 +45,7 @@ const Profile = () => {
                 }}
               >
                 <img 
-                  src="./images/three-view.webp" 
+                  src="/images/three-view.webp" 
                   alt="響-Kyo- 三面図" 
                   className={styles.characterImage}
                 />
@@ -60,7 +60,7 @@ const Profile = () => {
                 className={styles.raidoriLink}
               >
                 <img 
-                  src="./images/raidori.webp" 
+                  src="/images/raidori.webp" 
                   alt="ライドリ - 支援サイト" 
                 />
               </a>
@@ -248,7 +248,7 @@ const Profile = () => {
               ×
             </button>
             <img 
-              src="./images/three-view-full.png" 
+              src="/images/three-view-full.png" 
               alt="響-Kyo- 三面図（拡大）" 
               className={styles.modalImage}
             />
