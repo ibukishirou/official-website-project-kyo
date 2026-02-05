@@ -1,21 +1,34 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import commissionData from '../data/commission.json';
 import styles from './Commission.module.css';
 
 const Commission = () => {
-  useEffect(() => {
-    // TikTok埋め込みスクリプトを読み込む
-    const script = document.createElement('script');
-    script.src = 'https://www.tiktok.com/embed.js';
-    script.async = true;
-    document.body.appendChild(script);
+  const [tiktokEmbeds, setTiktokEmbeds] = useState({});
 
-    return () => {
-      // クリーンアップ
-      if (script.parentNode) {
-        document.body.removeChild(script);
+  useEffect(() => {
+    // TikTok oEmbed APIから埋め込みHTMLを取得
+    const fetchTikTokEmbed = async (url, key) => {
+      try {
+        const response = await fetch(
+          `https://www.tiktok.com/oembed?url=${encodeURIComponent(url)}`
+        );
+        const data = await response.json();
+        if (data.html) {
+          setTiktokEmbeds(prev => ({ ...prev, [key]: data.html }));
+        }
+      } catch (error) {
+        console.error('TikTok埋め込み取得エラー:', error);
       }
     };
+
+    // ショート動画のTikTok URLを取得
+    const shortVideo = commissionData['ショート動画'];
+    if (shortVideo?.referenceUrl1) {
+      fetchTikTokEmbed(shortVideo.referenceUrl1, 'ref1');
+    }
+    if (shortVideo?.referenceUrl2) {
+      fetchTikTokEmbed(shortVideo.referenceUrl2, 'ref2');
+    }
   }, []);
 
   const getYouTubeVideoId = (url) => {
@@ -35,7 +48,7 @@ const Commission = () => {
     return match ? match[1] : null;
   };
 
-  const renderPreview = (url) => {
+  const renderPreview = (url, embedKey = null) => {
     if (!url) return null;
 
     // YouTube判定
@@ -59,36 +72,14 @@ const Commission = () => {
       }
     }
 
-    // TikTok判定
-    if (url.includes('tiktok.com')) {
-      const videoId = getTikTokVideoId(url);
-      if (videoId) {
-        return (
-          <div className={styles.videoPreview}>
-            <blockquote
-              className="tiktok-embed"
-              cite={url}
-              data-video-id={videoId}
-              style={{ 
-                maxWidth: '100%', 
-                width: '100%',
-                margin: '0',
-                minWidth: '0'
-              }}
-            >
-              <section>
-                <a
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  href={url}
-                >
-                  TikTokで見る
-                </a>
-              </section>
-            </blockquote>
-          </div>
-        );
-      }
+    // TikTok判定 - oEmbed APIから取得したHTMLを使用
+    if (url.includes('tiktok.com') && embedKey && tiktokEmbeds[embedKey]) {
+      return (
+        <div 
+          className={styles.tiktokEmbedContainer}
+          dangerouslySetInnerHTML={{ __html: tiktokEmbeds[embedKey] }}
+        />
+      );
     }
 
     return null;
@@ -146,8 +137,8 @@ const Commission = () => {
                   </div>
                   {hasDualPreview ? (
                     <div className={styles.dualPreviewContainer}>
-                      {renderPreview(item.referenceUrl1)}
-                      {renderPreview(item.referenceUrl2)}
+                      {renderPreview(item.referenceUrl1, 'ref1')}
+                      {renderPreview(item.referenceUrl2, 'ref2')}
                     </div>
                   ) : (
                     hasPreview && renderPreview(item.referenceUrl)
