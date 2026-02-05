@@ -33,14 +33,13 @@ const Home = () => {
     <div className={styles.home}>
       {/* ファーストビュー */}
       <section className={styles.hero}>
-        <picture className={styles.heroImage}>
-          <source media="(max-width: 768px)" srcSet="/images/hero-mobile.webp" />
+        <div className={styles.heroImage}>
           <img 
             src="/images/hero.webp" 
             alt="響-Kyo-" 
             className={styles.heroImg}
           />
-        </picture>
+        </div>
       </section>
 
 
