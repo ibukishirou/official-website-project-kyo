@@ -36,7 +36,7 @@ const Commission = () => {
       const videoId = getYouTubeVideoId(url);
       if (videoId) {
         return (
-          <div className={styles.videoPreview}>
+          <div className={styles.videoPreview} style={{ aspectRatio: '16 / 9' }}>
             <iframe
               src={`https://www.youtube.com/embed/${videoId}`}
               title="YouTube video"
@@ -55,12 +55,12 @@ const Commission = () => {
       const videoId = getTikTokVideoId(url);
       if (videoId) {
         return (
-          <div className={styles.videoPreview}>
+          <div className={styles.videoPreview} style={{ aspectRatio: 'auto', height: 'auto' }}>
             <blockquote
               className="tiktok-embed"
               cite={url}
               data-video-id={videoId}
-              style={{ maxWidth: '605px', minWidth: '325px', margin: '0 auto' }}
+              style={{ maxWidth: '100%', minWidth: '325px', margin: '0 auto' }}
             >
               <section>
                 <a

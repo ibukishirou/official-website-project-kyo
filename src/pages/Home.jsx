@@ -1,23 +1,8 @@
-import { useEffect } from 'react';
 import songsData from '../data/songs.json';
 import linksData from '../data/links.json';
 import styles from './Home.module.css';
 
 const Home = () => {
-  useEffect(() => {
-    // スクロール演出の処理
-    const handleScroll = () => {
-      const scrollIndicator = document.querySelector(`.${styles.scrollIndicator}`);
-      if (scrollIndicator && window.scrollY > 100) {
-        scrollIndicator.style.opacity = '0';
-      } else if (scrollIndicator) {
-        scrollIndicator.style.opacity = '1';
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
 
   const getIconClass = (serviceName) => {
     const iconMap = {
@@ -56,10 +41,6 @@ const Home = () => {
             className={styles.heroImg}
           />
         </picture>
-        <div className={styles.scrollIndicator}>
-          <div className={styles.scrollMouse}></div>
-          <p>Scroll</p>
-        </div>
       </section>
 
 
