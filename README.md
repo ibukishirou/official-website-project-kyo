@@ -122,7 +122,3 @@ src/
 ## ライセンス
 
 © Project Kyo All Rights Reserved.
-
-## サポート
-
-問い合わせ: wip@wip.wip

@@ -3,7 +3,7 @@ import styles from './Contact.module.css';
 
 const Contact = () => {
   const [copied, setCopied] = useState(false);
-  const email = 'wip@wip.wip';
+  const email = 'kyo.work0630@gmail.com';
 
   const copyToClipboard = async () => {
     try {
