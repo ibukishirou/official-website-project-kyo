@@ -30,11 +30,6 @@ const Commission = () => {
     return match && match[2].length === 11 ? match[2] : null;
   };
 
-  const getTikTokVideoId = (url) => {
-    const match = url.match(/video\/(\d+)/);
-    return match ? match[1] : null;
-  };
-
   const renderPreview = (url) => {
     if (!url) return null;
 
@@ -59,34 +54,18 @@ const Commission = () => {
       }
     }
 
-    // TikTok判定
-    if (url.includes('tiktok.com')) {
-      const videoId = getTikTokVideoId(url);
-      if (videoId) {
-        return (
-          <div className={styles.tiktokWrapper}>
-            <blockquote
-              className="tiktok-embed"
-              cite={url}
-              data-video-id={videoId}
-              style={{ margin: '0' }}
-            >
-              <section>
-                <a
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  href={url}
-                >
-                  TikTokで見る
-                </a>
-              </section>
-            </blockquote>
-          </div>
-        );
-      }
-    }
-
     return null;
+  };
+
+  const renderTikTokEmbed = (embedHtml) => {
+    if (!embedHtml) return null;
+    
+    return (
+      <div 
+        className={styles.tiktokWrapper}
+        dangerouslySetInnerHTML={{ __html: embedHtml }}
+      />
+    );
   };
 
   return (
@@ -102,7 +81,7 @@ const Commission = () => {
               const hasPreview = item.referenceUrl;
               const isOptionCard = menuName === 'オプション';
               const isShortVideo = menuName === 'ショート動画';
-              const hasDualPreview = isShortVideo && item.referenceUrl1 && item.referenceUrl2;
+              const hasDualPreview = isShortVideo && item.tiktokEmbed1 && item.tiktokEmbed2;
               
               return (
                 <div key={menuName} className={`${styles.menuCard} ${(hasPreview || hasDualPreview) ? styles.menuCardWithPreview : ''} ${isOptionCard ? styles.optionCard : ''}`}>
@@ -141,8 +120,8 @@ const Commission = () => {
                   </div>
                   {hasDualPreview ? (
                     <div className={styles.dualPreviewContainer}>
-                      {renderPreview(item.referenceUrl1)}
-                      {renderPreview(item.referenceUrl2)}
+                      {renderTikTokEmbed(item.tiktokEmbed1)}
+                      {renderTikTokEmbed(item.tiktokEmbed2)}
                     </div>
                   ) : (
                     hasPreview && renderPreview(item.referenceUrl)
