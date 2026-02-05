@@ -1,7 +1,22 @@
+import { useEffect } from 'react';
 import commissionData from '../data/commission.json';
 import styles from './Commission.module.css';
 
 const Commission = () => {
+  useEffect(() => {
+    // TikTok埋め込みスクリプトを読み込む
+    const script = document.createElement('script');
+    script.src = 'https://www.tiktok.com/embed.js';
+    script.async = true;
+    document.body.appendChild(script);
+
+    return () => {
+      // クリーンアップ
+      if (script.parentNode) {
+        document.body.removeChild(script);
+      }
+    };
+  }, []);
   const getYouTubeVideoId = (url) => {
     const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
     const match = url.match(regExp);
@@ -16,6 +31,7 @@ const Commission = () => {
   const renderPreview = (url) => {
     if (!url) return null;
 
+    // YouTube判定
     if (url.includes('youtube.com') || url.includes('youtu.be')) {
       const videoId = getYouTubeVideoId(url);
       if (videoId) {
@@ -34,20 +50,31 @@ const Commission = () => {
       }
     }
 
+    // TikTok判定
     if (url.includes('tiktok.com')) {
-      return (
-        <div className={styles.videoPreview}>
-          <a 
-            href={url} 
-            target="_blank" 
-            rel="noopener noreferrer"
-            className={styles.tiktokLink}
-          >
-            <i className="ei ei-tiktok" style={{ fontSize: '3rem' }}></i>
-            <span>TikTokで見る</span>
-          </a>
-        </div>
-      );
+      const videoId = getTikTokVideoId(url);
+      if (videoId) {
+        return (
+          <div className={styles.videoPreview}>
+            <blockquote
+              className="tiktok-embed"
+              cite={url}
+              data-video-id={videoId}
+              style={{ maxWidth: '605px', minWidth: '325px', margin: '0 auto' }}
+            >
+              <section>
+                <a
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  href={url}
+                >
+                  TikTokで見る
+                </a>
+              </section>
+            </blockquote>
+          </div>
+        );
+      }
     }
 
     return null;

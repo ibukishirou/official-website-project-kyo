@@ -166,17 +166,19 @@
   }
 }
 
-@media (max-width: 768px) {
-  .nav {
-    height: 60px;
-  }
-
+@media (max-width: 1079px) {
   .desktopMenu {
     display: none;
   }
 
   .hamburger {
     display: flex;
+  }
+}
+
+@media (max-width: 768px) {
+  .nav {
+    height: 60px;
   }
 
   .mobileMenu {
