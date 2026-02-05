@@ -69,7 +69,7 @@ const Commission = () => {
               className="tiktok-embed"
               cite={url}
               data-video-id={videoId}
-              style={{ maxWidth: '100%', minWidth: '325px', margin: '0 auto' }}
+              style={{ maxWidth: '100%', margin: '0 auto' }}
             >
               <section>
                 <a
@@ -105,7 +105,7 @@ const Commission = () => {
               const hasDualPreview = isShortVideo && item.referenceUrl1 && item.referenceUrl2;
               
               return (
-                <div key={menuName} className={`${styles.menuCard} ${hasPreview ? styles.menuCardWithPreview : ''} ${isOptionCard ? styles.optionCard : ''} ${hasDualPreview ? styles.menuCardWithDualPreview : ''}`}>
+                <div key={menuName} className={`${styles.menuCard} ${(hasPreview || hasDualPreview) ? styles.menuCardWithPreview : ''} ${isOptionCard ? styles.optionCard : ''}`}>
                   <div className={styles.menuContent}>
                     <div className={styles.menuHeader}>
                       <h3 className={styles.menuName}>{menuName}</h3>

@@ -41,16 +41,11 @@
   align-items: start;
 }
 
-.menuCardWithDualPreview {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: var(--spacing-xl);
-}
-
 .dualPreviewContainer {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: var(--spacing-md);
+  align-items: start;
 }
 
 .menuCard:hover {
@@ -126,6 +121,7 @@
 
 .videoPreview {
   width: 100%;
+  max-height: 600px;
   border-radius: var(--border-radius-md);
   overflow: visible;
   background: var(--bg-secondary);
