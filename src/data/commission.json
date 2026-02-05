@@ -1,42 +1,31 @@
-[
-  {
-    "id": 1,
-    "menuName": "オリジナルMV",
+{
+  "オリジナルMV": {
     "price": "￥30,000~",
     "description": "サムネイル込\n本家再現やリリック系など、凝った演出のMVを作成します\n素材の量や動画の尺に合わせて価格が変動します\n納期目安：約２週間",
     "referenceUrl": "https://youtu.be/ma38CHcOcM0",
     "referenceTitle": "MAGIC / Ado - 伊吹しろう Cover【YouTube収益化記念！】"
   },
-  {
-    "id": 2,
-    "menuName": "シンプルMV",
+  "シンプルMV": {
     "price": "￥5,000~",
     "description": "サムネイル込\n簡易的な動きのMVを作成します\n素材の量に合わせて価格が変動します\n納期目安：約１週間",
     "referenceUrl": "https://youtu.be/EBiwhFTlF68",
     "referenceTitle": "ダーリン / 須田景凪 Covered by 空月ハルキ【歌ってみた】"
   },
-  {
-    "id": 3,
-    "menuName": "長尺横動画",
+  "長尺横動画": {
     "price": "￥50,000~",
     "description": "サムネイル込\n企画動画や切り抜きなどの動画を作成します\n素材の量や動画の尺に合わせて価格が変動します\n納期目安：約１か月",
     "referenceUrl": "https://youtu.be/abE3UHfDaUs",
     "referenceTitle": "【平成懐古】1時間で平成グッズをたくさん集めろ！アラサーVライバーバトル！"
   },
-  {
-    "id": 4,
-    "menuName": "ショート動画",
+  "ショート動画": {
     "price": "￥3,000~",
-    "description": "ショートMV、ゲーム背景のトーク動画など、大体何でも作成します　\n素材の量や動画の尺に合わせて価格が変動します\n納期目安：約３～７日",
-    "referenceUrl": "https://youtube.com/shorts/gIVSP26XgTA",
-    "referenceTitle": ""
+    "description": "ショートMV、ゲーム背景のトーク動画など、大体何でも作成します\n素材の量や動画の尺に合わせて価格が変動します\n納期目安：約３～７日",
+    "referenceUrl1": "https://www.tiktok.com/@omitarou10/video/7525281417073396999",
+    "referenceTitle1": "ぶちぶち物語パート1 続く#マイクラ #tiktoklive #切り抜き動画 - omitarou10 おみ【臣】🐺∞⚜️",
+    "referenceUrl2": "https://www.tiktok.com/@aishan.tiktok/video/7484844751141817607",
+    "referenceTitle2": "症状も効果も個人差めちゃくちゃあるよ！！！#潰瘍性大腸炎 #難病 #vtuber #注射 - aishan.tiktok あいしゃん🎼🎩"
   },
-  {
-    "id": 5,
-    "menuName": "オプション",
-    "price": "",
-    "description": "・立ち絵人数の追加　＋￥1,000/人\n・実績非公開　＋￥1,000\n・素材準備　＋￥2,000\n・早期納品(5日以内)　＋合計金額の50%",
-    "referenceUrl": "",
-    "referenceTitle": ""
+  "オプション": {
+    "description": "・立ち絵人数の追加　＋￥1,000/人\n・実績非公開　＋￥1,000\n・素材準備　＋￥2,000\n・早期納品(5日以内)　＋合計金額の50%"
   }
-]
+}

@@ -41,6 +41,18 @@
   align-items: start;
 }
 
+.menuCardWithDualPreview {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-xl);
+}
+
+.dualPreviewContainer {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--spacing-md);
+}
+
 .menuCard:hover {
   transform: translateY(-4px);
   box-shadow: var(--shadow-lg);
@@ -305,6 +317,10 @@
   .menuCardWithPreview {
     grid-template-columns: 1fr;
   }
+  
+  .menuCardWithDualPreview {
+    grid-template-columns: 1fr;
+  }
 }
 
 @media (max-width: 768px) {
@@ -321,6 +337,10 @@
   }
 
   .linkCards {
+    grid-template-columns: 1fr;
+  }
+  
+  .dualPreviewContainer {
     grid-template-columns: 1fr;
   }
 }

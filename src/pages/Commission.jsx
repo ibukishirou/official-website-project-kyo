@@ -17,6 +17,7 @@ const Commission = () => {
       }
     };
   }, []);
+
   const getYouTubeVideoId = (url) => {
     // YouTube Shorts対応
     if (url.includes('/shorts/')) {
@@ -97,15 +98,17 @@ const Commission = () => {
         <section className={styles.section}>
           <h2 className={styles.sectionTitle}>メニュー</h2>
           <div className={styles.menuGrid}>
-            {commissionData.map((item) => {
-              const hasPreview = item.referenceUrl && item.id <= 4;
-              const isOptionCard = item.id === 5;
+            {Object.entries(commissionData).map(([menuName, item]) => {
+              const hasPreview = item.referenceUrl;
+              const isOptionCard = menuName === 'オプション';
+              const isShortVideo = menuName === 'ショート動画';
+              const hasDualPreview = isShortVideo && item.referenceUrl1 && item.referenceUrl2;
               
               return (
-                <div key={item.id} className={`${styles.menuCard} ${hasPreview ? styles.menuCardWithPreview : ''} ${isOptionCard ? styles.optionCard : ''}`}>
+                <div key={menuName} className={`${styles.menuCard} ${hasPreview ? styles.menuCardWithPreview : ''} ${isOptionCard ? styles.optionCard : ''} ${hasDualPreview ? styles.menuCardWithDualPreview : ''}`}>
                   <div className={styles.menuContent}>
                     <div className={styles.menuHeader}>
-                      <h3 className={styles.menuName}>{item.menuName}</h3>
+                      <h3 className={styles.menuName}>{menuName}</h3>
                       {item.price && <p className={styles.menuPrice}>{item.price}</p>}
                     </div>
                     {isOptionCard ? (
@@ -136,7 +139,14 @@ const Commission = () => {
                       </div>
                     )}
                   </div>
-                  {hasPreview && renderPreview(item.referenceUrl)}
+                  {hasDualPreview ? (
+                    <div className={styles.dualPreviewContainer}>
+                      {renderPreview(item.referenceUrl1)}
+                      {renderPreview(item.referenceUrl2)}
+                    </div>
+                  ) : (
+                    hasPreview && renderPreview(item.referenceUrl)
+                  )}
                 </div>
               );
             })}
