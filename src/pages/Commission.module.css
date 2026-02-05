@@ -42,11 +42,10 @@
 }
 
 .dualPreviewContainer {
-  display: flex;
-  gap: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--spacing-md);
   align-items: start;
-  justify-content: space-between;
-  width: 100%;
 }
 
 .menuCard:hover {
@@ -141,23 +140,10 @@
 
 /* TikTok埋め込みラッパー */
 .tiktokWrapper {
-  flex: 1;
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  max-width: 50%;
-}
-
-.tiktokWrapper :global(.tiktok-embed) {
-  margin: 0 !important;
-  max-width: 100% !important;
-  min-width: 280px !important;
-  width: 100% !important;
-}
-
-.tiktokWrapper :global(iframe) {
-  max-width: 100% !important;
-  width: 100% !important;
 }
 
 .tiktokLink {
