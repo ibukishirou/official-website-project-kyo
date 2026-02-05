@@ -44,10 +44,10 @@
 .dualPreviewContainer {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: var(--spacing-md);
+  gap: var(--spacing-sm);
   align-items: start;
   max-width: 100%;
-  overflow: hidden;
+  overflow: visible;
 }
 
 .menuCard:hover {
@@ -146,10 +146,14 @@
   display: flex;
   justify-content: center;
   align-items: flex-start;
+  transform: scale(0.75);
+  transform-origin: top center;
 }
 
 .tiktokWrapper :global(.tiktok-embed) {
   margin: 0 !important;
+  max-width: 325px !important;
+  min-width: 325px !important;
 }
 
 .tiktokLink {
