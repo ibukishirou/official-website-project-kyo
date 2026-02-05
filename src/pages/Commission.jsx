@@ -64,12 +64,17 @@ const Commission = () => {
       const videoId = getTikTokVideoId(url);
       if (videoId) {
         return (
-          <div className={styles.videoPreview} style={{ aspectRatio: 'auto', height: 'auto' }}>
+          <div className={styles.videoPreview}>
             <blockquote
               className="tiktok-embed"
               cite={url}
               data-video-id={videoId}
-              style={{ maxWidth: '100%', margin: '0 auto' }}
+              style={{ 
+                maxWidth: '100%', 
+                width: '100%',
+                margin: '0',
+                minWidth: '0'
+              }}
             >
               <section>
                 <a
