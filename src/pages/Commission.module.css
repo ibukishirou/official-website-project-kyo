@@ -143,8 +143,8 @@
 /* TikTok埋め込みラッパー */
 .tiktokWrapper {
   width: 100%;
-  max-width: 325px;
-  height: 580px;
+  max-width: 100%;
+  height: 600px;
   overflow: hidden;
   position: relative;
   border-radius: var(--border-radius-md);
@@ -153,16 +153,18 @@
 
 /* TikTok埋め込みのblockquoteを制御 */
 .tiktokWrapper :global(.tiktok-embed) {
-  max-width: 325px !important;
-  width: 325px !important;
+  max-width: 100% !important;
+  width: 100% !important;
   margin: 0 !important;
+  transform: scale(0.8);
   transform-origin: top center;
 }
 
 /* TikTok iframeのサイズを制御 */
 .tiktokWrapper :global(iframe) {
-  max-width: 325px !important;
-  width: 325px !important;
+  max-width: 100% !important;
+  width: 100% !important;
+  height: 100% !important;
 }
 
 /* 下部の説明部分を隠す */
@@ -172,9 +174,10 @@
   bottom: 0;
   left: 0;
   right: 0;
-  height: 100px;
-  background: var(--bg-secondary);
+  height: 150px;
+  background: linear-gradient(to top, var(--bg-secondary) 60%, transparent);
   z-index: 10;
+  pointer-events: none;
 }
 
 .tiktokLink {
