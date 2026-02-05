@@ -62,35 +62,23 @@ const Home = () => {
         </div>
       </section>
 
-      {/* 自己紹介 */}
-      <section className={`${styles.section} ${styles.introduction}`}>
-        <div className="container">
-          <div className={styles.introContent}>
-            <p>キミと歩む日々が、ボクを成長させる。</p>
-          </div>
-        </div>
-      </section>
+
 
       {/* ティザーPV */}
       <section className={`${styles.section} ${styles.teaser}`}>
         <div className="container">
           <h2 className="section-title" style={{color: '#333333', fontWeight: 800}}>ティザーPV</h2>
           <div className={styles.teaserContent}>
-            <a
-              href="https://youtu.be/Toi-VQ41PAk"
-              target="_blank"
-              rel="noopener noreferrer"
-              className={styles.teaserCard}
-            >
-              <div className={styles.teaserThumbnail}>
-                <img
-                  src="https://img.youtube.com/vi/Toi-VQ41PAk/maxresdefault.jpg"
-                  alt="ティザーPV"
-                  loading="lazy"
-                />
-              </div>
-              <h3 className={styles.teaserTitle}>響-Kyo- ティザーPV</h3>
-            </a>
+            <div className={styles.videoWrapper}>
+              <iframe
+                src="https://www.youtube.com/embed/Toi-VQ41PAk"
+                title="響-Kyo- ティザーPV"
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowFullScreen
+                className={styles.videoIframe}
+              ></iframe>
+            </div>
           </div>
         </div>
       </section>
