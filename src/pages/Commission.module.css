@@ -11,6 +11,7 @@
 
 .section {
   margin-bottom: var(--spacing-3xl);
+  width: 100%;
 }
 
 .sectionTitle {
@@ -24,6 +25,7 @@
 .menuGrid {
   display: grid;
   gap: var(--spacing-xl);
+  width: 100%;
 }
 
 .menuCard {
@@ -32,6 +34,8 @@
   padding: var(--spacing-xl);
   box-shadow: var(--shadow-md);
   transition: transform var(--transition-base), box-shadow var(--transition-base);
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .menuCardWithPreview {

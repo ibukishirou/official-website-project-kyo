@@ -121,7 +121,7 @@ const Profile = () => {
                   </div>
                   <div className={styles.infoItem}>
                     <dt>活動内容</dt>
-                    <dd>テトリス配信/雑談/マダミス</dd>
+                    <dd>テトリス/雑談/マダミス</dd>
                   </div>
                   <div className={styles.infoItem}>
                     <dt>配信時間</dt>

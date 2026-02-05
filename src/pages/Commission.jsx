@@ -75,7 +75,6 @@ const Commission = () => {
 
         {/* メニュー */}
         <section className={styles.section}>
-          <h2 className={styles.sectionTitle}>メニュー</h2>
           <div className={styles.menuGrid}>
             {Object.entries(commissionData).map(([menuName, item]) => {
               const hasPreview = item.referenceUrl;
