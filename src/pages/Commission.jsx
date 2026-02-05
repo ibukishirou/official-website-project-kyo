@@ -18,6 +18,12 @@ const Commission = () => {
     };
   }, []);
   const getYouTubeVideoId = (url) => {
+    // YouTube Shorts対応
+    if (url.includes('/shorts/')) {
+      const match = url.match(/\/shorts\/([^/?]+)/);
+      return match ? match[1] : null;
+    }
+    // 通常のYouTube URL
     const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
     const match = url.match(regExp);
     return match && match[2].length === 11 ? match[2] : null;
@@ -35,8 +41,10 @@ const Commission = () => {
     if (url.includes('youtube.com') || url.includes('youtu.be')) {
       const videoId = getYouTubeVideoId(url);
       if (videoId) {
+        // Shorts判定（縦動画）
+        const isShorts = url.includes('/shorts/');
         return (
-          <div className={styles.videoPreview} style={{ aspectRatio: '16 / 9' }}>
+          <div className={styles.videoPreview} style={{ aspectRatio: isShorts ? '9 / 16' : '16 / 9' }}>
             <iframe
               src={`https://www.youtube.com/embed/${videoId}`}
               title="YouTube video"
