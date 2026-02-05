@@ -74,7 +74,7 @@ const Profile = () => {
               <div className={styles.card}>
                 <h2 className={styles.sectionTitle}>プロフィール</h2>
                 <p className={styles.description}>
-                  2次元と3次元を行き来できる元気なお姉さん系電脳少女。
+                  2次元と3次元を行き来できる元気なお姉さん系Vライバー。
                   <br />
                   イヤリングの安全ピンをトリガーに電脳世界の扉が開き、身体が電脳化した。
                   <br />

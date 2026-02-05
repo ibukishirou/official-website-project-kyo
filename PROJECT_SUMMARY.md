@@ -2,7 +2,7 @@
 
 ## 📋 プロジェクト概要
 
-電脳少女VTuber「響-Kyo-」の公式Webサイトを完成させました。
+Vライバー「響-Kyo-」の公式Webサイトを完成させました。
 React + Vite + GitHub Pagesを使用した、モダンでレスポンシブなSPA（Single Page Application）です。
 
 ## ✅ 完成した機能
