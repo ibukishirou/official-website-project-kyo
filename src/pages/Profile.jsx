@@ -58,12 +58,12 @@ const Profile = () => {
             <div className={styles.subImage}>
               <div 
                 className={styles.threeViewWrapper}
-                onClick={() => openModal('/images/three-view.png')}
+                onClick={() => openModal('/images/three-view-full.png')}
                 role="button"
                 tabIndex={0}
                 onKeyPress={(e) => {
                   if (e.key === 'Enter' || e.key === ' ') {
-                    openModal('/images/three-view.png');
+                    openModal('/images/three-view-full.png');
                   }
                 }}
               >
