@@ -4,13 +4,16 @@ import styles from './Profile.module.css';
 
 const Profile = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalImage, setModalImage] = useState('');
 
-  const openModal = () => {
+  const openModal = (imageSrc) => {
+    setModalImage(imageSrc);
     setIsModalOpen(true);
   };
 
   const closeModal = () => {
     setIsModalOpen(false);
+    setModalImage('');
   };
 
   return (
@@ -35,12 +38,32 @@ const Profile = () => {
             <div className={styles.subImage}>
               <div 
                 className={styles.threeViewWrapper}
-                onClick={openModal}
+                onClick={() => openModal('/images/three-view-2.png')}
                 role="button"
                 tabIndex={0}
                 onKeyPress={(e) => {
                   if (e.key === 'Enter' || e.key === ' ') {
-                    openModal();
+                    openModal('/images/three-view-2.png');
+                  }
+                }}
+              >
+                <img 
+                  src="/images/three-view-2.webp" 
+                  alt="響-Kyo- 三面図2" 
+                  className={styles.characterImage}
+                />
+                <p className={styles.expandHint}>クリックで拡大表示</p>
+              </div>
+            </div>
+            <div className={styles.subImage}>
+              <div 
+                className={styles.threeViewWrapper}
+                onClick={() => openModal('/images/three-view-full.png')}
+                role="button"
+                tabIndex={0}
+                onKeyPress={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    openModal('/images/three-view-full.png');
                   }
                 }}
               >
@@ -52,19 +75,6 @@ const Profile = () => {
                 <p className={styles.expandHint}>クリックで拡大表示</p>
               </div>
             </div>
-            <div className={styles.raidoriImage}>
-              <a
-                href="https://raidori.com/@project__kyo"
-                target="_blank"
-                rel="noopener noreferrer"
-                className={styles.raidoriLink}
-              >
-                <img 
-                  src="/images/raidori.webp" 
-                  alt="ライドリ - 支援サイト" 
-                />
-              </a>
-            </div>
           </div>
 
           {/* 右カラム：情報 */}
@@ -74,7 +84,9 @@ const Profile = () => {
               <div className={styles.card}>
                 <h2 className={styles.sectionTitle}>プロフィール</h2>
                 <p className={styles.description}>
-                  2次元と3次元を行き来できる元気なお姉さん系Vライバー。
+                  電脳世界を行き来できる元気なお姉さん。
+                  <br />
+                  人呼んで「電脳往還のハイボルテージ」
                   <br />
                   イヤリングの安全ピンをトリガーに電脳世界の扉が開き、身体が電脳化した。
                   <br />
@@ -202,18 +214,23 @@ const Profile = () => {
                   <div className={styles.infoItem}>
                     <dt>モデリング</dt>
                     <dd>
-                      {creditsData.modeling.url ? (
-                        <a
-                          href={creditsData.modeling.url}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className={styles.creditLink}
-                        >
-                          {creditsData.modeling.name} 様
-                        </a>
-                      ) : (
-                        `${creditsData.modeling.name} 様`
-                      )}
+                      {creditsData.modeling.map((modeler, index) => (
+                        <span key={index}>
+                          {index > 0 && ' / '}
+                          {modeler.url ? (
+                            <a
+                              href={modeler.url}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className={styles.creditLink}
+                            >
+                              {modeler.name} 様
+                            </a>
+                          ) : (
+                            `${modeler.name} 様`
+                          )}
+                        </span>
+                      ))}
                     </dd>
                   </div>
                   <div className={styles.infoItem}>
@@ -248,7 +265,7 @@ const Profile = () => {
               ×
             </button>
             <img 
-              src="/images/three-view-full.png" 
+              src={modalImage} 
               alt="響-Kyo- 三面図（拡大）" 
               className={styles.modalImage}
             />

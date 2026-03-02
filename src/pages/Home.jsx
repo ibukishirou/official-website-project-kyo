@@ -11,8 +11,8 @@ const Home = () => {
       'Instagram': 'fa-brands fa-instagram',
       'Bluesky': 'fa-brands fa-bluesky',
       'X': 'fa-brands fa-x-twitter',
+      'X(依頼用)': 'fa-brands fa-x-twitter',
       'Booth': 'fa-solid fa-store',
-      '欲しいものリスト': 'fa-solid fa-gift',
       'マシュマロ': 'fa-solid fa-envelope'
     };
     return iconMap[serviceName] || 'fa-solid fa-link';
@@ -51,7 +51,7 @@ const Home = () => {
           <div className={styles.teaserContent}>
             <div className={styles.videoWrapper}>
               <iframe
-                src="https://www.youtube.com/embed/w005e5KCPus"
+                src="https://www.youtube.com/embed/9__A6-63o0o"
                 title="響-Kyo- ティザーPV"
                 frameBorder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
