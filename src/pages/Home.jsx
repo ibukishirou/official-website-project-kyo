@@ -63,6 +63,30 @@ const Home = () => {
         </div>
       </section>
 
+      {/* ファンクラブ */}
+      <section className={`${styles.section} ${styles.fanclub}`}>
+        <div className="container">
+          <h2 className="section-title" style={{color: '#333333', fontWeight: 800}}>ファンクラブ</h2>
+          <div className={styles.fanclubContent}>
+            <div className={styles.fanclubImage}>
+              <img 
+                src="/images/fanclub.webp" 
+                alt="ファンクラブ - raidori" 
+                className={styles.fanclubImg}
+              />
+            </div>
+            <a
+              href="https://raidori.com/@project__kyo"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.fanclubButton}
+            >
+              <span className={styles.fanclubButtonText}>ご加入はこちらから！</span>
+            </a>
+          </div>
+        </div>
+      </section>
+
       {/* リンク集 */}
       <section className={`${styles.section} ${styles.links}`}>
         <div className="container">
