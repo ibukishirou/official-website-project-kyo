@@ -189,37 +189,54 @@
 }
 
 /* オプション専用スタイル */
-.optionList {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-sm);
+.optionCard {
+  background: var(--bg-secondary);
+}
+
+.optionGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--spacing-md);
 }
 
 .optionItem {
+  background: var(--bg-primary);
+  padding: var(--spacing-md);
+  border-radius: var(--border-radius-md);
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow var(--transition-base);
+}
+
+.optionItem:hover {
+  box-shadow: var(--shadow-md);
+}
+
+.optionHeader {
   display: flex;
   justify-content: space-between;
   align-items: baseline;
-  padding: var(--spacing-sm) 0;
-  border-bottom: 1px solid var(--bg-secondary);
-  line-height: 1.6;
+  gap: var(--spacing-sm);
+  margin-bottom: var(--spacing-xs);
 }
 
-.optionItem:last-child {
-  border-bottom: none;
-}
-
-.optionLabel {
-  flex: 1;
-  color: var(--text-secondary);
-  font-weight: 500;
+.optionName {
+  font-weight: 700;
+  color: var(--text-primary);
+  font-size: 1rem;
 }
 
 .optionPrice {
   font-weight: 700;
   color: var(--color-magenta);
   white-space: nowrap;
-  margin-left: var(--spacing-md);
-  text-align: right;
+  font-size: 0.95rem;
+}
+
+.optionDescription {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin-top: var(--spacing-xs);
 }
 
 .videoPreview {
@@ -419,7 +436,7 @@
     grid-template-columns: 1fr;
   }
 
-  .dualPreviewContainer {
+  .optionGrid {
     grid-template-columns: 1fr;
   }
 }

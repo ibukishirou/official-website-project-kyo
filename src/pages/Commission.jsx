@@ -1,18 +1,7 @@
-import { useEffect } from 'react';
 import commissionData from '../data/commission.json';
 import styles from './Commission.module.css';
 
 const Commission = () => {
-  useEffect(() => {
-    const script = document.createElement('script');
-    script.src = 'https://www.tiktok.com/embed.js';
-    script.async = true;
-    document.body.appendChild(script);
-    return () => {
-      if (script.parentNode) document.body.removeChild(script);
-    };
-  }, []);
-
   const getYouTubeVideoId = (url) => {
     if (url.includes('/shorts/')) {
       const match = url.match(/\/shorts\/([^/?]+)/);
@@ -21,10 +10,6 @@ const Commission = () => {
     const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
     const match = url.match(regExp);
     return match && match[2].length === 11 ? match[2] : null;
-  };
-
-  const formatPrice = (price) => {
-    return `￥${price.toLocaleString('ja-JP')}~`;
   };
 
   const renderPreview = (url) => {
@@ -50,72 +35,6 @@ const Commission = () => {
     return null;
   };
 
-  const renderTikTokEmbed = (embedHtml) => {
-    if (!embedHtml) return null;
-    return (
-      <div
-        className={styles.tiktokWrapper}
-        dangerouslySetInnerHTML={{ __html: embedHtml }}
-      />
-    );
-  };
-
-  const renderPrice = (item) => {
-    if (item.discountPrice != null) {
-      return (
-        <div className={styles.priceBlock}>
-          {item.catchphrase != null && (
-            <div className={styles.catchphraseBadge}>
-              <div className={styles.catchphraseBadgeText}>{item.catchphrase}</div>
-            </div>
-          )}
-          <div className={styles.priceRow}>
-            <span className={styles.regularPrice}>{formatPrice(item.regularPrice)}</span>
-            <span className={styles.priceArrow}>→</span>
-            <span className={styles.discountPrice}>{formatPrice(item.discountPrice)}</span>
-          </div>
-        </div>
-      );
-    }
-    if (item.regularPrice != null) {
-      return <p className={styles.menuPrice}>{formatPrice(item.regularPrice)}</p>;
-    }
-    return null;
-  };
-
-  const renderDescription = (menuName, item) => {
-    const isOptionCard = menuName === 'オプション';
-
-    if (isOptionCard && Array.isArray(item.description)) {
-      return (
-        <div className={styles.optionList}>
-          {item.description.map((line, index) => {
-            const match = line.match(/^(.+?)(＋.+)$/);
-            if (match) {
-              return (
-                <div key={index} className={styles.optionItem}>
-                  <span className={styles.optionLabel}>{match[1]}</span>
-                  <span className={styles.optionPrice}>{match[2]}</span>
-                </div>
-              );
-            }
-            return (
-              <div key={index} className={styles.optionItem}>
-                {line}
-              </div>
-            );
-          })}
-        </div>
-      );
-    }
-
-    return (
-      <p className={styles.menuDescription} style={{ whiteSpace: 'pre-line' }}>
-        {item.description}
-      </p>
-    );
-  };
-
   return (
     <div className={styles.commission}>
       <div className="container">
@@ -125,31 +44,47 @@ const Commission = () => {
         <section className={styles.section}>
           <div className={styles.menuGrid}>
             {Object.entries(commissionData).map(([menuName, item]) => {
-              const hasPreview = item.referenceUrl;
               const isOptionCard = menuName === 'オプション';
-              const isShortVideo = menuName === 'ショート動画';
-              const hasDualPreview = isShortVideo && item.tiktokEmbed1 && item.tiktokEmbed2;
+              const hasPreview = item.referenceUrl && !isOptionCard;
+
+              if (isOptionCard) {
+                return (
+                  <div key={menuName} className={`${styles.menuCard} ${styles.optionCard}`}>
+                    <div className={styles.menuContent}>
+                      <h3 className={styles.menuName}>{menuName}</h3>
+                      <div className={styles.optionGrid}>
+                        {item.items.map((option, index) => (
+                          <div key={index} className={styles.optionItem}>
+                            <div className={styles.optionHeader}>
+                              <span className={styles.optionName}>{option.name}</span>
+                              <span className={styles.optionPrice}>{option.price}</span>
+                            </div>
+                            {option.description && (
+                              <p className={styles.optionDescription}>{option.description}</p>
+                            )}
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                );
+              }
 
               return (
                 <div
                   key={menuName}
-                  className={`${styles.menuCard} ${(hasPreview || hasDualPreview) ? styles.menuCardWithPreview : ''} ${isOptionCard ? styles.optionCard : ''}`}
+                  className={`${styles.menuCard} ${hasPreview ? styles.menuCardWithPreview : ''}`}
                 >
                   <div className={styles.menuContent}>
                     <div className={styles.menuHeader}>
                       <h3 className={styles.menuName}>{menuName}</h3>
-                      {renderPrice(item)}
+                      <p className={styles.menuPrice}>{item.price}</p>
                     </div>
-                    {renderDescription(menuName, item)}
+                    <p className={styles.menuDescription} style={{ whiteSpace: 'pre-line' }}>
+                      {item.description}
+                    </p>
                   </div>
-                  {hasDualPreview ? (
-                    <div className={styles.dualPreviewContainer}>
-                      {renderTikTokEmbed(item.tiktokEmbed1)}
-                      {renderTikTokEmbed(item.tiktokEmbed2)}
-                    </div>
-                  ) : (
-                    hasPreview && renderPreview(item.referenceUrl)
-                  )}
+                  {hasPreview && renderPreview(item.referenceUrl)}
                 </div>
               );
             })}
@@ -177,7 +112,6 @@ const Commission = () => {
             <ul className={styles.paymentList}>
               <li>銀行振込</li>
               <li>BOOTH</li>
-              <li>アズカリ</li>
             </ul>
           </div>
         </section>
@@ -186,15 +120,17 @@ const Commission = () => {
         <section className={styles.section}>
           <div className={styles.card}>
             <h2 className={styles.sectionTitle}>注意事項</h2>
+            
             <div className={styles.noticeSection}>
               <h3 className={styles.notesTitle}>お願い事項</h3>
               <ul className={styles.noticeList}>
-                <li>作成したい動画の縦横比にあった素材をご提出ください<br />※横動画をショートで切り抜きなど、意図的なものは除く</li>
+                <li>作成したい動画の縦横比にあった素材をご提出ください<br />※意図的なものは除く(横動画をショートで使用など)</li>
                 <li>音声のみの素材は wavまたはmp3 でご提出ください</li>
-                <li>歌ってみたのご依頼時、MIX音源が未完成であってもMIX前の音源をご提出いただければ制作が可能です<br />MIX音源完成時に差し替えし納品をいたします</li>
                 <li>やり取りが遅くなると納品も遅れます、できる限り迅速なやり取りをお願いします</li>
+                <li>歌ってみたのご依頼で、MIX音源が未完成の状態で依頼をする場合は、MIX前の音源をご提出ください。</li>
               </ul>
             </div>
+
             <div className={styles.noticeSection}>
               <h3 className={styles.notesTitle}>出来ない事項</h3>
               <ul className={styles.noticeList}>
@@ -203,6 +139,7 @@ const Commission = () => {
                 <li>投稿後の再生数などの担保</li>
               </ul>
             </div>
+
             <div className={styles.noticeSection}>
               <h3 className={styles.notesTitle}>キャンセルについて</h3>
               <p>基本的にお支払い後のキャンセルは受け付けておりません。</p>
@@ -213,11 +150,21 @@ const Commission = () => {
         {/* リンク */}
         <section className={styles.section}>
           <div className={styles.linkCards}>
-            <a href="https://www.foriio.com/kyo-work0630" target="_blank" rel="noopener noreferrer" className={styles.linkCard}>
+            <a
+              href="https://www.foriio.com/kyo-work0630"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.linkCard}
+            >
               <h3>ポートフォリオ</h3>
               <p>動画編集実績はこちら</p>
             </a>
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLSecHI1W4aR253lJhP27rLBOGXC2SNP968Tn1tPBEBSFnaU1dw/viewform" target="_blank" rel="noopener noreferrer" className={styles.linkCard}>
+            <a
+              href="https://docs.google.com/forms/d/e/1FAIpQLSecHI1W4aR253lJhP27rLBOGXC2SNP968Tn1tPBEBSFnaU1dw/viewform"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.linkCard}
+            >
               <h3>ご依頼・お見積り</h3>
               <p>ご依頼の際はこちらから</p>
             </a>

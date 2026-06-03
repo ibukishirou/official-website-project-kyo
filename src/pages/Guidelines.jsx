@@ -6,24 +6,6 @@ const Guidelines = () => {
       <div className="container">
         <h1 className="section-title" style={{color: '#333333', fontWeight: 800}}>各種ガイドライン</h1>
 
-        {/* 配信ルール */}
-        <section className={styles.section}>
-          <div className={styles.card}>
-            <h2 className={styles.sectionTitle}>配信ルール</h2>
-            <ul className={styles.ruleList}>
-              <li>コメント欄を荒らす行為/同じコメントの連投はお控えください</li>
-              <li>自分語りは配信主が聞いた時以外は極力しないでください</li>
-              <li>アンチはブロックするので構わないでください</li>
-              <li>他配信者様の配信でボクの名前を出すのはお控えください</li>
-              <li>ボクの配信で他配信者様の名前を出すのはお控えください</li>
-              <li>メンション/リスナー同士の会話はお控えください</li>
-              <li>ネタバレ/指示コメはお控えください</li>
-              <li>政治的な発言はお控えください</li>
-              <li>「配信あまり来れなくてごめんね」「ごめん抜けるね」などの謝罪はお止めください</li>
-            </ul>
-          </div>
-        </section>
-
         {/* 二次創作ガイドライン */}
         <section className={styles.section}>
           <div className={styles.card}>
