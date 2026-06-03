@@ -118,9 +118,9 @@
 
 .linksGrid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(6, 1fr);
   gap: var(--spacing-lg);
-  max-width: 800px;
+  max-width: 1200px;
   margin: 0 auto;
 }
 

@@ -52,11 +52,14 @@ const Commission = () => {
                   <div key={menuName} className={`${styles.menuCard} ${styles.optionCard}`}>
                     <div className={styles.menuContent}>
                       <h3 className={styles.menuName}>{menuName}</h3>
-                      <div className={styles.optionGrid}>
+                      <div className={styles.optionList}>
                         {item.items.map((option, index) => (
                           <div key={index} className={styles.optionItem}>
                             <div className={styles.optionHeader}>
-                              <span className={styles.optionName}>{option.name}</span>
+                              <div className={styles.optionTitleRow}>
+                                <i className={`fas fa-puzzle-piece ${styles.optionIcon}`}></i>
+                                <span className={styles.optionName}>{option.name}</span>
+                              </div>
                               <span className={styles.optionPrice}>{option.price}</span>
                             </div>
                             {option.description && (
@@ -78,11 +81,51 @@ const Commission = () => {
                   <div className={styles.menuContent}>
                     <div className={styles.menuHeader}>
                       <h3 className={styles.menuName}>{menuName}</h3>
-                      <p className={styles.menuPrice}>{item.price}</p>
+                      <div className={styles.priceTag}>
+                        <i className="fas fa-tag"></i>
+                        <span>{item.price}</span>
+                      </div>
                     </div>
-                    <p className={styles.menuDescription} style={{ whiteSpace: 'pre-line' }}>
+                    
+                    <p className={styles.menuDescription}>
                       {item.description}
                     </p>
+
+                    {item.specialOptions && item.specialOptions.length > 0 && (
+                      <div className={styles.specialOptions}>
+                        <div className={styles.specialOptionsTitle}>
+                          <i className="fas fa-gift"></i>
+                          <span>特別オプション</span>
+                        </div>
+                        <ul className={styles.specialOptionsList}>
+                          {item.specialOptions.map((option, index) => (
+                            <li key={index}>
+                              <i className="fas fa-check-circle"></i>
+                              <span>{option}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
+
+                    {item.deliveryTime && (
+                      <div className={styles.deliveryTime}>
+                        <i className="fas fa-clock"></i>
+                        <span>{item.deliveryTime}</span>
+                      </div>
+                    )}
+
+                    {item.portfolioUrl && (
+                      <a
+                        href={item.portfolioUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={styles.portfolioButton}
+                      >
+                        <i className="fas fa-external-link-alt"></i>
+                        <span>実績をもっと見る</span>
+                      </a>
+                    )}
                   </div>
                   {hasPreview && renderPreview(item.referenceUrl)}
                 </div>
