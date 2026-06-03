@@ -114,20 +114,24 @@ const Commission = () => {
                         <span>{item.deliveryTime}</span>
                       </div>
                     )}
-
-                    {item.portfolioUrl && (
-                      <a
-                        href={item.portfolioUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className={styles.portfolioButton}
-                      >
-                        <i className="fas fa-external-link-alt"></i>
-                        <span>実績をもっと見る</span>
-                      </a>
-                    )}
                   </div>
-                  {hasPreview && renderPreview(item.referenceUrl)}
+                  
+                  {hasPreview && (
+                    <div className={styles.previewColumn}>
+                      {renderPreview(item.referenceUrl)}
+                      {item.portfolioUrl && (
+                        <a
+                          href={item.portfolioUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className={styles.portfolioButton}
+                        >
+                          <i className="fas fa-external-link-alt"></i>
+                          <span>実績をもっと見る</span>
+                        </a>
+                      )}
+                    </div>
+                  )}
                 </div>
               );
             })}
