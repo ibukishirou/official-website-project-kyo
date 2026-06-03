@@ -87,7 +87,7 @@ const Commission = () => {
                       </div>
                     </div>
                     
-                    <p className={styles.menuDescription}>
+                    <p className={styles.menuDescription} style={{ whiteSpace: 'pre-line' }}>
                       {item.description}
                     </p>
 
