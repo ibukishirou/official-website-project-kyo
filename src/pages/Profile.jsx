@@ -92,13 +92,6 @@ const Profile = () => {
                   <br />
                   電脳世界ではふよふよ生きており、身体は23歳で固定されている。
                 </p>
-                <p className={styles.description}>
-                  得意のテトリスを中心にTikTokで配信活動中。
-                  <br />
-                  夢は「武道館でテトリス！」そして「トップVTokerになる！」
-                  <br />
-                  この夢を叶える為に、日々いろんな活動をしている。
-                </p>
               </div>
             </section>
 
@@ -133,11 +126,7 @@ const Profile = () => {
                   </div>
                   <div className={styles.infoItem}>
                     <dt>活動内容</dt>
-                    <dd>テトリス/雑談/マダミス</dd>
-                  </div>
-                  <div className={styles.infoItem}>
-                    <dt>配信時間</dt>
-                    <dd>15時~18時　定休日：火/木</dd>
+                    <dd>ゲーム実況</dd>
                   </div>
                   <div className={styles.infoItem}>
                     <dt>ファンマーク</dt>

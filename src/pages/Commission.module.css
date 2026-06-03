@@ -83,19 +83,133 @@
 .menuName {
   font-size: 1.5rem;
   font-weight: 700;
+  margin-bottom: var(--spacing-xs);
 }
 
-/* 通常価格のみの場合 */
-.menuPrice {
+.priceTag {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
   font-size: 1.3rem;
   font-weight: 700;
   color: var(--color-magenta);
+}
+
+.priceTag i {
+  font-size: 1.1rem;
 }
 
 .menuDescription {
   line-height: 1.8;
   color: var(--text-secondary);
   font-weight: 500;
+  margin-bottom: var(--spacing-md);
+}
+
+/* 特別オプション */
+.specialOptions {
+  background: linear-gradient(135deg, rgba(127, 255, 212, 0.1) 0%, rgba(255, 105, 180, 0.1) 100%);
+  border-left: 3px solid var(--color-cyan);
+  padding: var(--spacing-md);
+  border-radius: var(--border-radius-md);
+  margin-bottom: var(--spacing-md);
+}
+
+.specialOptionsTitle {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: var(--spacing-sm);
+  font-size: 0.95rem;
+}
+
+.specialOptionsTitle i {
+  color: var(--color-magenta);
+  font-size: 1rem;
+}
+
+.specialOptionsList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+}
+
+.specialOptionsList li {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--spacing-sm);
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.specialOptionsList li i {
+  color: var(--color-cyan);
+  margin-top: 2px;
+  flex-shrink: 0;
+}
+
+/* 納期 */
+.deliveryTime {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  padding: var(--spacing-sm) var(--spacing-md);
+  background: var(--bg-secondary);
+  border-radius: var(--border-radius-sm);
+  width: fit-content;
+  margin-bottom: var(--spacing-md);
+}
+
+.deliveryTime i {
+  color: var(--color-magenta);
+}
+
+/* プレビューカラム */
+.previewColumn {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+/* ポートフォリオボタン */
+.portfolioButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-xs);
+  padding: var(--spacing-md) var(--spacing-lg);
+  background: linear-gradient(135deg, rgba(127, 255, 212, 0.15) 0%, rgba(255, 105, 180, 0.15) 100%);
+  color: var(--text-primary);
+  border: 2px solid;
+  border-image: var(--gradient-primary) 1;
+  border-radius: var(--border-radius-md);
+  font-weight: 700;
+  font-size: 0.95rem;
+  text-decoration: none;
+  transition: all var(--transition-base);
+  box-shadow: var(--shadow-sm);
+}
+
+.portfolioButton:hover {
+  background: linear-gradient(135deg, rgba(127, 255, 212, 0.25) 0%, rgba(255, 105, 180, 0.25) 100%);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.portfolioButton i {
+  font-size: 0.9rem;
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 /* ===== 価格ブロック（割引あり） ===== */
@@ -189,37 +303,70 @@
 }
 
 /* オプション専用スタイル */
+.optionCard {
+  background: var(--bg-secondary);
+}
+
 .optionList {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-sm);
+  gap: var(--spacing-md);
 }
 
 .optionItem {
+  background: var(--bg-primary);
+  padding: var(--spacing-lg);
+  border-radius: var(--border-radius-md);
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow var(--transition-base), transform var(--transition-base);
+}
+
+.optionItem:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+
+.optionHeader {
   display: flex;
   justify-content: space-between;
-  align-items: baseline;
-  padding: var(--spacing-sm) 0;
-  border-bottom: 1px solid var(--bg-secondary);
-  line-height: 1.6;
+  align-items: flex-start;
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-sm);
 }
 
-.optionItem:last-child {
-  border-bottom: none;
-}
-
-.optionLabel {
+.optionTitleRow {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
   flex: 1;
-  color: var(--text-secondary);
-  font-weight: 500;
+}
+
+.optionIcon {
+  color: var(--color-magenta);
+  font-size: 1.1rem;
+  flex-shrink: 0;
+}
+
+.optionName {
+  font-weight: 700;
+  color: var(--text-primary);
+  font-size: 1.1rem;
 }
 
 .optionPrice {
   font-weight: 700;
   color: var(--color-magenta);
   white-space: nowrap;
-  margin-left: var(--spacing-md);
-  text-align: right;
+  font-size: 1rem;
+  background: linear-gradient(135deg, rgba(127, 255, 212, 0.15) 0%, rgba(255, 105, 180, 0.15) 100%);
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border-radius: var(--border-radius-sm);
+}
+
+.optionDescription {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
 }
 
 .videoPreview {
@@ -407,19 +554,35 @@
     font-size: 1.3rem;
   }
 
-  .menuPrice {
+  .priceTag {
     font-size: 1.1rem;
-  }
-
-  .discountPrice {
-    font-size: 1.3rem;
   }
 
   .linkCards {
     grid-template-columns: 1fr;
   }
 
-  .dualPreviewContainer {
-    grid-template-columns: 1fr;
+  .specialOptions {
+    padding: var(--spacing-sm);
+  }
+
+  .previewColumn {
+    gap: var(--spacing-sm);
+  }
+
+  .portfolioButton {
+    width: 100%;
+    padding: var(--spacing-sm) var(--spacing-md);
+    font-size: 0.9rem;
+  }
+
+  .optionHeader {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--spacing-sm);
+  }
+
+  .optionPrice {
+    align-self: flex-start;
   }
 }
