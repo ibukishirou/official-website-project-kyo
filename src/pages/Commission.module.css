@@ -9,6 +9,24 @@
   background-clip: text;
 }
 
+.subtitle {
+  text-align: center;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  margin-top: calc(var(--spacing-md) * -1);
+  margin-bottom: var(--spacing-2xl);
+  background: linear-gradient(135deg, rgba(127, 255, 212, 0.15) 0%, rgba(255, 105, 180, 0.15) 100%);
+  padding: var(--spacing-sm) var(--spacing-lg);
+  border-radius: var(--border-radius-lg);
+  display: inline-block;
+  width: auto;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+  width: fit-content;
+}
+
 .section {
   margin-bottom: var(--spacing-3xl);
   width: 100%;

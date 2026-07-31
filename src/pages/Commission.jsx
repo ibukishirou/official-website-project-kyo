@@ -39,6 +39,7 @@ const Commission = () => {
     <div className={styles.commission}>
       <div className="container">
         <h1 className="section-title" style={{ color: '#333333', fontWeight: 800 }}>コミッション</h1>
+        <p className={styles.subtitle}>企業・個人問わずご依頼可能です</p>
 
         {/* メニュー */}
         <section className={styles.section}>
@@ -207,7 +208,7 @@ const Commission = () => {
               <p>動画編集実績はこちら</p>
             </a>
             <a
-              href="https://docs.google.com/forms/d/e/1FAIpQLSecHI1W4aR253lJhP27rLBOGXC2SNP968Tn1tPBEBSFnaU1dw/viewform"
+              href="https://forms.gle/dwL4eXHbABaytYdA6"
               target="_blank"
               rel="noopener noreferrer"
               className={styles.linkCard}
