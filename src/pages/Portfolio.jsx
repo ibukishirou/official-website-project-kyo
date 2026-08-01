@@ -73,10 +73,16 @@ const Portfolio = () => {
     return url.includes('x.com') || url.includes('twitter.com');
   };
 
-  // YouTube サムネイルURLを取得
+  // YouTube サムネイルURLを取得（カード用 - 高解像度）
   const getYouTubeThumbnail = (url) => {
     const videoId = getYouTubeVideoId(url);
     return videoId ? `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg` : null;
+  };
+
+  // YouTube サムネイルURLを取得（モーダル用 - 中解像度320x180）
+  const getYouTubeThumbnailMQ = (url) => {
+    const videoId = getYouTubeVideoId(url);
+    return videoId ? `https://i.ytimg.com/vi/${videoId}/mqdefault.jpg` : null;
   };
 
   // 現在選択中のアイテムとメディア
@@ -288,7 +294,7 @@ const Portfolio = () => {
               <div className={styles.modalSidebar}>
                 <div className={styles.mediaThumbnails}>
                   {allMedia.map((media, index) => {
-                    const thumbnail = getYouTubeThumbnail(media);
+                    const thumbnail = getYouTubeThumbnailMQ(media);
                     const isActive = index === selectedMediaIndex;
                     
                     // ラベル表示ロジック
