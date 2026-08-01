@@ -296,10 +296,10 @@ const Portfolio = () => {
                     if (index !== 0) {
                       if (isXPost(media)) {
                         label = '告知動画';
-                      } else if (media.includes('/shorts/')) {
-                        label = 'ショート動画';
+                      } else {
+                        // YouTube動画（ショート/通常問わず）は一律で「宣伝動画」
+                        label = '宣伝動画';
                       }
-                      // YouTube横動画の場合はラベルなし
                     }
 
                     return (
