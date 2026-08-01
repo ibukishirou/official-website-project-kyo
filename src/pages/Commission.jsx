@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import commissionData from '../data/commission.json';
 import styles from './Commission.module.css';
 
@@ -121,15 +122,13 @@ const Commission = () => {
                     <div className={styles.previewColumn}>
                       {renderPreview(item.referenceUrl)}
                       {item.portfolioUrl && (
-                        <a
-                          href={item.portfolioUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
+                        <Link
+                          to={item.portfolioUrl}
                           className={styles.portfolioButton}
                         >
                           <i className="fas fa-external-link-alt"></i>
                           <span>実績をもっと見る</span>
-                        </a>
+                        </Link>
                       )}
                     </div>
                   )}
@@ -197,21 +196,15 @@ const Commission = () => {
 
         {/* リンク */}
         <section className={styles.section}>
-          <div className={styles.linkCards}>
-            <a
-              href="https://www.foriio.com/kyo-work0630"
-              target="_blank"
-              rel="noopener noreferrer"
-              className={styles.linkCard}
-            >
-              <h3>ポートフォリオ</h3>
-              <p>動画編集実績はこちら</p>
-            </a>
+          <div className={styles.linkSection}>
+            <Link to="/portfolio" className={styles.portfolioLink}>
+              ポートフォリオはこちら
+            </Link>
             <a
               href="https://forms.gle/dwL4eXHbABaytYdA6"
               target="_blank"
               rel="noopener noreferrer"
-              className={styles.linkCard}
+              className={styles.contactButton}
             >
               <h3>ご依頼・お見積り</h3>
               <p>ご依頼の際はこちらから</p>

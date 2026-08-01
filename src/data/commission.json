@@ -9,7 +9,7 @@
     "deliveryTime": "約20日",
     "referenceUrl": "https://youtu.be/ma38CHcOcM0",
     "referenceTitle": "プレミアムMV参考動画",
-    "portfolioUrl": "https://www.foriio.com/kyo-work0630/categories/プレミアムMV"
+    "portfolioUrl": "/portfolio/premium"
   },
   "ベーシックMV": {
     "price": "￥8,000～",
@@ -21,7 +21,7 @@
     "deliveryTime": "約10日",
     "referenceUrl": "https://youtu.be/zjVZbKo-19c",
     "referenceTitle": "ベーシックMV参考動画",
-    "portfolioUrl": "https://www.foriio.com/kyo-work0630/categories/ベーシックMV"
+    "portfolioUrl": "/portfolio/basic"
   },
   "シンプルMV": {
     "price": "￥3,000～",
@@ -33,7 +33,7 @@
     "deliveryTime": "約5日",
     "referenceUrl": "https://youtu.be/us4q70-YN8Y",
     "referenceTitle": "シンプルMV参考動画",
-    "portfolioUrl": "https://www.foriio.com/kyo-work0630/categories/シンプルMV"
+    "portfolioUrl": "/portfolio/simple"
   },
   "オプション": {
     "items": [

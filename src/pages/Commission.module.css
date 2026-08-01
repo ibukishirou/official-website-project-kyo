@@ -521,14 +521,28 @@
   line-height: 1.6;
 }
 
-/* リンクカード */
-.linkCards {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: var(--spacing-lg);
+/* リンクセクション */
+.linkSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-md);
 }
 
-.linkCard {
+.portfolioLink {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  text-decoration: underline;
+  font-weight: 500;
+  transition: color var(--transition-base);
+}
+
+.portfolioLink:hover {
+  color: var(--text-primary);
+  opacity: 1;
+}
+
+.contactButton {
   background: var(--gradient-primary);
   color: var(--text-white);
   border-radius: var(--border-radius-lg);
@@ -536,21 +550,23 @@
   box-shadow: var(--shadow-md);
   transition: transform var(--transition-base), box-shadow var(--transition-base);
   text-align: center;
+  width: 100%;
+  max-width: 400px;
 }
 
-.linkCard:hover {
+.contactButton:hover {
   transform: translateY(-4px);
   box-shadow: var(--shadow-xl);
   opacity: 1;
 }
 
-.linkCard h3 {
+.contactButton h3 {
   font-size: 1.5rem;
   font-weight: 700;
   margin-bottom: var(--spacing-sm);
 }
 
-.linkCard p {
+.contactButton p {
   font-size: 1rem;
   opacity: 0.9;
   font-weight: 500;
@@ -576,8 +592,8 @@
     font-size: 1.1rem;
   }
 
-  .linkCards {
-    grid-template-columns: 1fr;
+  .contactButton {
+    max-width: 100%;
   }
 
   .specialOptions {
