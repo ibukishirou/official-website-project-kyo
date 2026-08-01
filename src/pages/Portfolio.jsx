@@ -260,7 +260,7 @@ const Portfolio = () => {
                       src={`https://www.youtube.com/embed/${getYouTubeVideoId(currentMedia)}`}
                       title="YouTube video player"
                       frameBorder="0"
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                       allowFullScreen
                       className={styles.videoFrame}
                     ></iframe>
