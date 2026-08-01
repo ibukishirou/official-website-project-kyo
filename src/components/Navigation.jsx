@@ -13,6 +13,7 @@ const Navigation = () => {
     { path: '/guidelines', label: 'ガイドライン' },
     { path: '/qa', label: 'Q&A' },
     { path: '/commission', label: 'コミッション' },
+    { path: '/portfolio', label: 'ポートフォリオ' },
     { path: '/contact', label: '問い合わせ' },
   ];
 

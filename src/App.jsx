@@ -6,6 +6,7 @@ import Events from './pages/Events';
 import Guidelines from './pages/Guidelines';
 import QA from './pages/QA';
 import Commission from './pages/Commission';
+import Portfolio from './pages/Portfolio';
 import Contact from './pages/Contact';
 import './styles/global.css';
 
@@ -20,6 +21,8 @@ function App() {
           <Route path="/guidelines" element={<Guidelines />} />
           <Route path="/qa" element={<QA />} />
           <Route path="/commission" element={<Commission />} />
+          <Route path="/portfolio" element={<Portfolio />} />
+          <Route path="/portfolio/:plan" element={<Portfolio />} />
           <Route path="/contact" element={<Contact />} />
         </Routes>
       </Layout>
