@@ -10,6 +10,7 @@ const Portfolio = () => {
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedItemIndex, setSelectedItemIndex] = useState(null);
   const [selectedMediaIndex, setSelectedMediaIndex] = useState(0);
+  const [embedError, setEmbedError] = useState(false);
 
   // URLパラメータが変更されたらタブを更新
   useEffect(() => {
@@ -112,6 +113,31 @@ const Portfolio = () => {
           window.twttr.widgets.load();
         }
       };
+    }
+  }, [modalOpen, selectedMediaIndex, currentMedia]);
+
+  // メディアが変更されたらembedErrorをリセット
+  useEffect(() => {
+    setEmbedError(false);
+  }, [selectedMediaIndex, currentMedia]);
+
+  // iframe読み込みエラーを検出（一定時間後にチェック）
+  useEffect(() => {
+    if (modalOpen && currentMedia && !isXPost(currentMedia)) {
+      const timer = setTimeout(() => {
+        // iframeが読み込まれているかチェック
+        const iframe = document.querySelector(`.${styles.videoFrame}`);
+        if (iframe) {
+          try {
+            // クロスオリジンのため直接チェックできないので、
+            // YouTubeの埋め込みブロック動画は別途CSSで検出
+            // ここでは念のためタイムアウト処理のみ
+          } catch (e) {
+            setEmbedError(true);
+          }
+        }
+      }, 3000);
+      return () => clearTimeout(timer);
     }
   }, [modalOpen, selectedMediaIndex, currentMedia]);
 
@@ -262,14 +288,49 @@ const Portfolio = () => {
                       </blockquote>
                     </div>
                   ) : (
-                    <iframe
-                      src={`https://www.youtube.com/embed/${getYouTubeVideoId(currentMedia)}`}
-                      title="YouTube video player"
-                      frameBorder="0"
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                      allowFullScreen
-                      className={styles.videoFrame}
-                    ></iframe>
+                    <div className={styles.youtubeWrapper}>
+                      {embedError ? (
+                        /* 埋め込み制限時のフォールバック表示 */
+                        <div className={styles.embedFallback}>
+                          <div className={styles.fallbackContent}>
+                            <i className="fab fa-youtube"></i>
+                            <h3>この動画はYouTubeでのみ再生できます</h3>
+                            <p>動画の所有者により、外部サイトでの再生が制限されています。</p>
+                            <a
+                              href={currentMedia}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className={styles.youtubeButton}
+                            >
+                              <i className="fab fa-youtube"></i>
+                              YouTubeで視聴する
+                            </a>
+                          </div>
+                        </div>
+                      ) : (
+                        <>
+                          <iframe
+                            src={`https://www.youtube.com/embed/${getYouTubeVideoId(currentMedia)}`}
+                            title="YouTube video player"
+                            frameBorder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            allowFullScreen
+                            className={styles.videoFrame}
+                            onError={() => setEmbedError(true)}
+                          ></iframe>
+                          {/* YouTubeで開くリンク（常に表示） */}
+                          <a
+                            href={currentMedia}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className={styles.youtubeLink}
+                            title="YouTubeで視聴する"
+                          >
+                            <i className="fab fa-youtube"></i>
+                          </a>
+                        </>
+                      )}
+                    </div>
                   )}
                 </div>
 
