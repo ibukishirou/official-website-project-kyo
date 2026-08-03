@@ -289,10 +289,18 @@ const Portfolio = () => {
                     </div>
                   ) : (
                     <div className={styles.youtubeWrapper}>
-                      {embedError ? (
-                        /* 埋め込み制限時のフォールバック表示 */
-                        <div className={styles.embedFallback}>
-                          <div className={styles.fallbackContent}>
+                      <iframe
+                        src={`https://www.youtube.com/embed/${getYouTubeVideoId(currentMedia)}`}
+                        title="YouTube video player"
+                        frameBorder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        allowFullScreen
+                        className={styles.videoFrame}
+                      ></iframe>
+                      {/* 埋め込みエラー時のオーバーレイ（クリックで切り替え） */}
+                      {embedError && (
+                        <div className={styles.embedErrorOverlay}>
+                          <div className={styles.errorContent}>
                             <i className="fab fa-youtube"></i>
                             <h3>この動画はYouTubeでのみ再生できます</h3>
                             <p>動画の所有者により、外部サイトでの再生が制限されています。</p>
@@ -307,29 +315,19 @@ const Portfolio = () => {
                             </a>
                           </div>
                         </div>
-                      ) : (
-                        <>
-                          <iframe
-                            src={`https://www.youtube.com/embed/${getYouTubeVideoId(currentMedia)}`}
-                            title="YouTube video player"
-                            frameBorder="0"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                            allowFullScreen
-                            className={styles.videoFrame}
-                            onError={() => setEmbedError(true)}
-                          ></iframe>
-                          {/* YouTubeで開くリンク（常に表示） */}
-                          <a
-                            href={currentMedia}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className={styles.youtubeLink}
-                            title="YouTubeで視聴する"
-                          >
-                            <i className="fab fa-youtube"></i>
-                          </a>
-                        </>
                       )}
+                      {/* 埋め込みエラー表示ボタン */}
+                      <button
+                        className={styles.showErrorButton}
+                        onClick={() => setEmbedError(!embedError)}
+                        title={embedError ? "動画プレイヤーを表示" : "埋め込みエラーの場合はここをクリック"}
+                      >
+                        {embedError ? (
+                          <><i className="fas fa-video"></i> プレイヤーを表示</>
+                        ) : (
+                          <><i className="fab fa-youtube"></i> YouTubeで開く</>
+                        )}
+                      </button>
                     </div>
                   )}
                 </div>

@@ -337,34 +337,8 @@
   pointer-events: auto;
 }
 
-/* YouTubeで開くリンク（右上アイコン） */
-.youtubeLink {
-  position: absolute;
-  top: var(--spacing-md);
-  right: var(--spacing-md);
-  width: 48px;
-  height: 48px;
-  background: rgba(255, 0, 0, 0.9);
-  color: white;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.5rem;
-  text-decoration: none;
-  transition: all var(--transition-base);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-  z-index: 10;
-}
-
-.youtubeLink:hover {
-  background: #FF0000;
-  transform: scale(1.1);
-  box-shadow: 0 4px 12px rgba(255, 0, 0, 0.5);
-}
-
-/* 埋め込み制限時のフォールバック表示 */
-.embedFallback {
+/* 埋め込みエラー時のオーバーレイ */
+.embedErrorOverlay {
   position: absolute;
   top: 0;
   left: 0;
@@ -375,29 +349,61 @@
   align-items: center;
   justify-content: center;
   padding: var(--spacing-xl);
+  z-index: 10;
 }
 
-.fallbackContent {
+/* エラー表示/非表示ボタン */
+.showErrorButton {
+  position: absolute;
+  bottom: var(--spacing-md);
+  right: var(--spacing-md);
+  padding: var(--spacing-sm) var(--spacing-lg);
+  background: rgba(255, 0, 0, 0.95);
+  color: white;
+  border: none;
+  border-radius: var(--border-radius-md);
+  font-size: 0.875rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  cursor: pointer;
+  transition: all var(--transition-base);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  z-index: 15;
+}
+
+.showErrorButton:hover {
+  background: #FF0000;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255, 0, 0, 0.5);
+}
+
+.showErrorButton i {
+  font-size: 1rem;
+}
+
+.errorContent {
   text-align: center;
   max-width: 400px;
   color: white;
 }
 
-.fallbackContent > i {
+.errorContent > i {
   font-size: 4rem;
   color: #FF0000;
   margin-bottom: var(--spacing-lg);
   display: block;
 }
 
-.fallbackContent h3 {
+.errorContent h3 {
   font-size: 1.25rem;
   font-weight: 700;
   margin-bottom: var(--spacing-md);
   color: white;
 }
 
-.fallbackContent p {
+.errorContent p {
   font-size: 0.875rem;
   color: rgba(255, 255, 255, 0.7);
   margin-bottom: var(--spacing-xl);
@@ -622,19 +628,18 @@
     font-size: 0.875rem;
   }
 
-  .youtubeLink {
-    width: 40px;
-    height: 40px;
-    font-size: 1.2rem;
-    top: var(--spacing-sm);
+  .showErrorButton {
+    font-size: 0.75rem;
+    padding: var(--spacing-xs) var(--spacing-md);
+    bottom: var(--spacing-sm);
     right: var(--spacing-sm);
   }
 
-  .fallbackContent h3 {
+  .errorContent h3 {
     font-size: 1.1rem;
   }
 
-  .fallbackContent p {
+  .errorContent p {
     font-size: 0.8rem;
   }
 
