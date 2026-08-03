@@ -325,23 +325,14 @@
   flex-shrink: 0;
 }
 
-.youtubeWrapper {
-  width: 100%;
-  height: 100%;
-  position: relative;
-}
-
 .videoFrame {
   width: 100%;
   height: 100%;
   pointer-events: auto;
 }
 
-/* 埋め込みエラー時のオーバーレイ */
-.embedErrorOverlay {
-  position: absolute;
-  top: 0;
-  left: 0;
+/* 埋め込みエラー時の表示 */
+.embedError {
   width: 100%;
   height: 100%;
   background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
@@ -349,38 +340,6 @@
   align-items: center;
   justify-content: center;
   padding: var(--spacing-xl);
-  z-index: 10;
-}
-
-/* エラー表示/非表示ボタン */
-.showErrorButton {
-  position: absolute;
-  bottom: var(--spacing-md);
-  right: var(--spacing-md);
-  padding: var(--spacing-sm) var(--spacing-lg);
-  background: rgba(255, 0, 0, 0.95);
-  color: white;
-  border: none;
-  border-radius: var(--border-radius-md);
-  font-size: 0.875rem;
-  font-weight: 600;
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-xs);
-  cursor: pointer;
-  transition: all var(--transition-base);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-  z-index: 15;
-}
-
-.showErrorButton:hover {
-  background: #FF0000;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(255, 0, 0, 0.5);
-}
-
-.showErrorButton i {
-  font-size: 1rem;
 }
 
 .errorContent {
@@ -628,13 +587,6 @@
     font-size: 0.875rem;
   }
 
-  .showErrorButton {
-    font-size: 0.75rem;
-    padding: var(--spacing-xs) var(--spacing-md);
-    bottom: var(--spacing-sm);
-    right: var(--spacing-sm);
-  }
-
   .errorContent h3 {
     font-size: 1.1rem;
   }
@@ -646,5 +598,9 @@
   .youtubeButton {
     font-size: 0.875rem;
     padding: var(--spacing-sm) var(--spacing-lg);
+  }
+
+  .embedError {
+    padding: var(--spacing-md);
   }
 }

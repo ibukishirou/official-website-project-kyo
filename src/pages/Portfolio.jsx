@@ -287,48 +287,45 @@ const Portfolio = () => {
                         <a href={currentMedia.replace('/video/1', '')}></a>
                       </blockquote>
                     </div>
-                  ) : (
-                    <div className={styles.youtubeWrapper}>
-                      <iframe
-                        src={`https://www.youtube.com/embed/${getYouTubeVideoId(currentMedia)}`}
-                        title="YouTube video player"
-                        frameBorder="0"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                        allowFullScreen
-                        className={styles.videoFrame}
-                      ></iframe>
-                      {/* 埋め込みエラー時のオーバーレイ（クリックで切り替え） */}
-                      {embedError && (
-                        <div className={styles.embedErrorOverlay}>
-                          <div className={styles.errorContent}>
-                            <i className="fab fa-youtube"></i>
-                            <h3>この動画はYouTubeでのみ再生できます</h3>
-                            <p>動画の所有者により、外部サイトでの再生が制限されています。</p>
-                            <a
-                              href={currentMedia}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className={styles.youtubeButton}
-                            >
-                              <i className="fab fa-youtube"></i>
-                              YouTubeで視聴する
-                            </a>
-                          </div>
-                        </div>
-                      )}
-                      {/* 埋め込みエラー表示ボタン */}
-                      <button
-                        className={styles.showErrorButton}
-                        onClick={() => setEmbedError(!embedError)}
-                        title={embedError ? "動画プレイヤーを表示" : "埋め込みエラーの場合はここをクリック"}
-                      >
-                        {embedError ? (
-                          <><i className="fas fa-video"></i> プレイヤーを表示</>
-                        ) : (
-                          <><i className="fab fa-youtube"></i> YouTubeで開く</>
-                        )}
-                      </button>
+                  ) : embedError ? (
+                    /* 埋め込みエラー時：YouTubeへの導線のみ表示 */
+                    <div className={styles.embedError}>
+                      <div className={styles.errorContent}>
+                        <i className="fab fa-youtube"></i>
+                        <h3>この動画はYouTubeでのみ再生できます</h3>
+                        <p>動画の所有者により、外部サイトでの再生が制限されています。</p>
+                        <a
+                          href={currentMedia}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className={styles.youtubeButton}
+                        >
+                          <i className="fab fa-youtube"></i>
+                          YouTubeで視聴する
+                        </a>
+                      </div>
                     </div>
+                  ) : (
+                    /* 正常時：純粋なiframeのみ */
+                    <iframe
+                      src={`https://www.youtube.com/embed/${getYouTubeVideoId(currentMedia)}?enablejsapi=1`}
+                      title="YouTube video player"
+                      frameBorder="0"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                      allowFullScreen
+                      className={styles.videoFrame}
+                      onLoad={(e) => {
+                        // YouTube Player APIでエラーを検出
+                        const iframe = e.target;
+                        const checkEmbed = () => {
+                          // iframeが非常に小さい高さの場合はエラーと判定
+                          if (iframe && iframe.offsetHeight < 100) {
+                            setEmbedError(true);
+                          }
+                        };
+                        setTimeout(checkEmbed, 2000);
+                      }}
+                    ></iframe>
                   )}
                 </div>
 
