@@ -10,16 +10,25 @@ const Portfolio = () => {
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedItemIndex, setSelectedItemIndex] = useState(null);
   const [selectedMediaIndex, setSelectedMediaIndex] = useState(0);
+  const [isTabChanging, setIsTabChanging] = useState(false);
 
   // URLパラメータが変更されたらタブを更新
   useEffect(() => {
     if (plan && ['simple', 'basic', 'premium'].includes(plan)) {
+      // タブ変更アニメーションをトリガー
+      if (plan !== activeTab) {
+        setIsTabChanging(true);
+        // アニメーション終了後にフラグをリセット
+        setTimeout(() => {
+          setIsTabChanging(false);
+        }, 600); // アニメーション時間に合わせる
+      }
       setActiveTab(plan);
     } else if (!plan) {
       // パラメータがない場合はbasicにリダイレクト
       navigate('/portfolio/basic', { replace: true });
     }
-  }, [plan, navigate]);
+  }, [plan, navigate, activeTab]);
 
   // 選択中のプランでフィルタリング
   const filteredItems = portfolioData.filter(item => item.plan === activeTab);
@@ -93,25 +102,39 @@ const Portfolio = () => {
   // X埋め込みスクリプトをロード
   useEffect(() => {
     if (modalOpen && currentMedia && isXPost(currentMedia)) {
-      // 既存のスクリプトを削除
-      const existingScript = document.querySelector('script[src="https://platform.twitter.com/widgets.js"]');
-      if (existingScript) {
-        existingScript.remove();
+      // 既存のウィジェットをクリーンアップ
+      const xEmbedContainer = document.querySelector(`.${styles.xEmbed}`);
+      if (xEmbedContainer) {
+        // 古いツイート埋め込みを削除
+        const oldTweets = xEmbedContainer.querySelectorAll('.twitter-tweet');
+        oldTweets.forEach(tweet => {
+          const iframe = tweet.querySelector('iframe');
+          if (iframe) {
+            iframe.remove();
+          }
+        });
       }
       
-      // 新しいスクリプトを追加
-      const script = document.createElement('script');
-      script.src = 'https://platform.twitter.com/widgets.js';
-      script.async = true;
-      script.charset = 'utf-8';
-      document.body.appendChild(script);
-      
-      // twttrが利用可能になったらウィジェットを再ロード
-      script.onload = () => {
-        if (window.twttr && window.twttr.widgets) {
-          window.twttr.widgets.load();
+      // スクリプトが既にロード済みの場合は、ウィジェットのみリロード
+      if (window.twttr && window.twttr.widgets) {
+        window.twttr.widgets.load();
+      } else {
+        // 初回ロード時のみスクリプトを追加
+        const existingScript = document.querySelector('script[src="https://platform.twitter.com/widgets.js"]');
+        if (!existingScript) {
+          const script = document.createElement('script');
+          script.src = 'https://platform.twitter.com/widgets.js';
+          script.async = true;
+          script.charset = 'utf-8';
+          document.body.appendChild(script);
+          
+          script.onload = () => {
+            if (window.twttr && window.twttr.widgets) {
+              window.twttr.widgets.load();
+            }
+          };
         }
-      };
+      }
     }
   }, [modalOpen, selectedMediaIndex, currentMedia]);
 
@@ -151,12 +174,17 @@ const Portfolio = () => {
       </div>
 
       {/* 作品一覧グリッド */}
-      <div className={styles.grid}>
+      <div className={`${styles.grid} ${isTabChanging ? styles.gridFadeIn : ''}`}>
         {filteredItems.map((item, index) => {
           const thumbnail = getYouTubeThumbnail(item.mainVideo);
           
           return (
-            <div key={index} className={styles.card} onClick={() => openModal(index)}>
+            <div 
+              key={`${activeTab}-${index}`} 
+              className={styles.card} 
+              onClick={() => openModal(index)}
+              style={{ animationDelay: `${index * 0.05}s` }}
+            >
               <div className={styles.thumbnailWrapper}>
                 {thumbnail ? (
                   <img src={thumbnail} alt={item.title} className={styles.thumbnail} />
