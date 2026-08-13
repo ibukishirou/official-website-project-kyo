@@ -352,19 +352,7 @@ const Portfolio = () => {
 
                 {/* 作品情報 */}
                 <div className={styles.modalInfo}>
-                  <div className={styles.titleRow}>
-                    <h2 className={styles.modalTitle}>{selectedItem.title}</h2>
-                    {!isXPost(currentMedia) && (
-                      <a
-                        href={currentMedia}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className={styles.youtubeHint}
-                      >
-                        動画を再生できない場合はYouTubeで確認ください
-                      </a>
-                    )}
-                  </div>
+                  <h2 className={styles.modalTitle}>{selectedItem.title}</h2>
                   <div className={styles.modalClientRow}>
                     <p className={styles.modalClient}>{selectedItem.client}様</p>
                     {selectedItem.date && <p className={styles.modalDate}>{selectedItem.date}</p>}
