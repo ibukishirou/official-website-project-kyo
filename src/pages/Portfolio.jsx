@@ -11,6 +11,7 @@ const Portfolio = () => {
   const [selectedItemIndex, setSelectedItemIndex] = useState(null);
   const [selectedMediaIndex, setSelectedMediaIndex] = useState(0);
   const [isTabChanging, setIsTabChanging] = useState(false);
+  const [isMediaLoading, setIsMediaLoading] = useState(true);
 
   // URLパラメータが変更されたらタブを更新
   useEffect(() => {
@@ -37,6 +38,7 @@ const Portfolio = () => {
   const openModal = (index) => {
     setSelectedItemIndex(index);
     setSelectedMediaIndex(0); // mainVideoを最初に表示
+    setIsMediaLoading(true); // ローディング開始
     setModalOpen(true);
     document.body.style.overflow = 'hidden'; // スクロール防止
   };
@@ -54,6 +56,7 @@ const Portfolio = () => {
     if (selectedItemIndex > 0) {
       setSelectedItemIndex(selectedItemIndex - 1);
       setSelectedMediaIndex(0);
+      setIsMediaLoading(true);
     }
   };
 
@@ -62,6 +65,7 @@ const Portfolio = () => {
     if (selectedItemIndex < filteredItems.length - 1) {
       setSelectedItemIndex(selectedItemIndex + 1);
       setSelectedMediaIndex(0);
+      setIsMediaLoading(true);
     }
   };
 
@@ -99,25 +103,51 @@ const Portfolio = () => {
   const allMedia = selectedItem ? [selectedItem.mainVideo, ...selectedItem.subMedia] : [];
   const currentMedia = allMedia[selectedMediaIndex];
 
+  // メディア切り替え時にローディングをリセット
+  useEffect(() => {
+    if (modalOpen && currentMedia) {
+      setIsMediaLoading(true);
+    }
+  }, [selectedMediaIndex, modalOpen, currentMedia]);
+
   // X埋め込みスクリプトをロード
   useEffect(() => {
     if (modalOpen && currentMedia && isXPost(currentMedia)) {
-      // 既存のウィジェットをクリーンアップ
-      const xEmbedContainer = document.querySelector(`.${styles.xEmbed}`);
-      if (xEmbedContainer) {
-        // 古いツイート埋め込みを削除
-        const oldTweets = xEmbedContainer.querySelectorAll('.twitter-tweet');
-        oldTweets.forEach(tweet => {
-          const iframe = tweet.querySelector('iframe');
-          if (iframe) {
-            iframe.remove();
-          }
-        });
-      }
+      setIsMediaLoading(true);
       
-      // スクリプトが既にロード済みの場合は、ウィジェットのみリロード
+      // スクリプトロード関数
+      const loadTwitterWidget = () => {
+        if (window.twttr && window.twttr.widgets) {
+          // 既存のコンテナをクリア
+          const xEmbedContainer = document.querySelector(`.${styles.xEmbed}`);
+          if (xEmbedContainer) {
+            // 完全にクリアして再構築
+            xEmbedContainer.innerHTML = '';
+            
+            // 新しいblockquoteを作成
+            const blockquote = document.createElement('blockquote');
+            blockquote.className = 'twitter-tweet';
+            blockquote.setAttribute('data-theme', 'light');
+            
+            const link = document.createElement('a');
+            link.href = currentMedia.replace('/video/1', '');
+            blockquote.appendChild(link);
+            
+            xEmbedContainer.appendChild(blockquote);
+            
+            // ウィジェットを読み込み
+            window.twttr.widgets.load(xEmbedContainer).then(() => {
+              setIsMediaLoading(false);
+            }).catch(() => {
+              setIsMediaLoading(false);
+            });
+          }
+        }
+      };
+      
+      // スクリプトが既にロード済みの場合
       if (window.twttr && window.twttr.widgets) {
-        window.twttr.widgets.load();
+        loadTwitterWidget();
       } else {
         // 初回ロード時のみスクリプトを追加
         const existingScript = document.querySelector('script[src="https://platform.twitter.com/widgets.js"]');
@@ -129,10 +159,22 @@ const Portfolio = () => {
           document.body.appendChild(script);
           
           script.onload = () => {
-            if (window.twttr && window.twttr.widgets) {
-              window.twttr.widgets.load();
-            }
+            loadTwitterWidget();
           };
+        } else {
+          // スクリプトは存在するが、twttrオブジェクトがまだロードされていない場合
+          const checkTwitter = setInterval(() => {
+            if (window.twttr && window.twttr.widgets) {
+              clearInterval(checkTwitter);
+              loadTwitterWidget();
+            }
+          }, 100);
+          
+          // タイムアウト設定（10秒）
+          setTimeout(() => {
+            clearInterval(checkTwitter);
+            setIsMediaLoading(false);
+          }, 10000);
         }
       }
     }
@@ -283,20 +325,27 @@ const Portfolio = () => {
               <div className={styles.modalMain}>
                 {/* メインメディアプレイヤー */}
                 <div className={styles.mediaPlayer}>
+                  {/* ローディングスピナー */}
+                  {isMediaLoading && (
+                    <div className={styles.loadingOverlay}>
+                      <div className={styles.spinner}></div>
+                    </div>
+                  )}
+                  
                   {isXPost(currentMedia) ? (
                     <div className={styles.xEmbed}>
-                      <blockquote className="twitter-tweet" data-theme="light">
-                        <a href={currentMedia.replace('/video/1', '')}></a>
-                      </blockquote>
+                      {/* X投稿の埋め込み - JavaScriptで動的に生成 */}
                     </div>
                   ) : (
                     <iframe
+                      key={`youtube-${selectedMediaIndex}`}
                       src={`https://www.youtube.com/embed/${getYouTubeVideoId(currentMedia)}`}
                       title="YouTube video player"
                       frameBorder="0"
                       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                       allowFullScreen
                       className={styles.videoFrame}
+                      onLoad={() => setIsMediaLoading(false)}
                     ></iframe>
                   )}
                 </div>
@@ -352,7 +401,10 @@ const Portfolio = () => {
                       <div
                         key={index}
                         className={`${styles.mediaThumbnail} ${isActive ? styles.activeThumbnail : ''}`}
-                        onClick={() => setSelectedMediaIndex(index)}
+                        onClick={() => {
+                          setSelectedMediaIndex(index);
+                          setIsMediaLoading(true);
+                        }}
                       >
                         {thumbnail ? (
                           <img src={thumbnail} alt={`Media ${index + 1}`} />
