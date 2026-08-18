@@ -1,6 +1,59 @@
 [
   {
     "plan": "basic",
+    "title": "宇宙一☆アイドル宣言 / 家入えと",
+    "client": "家入えと",
+    "date": "2026-06",
+    "mainVideo": "https://www.youtube.com/watch?v=9w3LOFMtwrY",
+    "subMedia": [],
+    "tags": [
+      "ポップ",
+      "かわいい"
+    ]
+  },
+  {
+    "plan": "simple",
+    "title": "少女レイ / みきとP",
+    "client": "薬袋さいね",
+    "date": "2026-08",
+    "mainVideo": "https://youtu.be/H5hVzHsBRhM",
+    "subMedia": [
+      "https://x.com/saine_371/status/2088583756600971390"
+    ],
+    "tags": [
+      "きれい",
+      "儚い"
+    ]
+  },
+  {
+    "plan": "premium",
+    "title": "トゥモロー最強説!! / 超ときめき♡宣伝部",
+    "client": "無敵なふたりは暴れたい！",
+    "date": "2026-08",
+    "mainVideo": "https://www.youtube.com/watch?v=UP2StjNO3vw",
+    "subMedia": [],
+    "tags": [
+      "ポップ",
+      "かわいい"
+    ]
+  },
+  {
+    "plan": "basic",
+    "title": "青と夏 / Mrs. GREEN APPLE",
+    "client": "えも",
+    "date": "2026-08",
+    "mainVideo": "https://youtu.be/iEtCJ4SAYZ0",
+    "subMedia": [
+      "https://x.com/emo_2kan/status/2088219078452490736",
+      "https://x.com/galZuttomo/status/2088219082784989248"
+    ],
+    "tags": [
+      "きれい",
+      "ロック"
+    ]
+  },
+  {
+    "plan": "basic",
     "title": "夏、透明な青に惹かれて。 / ハコニワリリィ",
     "client": "未来ミリ",
     "date": "2026-08",
