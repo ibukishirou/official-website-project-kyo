@@ -6,15 +6,20 @@ const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
 
-  const navItems = [
+  // 動画投稿者向けメニュー（響-Kyo-）
+  const creatorMenuItems = [
     { path: '/', label: 'HOME' },
     { path: '/profile', label: 'プロフィール' },
     { path: '/events', label: '実績' },
     { path: '/guidelines', label: 'ガイドライン' },
     { path: '/qa', label: 'Q&A' },
+    { path: '/contact', label: '問い合わせ' },
+  ];
+
+  // 動画編集者向けメニュー（きょー）
+  const editorMenuItems = [
     { path: '/commission', label: 'コミッション' },
     { path: '/portfolio', label: 'ポートフォリオ' },
-    { path: '/contact', label: '問い合わせ' },
   ];
 
   const toggleMenu = () => {
@@ -38,20 +43,39 @@ const Navigation = () => {
         </Link>
 
         {/* デスクトップメニュー */}
-        <ul className={styles.desktopMenu}>
-          {navItems.map((item) => (
-            <li key={item.path}>
-              <Link
-                to={item.path}
-                className={`${styles.navLink} ${
-                  location.pathname === item.path ? styles.active : ''
-                }`}
-              >
-                {item.label}
-              </Link>
-            </li>
-          ))}
-        </ul>
+        <div className={styles.desktopMenu}>
+          <ul className={styles.menuGroup}>
+            {creatorMenuItems.map((item) => (
+              <li key={item.path}>
+                <Link
+                  to={item.path}
+                  className={`${styles.navLink} ${
+                    location.pathname === item.path ? styles.active : ''
+                  }`}
+                >
+                  {item.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+          
+          <div className={styles.divider}></div>
+          
+          <ul className={styles.menuGroup}>
+            {editorMenuItems.map((item) => (
+              <li key={item.path}>
+                <Link
+                  to={item.path}
+                  className={`${styles.navLink} ${
+                    location.pathname === item.path ? styles.active : ''
+                  }`}
+                >
+                  {item.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
 
         {/* ハンバーガーメニューボタン */}
         <button
@@ -66,21 +90,43 @@ const Navigation = () => {
 
         {/* モバイルメニュー */}
         <div className={`${styles.mobileMenu} ${isOpen ? styles.show : ''}`}>
-          <ul>
-            {navItems.map((item) => (
-              <li key={item.path}>
-                <Link
-                  to={item.path}
-                  className={`${styles.mobileNavLink} ${
-                    location.pathname === item.path ? styles.active : ''
-                  }`}
-                  onClick={closeMenu}
-                >
-                  {item.label}
-                </Link>
-              </li>
-            ))}
-          </ul>
+          <div className={styles.mobileMenuGroup}>
+            <h3 className={styles.mobileMenuTitle}>響-Kyo-</h3>
+            <ul>
+              {creatorMenuItems.map((item) => (
+                <li key={item.path}>
+                  <Link
+                    to={item.path}
+                    className={`${styles.mobileNavLink} ${
+                      location.pathname === item.path ? styles.active : ''
+                    }`}
+                    onClick={closeMenu}
+                  >
+                    {item.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+          
+          <div className={styles.mobileMenuGroup}>
+            <h3 className={styles.mobileMenuTitle}>きょー</h3>
+            <ul>
+              {editorMenuItems.map((item) => (
+                <li key={item.path}>
+                  <Link
+                    to={item.path}
+                    className={`${styles.mobileNavLink} ${
+                      location.pathname === item.path ? styles.active : ''
+                    }`}
+                    onClick={closeMenu}
+                  >
+                    {item.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
 
         {/* オーバーレイ */}
