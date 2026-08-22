@@ -1,14 +1,30 @@
 [
   {
-    "plan": "basic",
-    "title": "宇宙一☆アイドル宣言 / 家入えと",
-    "client": "家入えと",
-    "date": "2026-06",
-    "mainVideo": "https://www.youtube.com/watch?v=9w3LOFMtwrY",
-    "subMedia": [],
+    "plan": "simple",
+    "title": "KING / Kanaria",
+    "client": "KUPO",
+    "date": "2026-08",
+    "mainVideo": "https://youtu.be/VFHijARIwPg",
+    "subMedia": [
+      "https://x.com/kuryu091/status/2090031019793461449?s=20"
+    ],
     "tags": [
-      "ポップ",
-      "かわいい"
+      "ダーク",
+      "かっこいい"
+    ]
+  },
+  {
+    "plan": "simple",
+    "title": "死ぬな！ / こっちのけんと",
+    "client": "師走おわり",
+    "date": "2026-08",
+    "mainVideo": "https://youtu.be/3LLJpMxbWNM?si=QsA0-gCj19gtEqjW",
+    "subMedia": [
+      "https://x.com/_Yearend_/status/2089701021195071975?s=20"
+    ],
+    "tags": [
+      "ダーク",
+      "レトロ"
     ]
   },
   {
@@ -100,6 +116,18 @@
     "tags": [
       "ポップ",
       "かわいい"
+    ]
+  },
+  {
+    "plan": "basic",
+    "title": "Click-Clack-Block / 家入えと",
+    "client": "家入えと",
+    "date": "2026-07",
+    "mainVideo": "https://youtu.be/xJ5AOyssW74?si=O0O8zJQ0FInSZHr_",
+    "subMedia": [],
+    "tags": [
+      "かっこいい",
+      "ロック"
     ]
   },
   {
@@ -219,14 +247,14 @@
   },
   {
     "plan": "basic",
-    "title": "あの子は悪魔/こめだわら",
-    "client": "Caeki",
-    "date": "2026-03",
-    "mainVideo": "https://youtu.be/APYv-HV02BM",
+    "title": "宇宙一☆アイドル宣言 / 家入えと",
+    "client": "家入えと",
+    "date": "2026-06",
+    "mainVideo": "https://www.youtube.com/watch?v=9w3LOFMtwrY",
     "subMedia": [],
     "tags": [
-      "ダーク",
-      "きれい"
+      "ポップ",
+      "かわいい"
     ]
   },
   {
@@ -310,6 +338,18 @@
     "tags": [
       "ポップ",
       "かわいい"
+    ]
+  },
+  {
+    "plan": "basic",
+    "title": "あの子は悪魔/こめだわら",
+    "client": "Caeki",
+    "date": "2026-03",
+    "mainVideo": "https://youtu.be/APYv-HV02BM",
+    "subMedia": [],
+    "tags": [
+      "ダーク",
+      "きれい"
     ]
   },
   {
