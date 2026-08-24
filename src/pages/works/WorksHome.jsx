@@ -25,11 +25,7 @@ const WorksHome = () => {
       document.head.appendChild(meta);
     }
   }, []);
-  const getYouTubeVideoId = (url) => {
-    const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
-    const match = url.match(regExp);
-    return match && match[2].length === 11 ? match[2] : null;
-  };
+
 
   return (
     <div className={styles.home}>
@@ -62,15 +58,17 @@ const WorksHome = () => {
       <section className={`${styles.section} ${styles.plans}`}>
         <div className="container">
           <h2 className="section-title">プラン紹介</h2>
-          <div className={styles.videoWrapper}>
-            <iframe
-              src={`https://www.youtube.com/embed/${getYouTubeVideoId('https://youtu.be/JDE0ewe9u0c')}`}
-              title="プラン紹介動画"
-              frameBorder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              allowFullScreen
-              className={styles.videoIframe}
-            ></iframe>
+          <div className={styles.plansContent}>
+            <div className={styles.videoWrapper}>
+              <iframe
+                src="https://www.youtube.com/embed/JDE0ewe9u0c"
+                title="プラン紹介動画"
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowFullScreen
+                className={styles.videoIframe}
+              ></iframe>
+            </div>
           </div>
         </div>
       </section>

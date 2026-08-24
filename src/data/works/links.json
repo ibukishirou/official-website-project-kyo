@@ -20,13 +20,13 @@
   {
     "platform": "Wick",
     "url": "https://wick-share.com/sns/share/bK2UrWFS?v=1787389137323",
-    "icon": "fas fa-fire",
+    "icon": "fab fa-wolf-pack-battalion",
     "color": "#7FFFD4"
   },
   {
     "platform": "つなぐ",
     "url": "https://tsunagu.cloud/users/kyo_work0630",
-    "icon": "fas fa-network-wired",
+    "icon": "fas fa-link",
     "color": "#FF69B4"
   }
 ]

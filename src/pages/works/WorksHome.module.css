@@ -75,11 +75,14 @@
   background: var(--bg-primary);
 }
 
+.plansContent {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
 .videoWrapper {
   position: relative;
   width: 100%;
-  max-width: 900px;
-  margin: 0 auto;
   padding-bottom: 56.25%; /* 16:9 aspect ratio */
   height: 0;
   overflow: hidden;
@@ -131,8 +134,6 @@
 
 .linkIcon {
   font-size: 2.5rem;
-  width: 2.5rem;
-  height: 2.5rem;
   display: inline-flex;
   align-items: center;
   justify-content: center;
