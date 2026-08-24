@@ -1,8 +1,11 @@
-import songsData from '../data/songs.json';
-import linksData from '../data/links.json';
+import songsData from '../../data/talent/songs.json';
+import linksData from '../../data/talent/links.json';
+import SEO from '../../components/SEO';
+import { seoConfig, getPersonSchema, getBreadcrumbSchema, getWebSiteSchema } from '../../utils/seo';
 import styles from './Home.module.css';
 
 const Home = () => {
+  const pageConfig = seoConfig.talent.home;
 
   const getIconClass = (serviceName) => {
     const iconMap = {
@@ -30,12 +33,25 @@ const Home = () => {
   };
 
   return (
-    <div className={styles.home}>
+    <>
+      <SEO
+        title={pageConfig.title}
+        description={pageConfig.description}
+        keywords={pageConfig.keywords}
+        ogImage={pageConfig.ogImage}
+        path={pageConfig.path}
+        structuredData={[
+          getPersonSchema('talent'),
+          getBreadcrumbSchema(pageConfig.path),
+          getWebSiteSchema(),
+        ]}
+      />
+      <div className={styles.home}>
       {/* ファーストビュー */}
       <section className={styles.hero}>
         <div className={styles.heroImage}>
           <img 
-            src="/images/hero.webp" 
+            src="/images/talent/hero.webp" 
             alt="響-Kyo-" 
             className={styles.heroImg}
           />
@@ -85,6 +101,7 @@ const Home = () => {
         </div>
       </section>
     </div>
+    </>
   );
 };
 

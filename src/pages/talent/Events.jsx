@@ -1,7 +1,10 @@
-import eventsData from '../data/events.json';
+import eventsData from '../../data/talent/events.json';
+import SEO from '../../components/SEO';
+import { seoConfig, getBreadcrumbSchema } from '../../utils/seo';
 import styles from './Events.module.css';
 
 const Events = () => {
+  const pageConfig = seoConfig.talent.events;
   // 年度でグループ化
   const eventsByYear = eventsData.reduce((acc, item) => {
     if (!acc[item.year]) {
@@ -45,7 +48,16 @@ const Events = () => {
   };
 
   return (
-    <div className={styles.events}>
+    <>
+      <SEO
+        title={pageConfig.title}
+        description={pageConfig.description}
+        keywords={pageConfig.keywords}
+        ogImage={pageConfig.ogImage}
+        path={pageConfig.path}
+        structuredData={getBreadcrumbSchema(pageConfig.path)}
+      />
+      <div className={styles.events}>
       <div className="container">
         <h1 className="section-title" style={{color: '#333333', fontWeight: 800}}>実績</h1>
 
@@ -80,6 +92,7 @@ const Events = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 

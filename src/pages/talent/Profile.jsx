@@ -1,8 +1,11 @@
 import { useState } from 'react';
-import creditsData from '../data/credits.json';
+import creditsData from '../../data/talent/credits.json';
+import SEO from '../../components/SEO';
+import { seoConfig, getBreadcrumbSchema } from '../../utils/seo';
 import styles from './Profile.module.css';
 
 const Profile = () => {
+  const pageConfig = seoConfig.talent.profile;
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalImage, setModalImage] = useState('');
 
@@ -17,7 +20,16 @@ const Profile = () => {
   };
 
   return (
-    <div className={styles.profile}>
+    <>
+      <SEO
+        title={pageConfig.title}
+        description={pageConfig.description}
+        keywords={pageConfig.keywords}
+        ogImage={pageConfig.ogImage}
+        path={pageConfig.path}
+        structuredData={getBreadcrumbSchema(pageConfig.path)}
+      />
+      <div className={styles.profile}>
       <div className="container">
         <h1 className="section-title" style={{color: '#333333', fontWeight: 800}}>プロフィール</h1>
 
@@ -27,9 +39,9 @@ const Profile = () => {
           <div className={styles.leftColumn}>
             <div className={styles.mainImage}>
               <picture>
-                <source media="(max-width: 768px)" srcSet="/images/key-visual-mobile.webp" />
+                <source media="(max-width: 768px)" srcSet="/images/talent/key-visual-mobile.webp" />
                 <img 
-                  src="/images/key-visual.webp" 
+                  src="/images/talent/key-visual.webp" 
                   alt="響-Kyo- 立ち絵" 
                   className={styles.characterImage}
                 />
@@ -38,17 +50,17 @@ const Profile = () => {
             <div className={styles.subImage}>
               <div 
                 className={styles.threeViewWrapper}
-                onClick={() => openModal('/images/three-view-2.png')}
+                onClick={() => openModal('/images/talent/three-view-2.png')}
                 role="button"
                 tabIndex={0}
                 onKeyPress={(e) => {
                   if (e.key === 'Enter' || e.key === ' ') {
-                    openModal('/images/three-view-2.png');
+                    openModal('/images/talent/three-view-2.png');
                   }
                 }}
               >
                 <img 
-                  src="/images/three-view-2.webp" 
+                  src="/images/talent/three-view-2.webp" 
                   alt="響-Kyo- 三面図2" 
                   className={styles.characterImage}
                 />
@@ -58,17 +70,17 @@ const Profile = () => {
             <div className={styles.subImage}>
               <div 
                 className={styles.threeViewWrapper}
-                onClick={() => openModal('/images/three-view.png')}
+                onClick={() => openModal('/images/talent/three-view.png')}
                 role="button"
                 tabIndex={0}
                 onKeyPress={(e) => {
                   if (e.key === 'Enter' || e.key === ' ') {
-                    openModal('/images/three-view.png');
+                    openModal('/images/talent/three-view.png');
                   }
                 }}
               >
                 <img 
-                  src="/images/three-view.webp" 
+                  src="/images/talent/three-view.webp" 
                   alt="響-Kyo- 三面図" 
                   className={styles.characterImage}
                 />
@@ -262,6 +274,7 @@ const Profile = () => {
         </div>
       )}
     </div>
+    </>
   );
 };
 

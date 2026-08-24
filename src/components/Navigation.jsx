@@ -6,20 +6,25 @@ const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
 
+  // 現在のパスが/talent配下か/works配下かを判定
+  const isTalentSection = location.pathname.startsWith('/talent');
+  const isWorksSection = location.pathname.startsWith('/works');
+
   // 動画投稿者向けメニュー（響-Kyo-）
   const creatorMenuItems = [
-    { path: '/', label: 'HOME' },
-    { path: '/profile', label: 'プロフィール' },
-    { path: '/events', label: '実績' },
-    { path: '/guidelines', label: 'ガイドライン' },
-    { path: '/qa', label: 'Q&A' },
-    { path: '/contact', label: '問い合わせ' },
+    { path: '/talent', label: 'HOME' },
+    { path: '/talent/profile', label: 'プロフィール' },
+    { path: '/talent/events', label: '実績' },
+    { path: '/talent/guidelines', label: 'ガイドライン' },
+    { path: '/talent/qa', label: 'Q&A' },
+    { path: '/talent/contact', label: '問い合わせ' },
   ];
 
   // 動画編集者向けメニュー（きょー）
   const editorMenuItems = [
-    { path: '/commission', label: 'コミッション' },
-    { path: '/portfolio', label: 'ポートフォリオ' },
+    { path: '/works', label: 'HOME' },
+    { path: '/works/commission', label: 'コミッション' },
+    { path: '/works/portfolio', label: 'ポートフォリオ' },
   ];
 
   const toggleMenu = () => {
@@ -30,12 +35,20 @@ const Navigation = () => {
     setIsOpen(false);
   };
 
+  // 表示するメニューアイテムを決定
+  const currentMenuItems = isTalentSection ? creatorMenuItems : isWorksSection ? editorMenuItems : creatorMenuItems;
+  
+  // 相互リンク先の情報
+  const crossLink = isTalentSection 
+    ? { path: '/works', label: '動画クリエイター きょー はこちら！' }
+    : { path: '/talent', label: 'Vタレント 響 -Kyo- はこちら！' };
+
   return (
     <nav className={styles.nav}>
       <div className={styles.container}>
         <Link to="/" className={styles.logo}>
           <img 
-            src="/images/logo-header.webp" 
+            src="/images/talent/logo-header.webp" 
             alt="響-Kyo-" 
             className={styles.logoImage}
           />
@@ -45,12 +58,16 @@ const Navigation = () => {
         {/* デスクトップメニュー */}
         <div className={styles.desktopMenu}>
           <ul className={styles.menuGroup}>
-            {creatorMenuItems.map((item) => (
+            {currentMenuItems.map((item) => (
               <li key={item.path}>
                 <Link
                   to={item.path}
                   className={`${styles.navLink} ${
-                    location.pathname === item.path ? styles.active : ''
+                    location.pathname === item.path || 
+                    (item.path === '/works/portfolio' && location.pathname.startsWith('/works/portfolio')) ||
+                    (item.path === '/talent' && location.pathname === '/talent') ||
+                    (item.path === '/works' && location.pathname === '/works')
+                      ? styles.active : ''
                   }`}
                 >
                   {item.label}
@@ -59,22 +76,10 @@ const Navigation = () => {
             ))}
           </ul>
           
-          <div className={styles.divider}></div>
-          
-          <ul className={styles.menuGroup}>
-            {editorMenuItems.map((item) => (
-              <li key={item.path}>
-                <Link
-                  to={item.path}
-                  className={`${styles.navLink} ${
-                    location.pathname === item.path ? styles.active : ''
-                  }`}
-                >
-                  {item.label}
-                </Link>
-              </li>
-            ))}
-          </ul>
+          {/* 相互リンクボタン */}
+          <Link to={crossLink.path} className={styles.crossLinkButton}>
+            {crossLink.label}
+          </Link>
         </div>
 
         {/* ハンバーガーメニューボタン */}
@@ -91,14 +96,20 @@ const Navigation = () => {
         {/* モバイルメニュー */}
         <div className={`${styles.mobileMenu} ${isOpen ? styles.show : ''}`}>
           <div className={styles.mobileMenuGroup}>
-            <h3 className={styles.mobileMenuTitle}>響-Kyo-</h3>
+            <h3 className={styles.mobileMenuTitle}>
+              {isTalentSection ? '響-Kyo-' : 'きょー'}
+            </h3>
             <ul>
-              {creatorMenuItems.map((item) => (
+              {currentMenuItems.map((item) => (
                 <li key={item.path}>
                   <Link
                     to={item.path}
                     className={`${styles.mobileNavLink} ${
-                      location.pathname === item.path ? styles.active : ''
+                      location.pathname === item.path ||
+                      (item.path === '/works/portfolio' && location.pathname.startsWith('/works/portfolio')) ||
+                      (item.path === '/talent' && location.pathname === '/talent') ||
+                      (item.path === '/works' && location.pathname === '/works')
+                        ? styles.active : ''
                     }`}
                     onClick={closeMenu}
                   >
@@ -109,23 +120,15 @@ const Navigation = () => {
             </ul>
           </div>
           
-          <div className={styles.mobileMenuGroup}>
-            <h3 className={styles.mobileMenuTitle}>きょー</h3>
-            <ul>
-              {editorMenuItems.map((item) => (
-                <li key={item.path}>
-                  <Link
-                    to={item.path}
-                    className={`${styles.mobileNavLink} ${
-                      location.pathname === item.path ? styles.active : ''
-                    }`}
-                    onClick={closeMenu}
-                  >
-                    {item.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
+          {/* モバイル用相互リンク */}
+          <div className={styles.mobileCrossLink}>
+            <Link 
+              to={crossLink.path} 
+              className={styles.mobileCrossLinkButton}
+              onClick={closeMenu}
+            >
+              {crossLink.label}
+            </Link>
           </div>
         </div>
 

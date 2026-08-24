@@ -1,0 +1,13 @@
+# robots.txt for project-kyo.jp
+
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://project-kyo.jp/sitemap.xml
+
+# 不要なリソースのクロール防止
+Disallow: /src/
+Disallow: /node_modules/
+Disallow: /*.json$
+Disallow: /*.map$

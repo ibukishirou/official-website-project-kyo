@@ -1,9 +1,12 @@
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import portfolioData from '../data/portfolio.json';
+import portfolioData from '../../data/works/portfolio.json';
+import SEO from '../../components/SEO';
+import { seoConfig, getBreadcrumbSchema } from '../../utils/seo';
 import styles from './Portfolio.module.css';
 
 const Portfolio = () => {
+  const pageConfig = seoConfig.works.portfolio;
   const { plan } = useParams();
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState(plan || 'basic');
@@ -27,7 +30,7 @@ const Portfolio = () => {
       setActiveTab(plan);
     } else if (!plan) {
       // パラメータがない場合はbasicにリダイレクト
-      navigate('/portfolio/basic', { replace: true });
+      navigate('/works/portfolio/basic', { replace: true });
     }
   }, [plan, navigate, activeTab]);
 
@@ -190,26 +193,35 @@ const Portfolio = () => {
   }, []);
 
   return (
-    <div className={styles.portfolio}>
+    <>
+      <SEO
+        title={pageConfig.title}
+        description={pageConfig.description}
+        keywords={pageConfig.keywords}
+        ogImage={pageConfig.ogImage}
+        path={pageConfig.path}
+        structuredData={getBreadcrumbSchema(pageConfig.path)}
+      />
+      <div className={styles.portfolio}>
       <h1 className="section-title">ポートフォリオ</h1>
 
       {/* タブナビゲーション */}
       <div className={styles.tabs}>
         <button
           className={`${styles.tab} ${activeTab === 'simple' ? styles.active : ''}`}
-          onClick={() => navigate('/portfolio/simple')}
+          onClick={() => navigate('/works/portfolio/simple')}
         >
           シンプルMV
         </button>
         <button
           className={`${styles.tab} ${activeTab === 'basic' ? styles.active : ''}`}
-          onClick={() => navigate('/portfolio/basic')}
+          onClick={() => navigate('/works/portfolio/basic')}
         >
           ベーシックMV
         </button>
         <button
           className={`${styles.tab} ${activeTab === 'premium' ? styles.active : ''}`}
-          onClick={() => navigate('/portfolio/premium')}
+          onClick={() => navigate('/works/portfolio/premium')}
         >
           プレミアムMV
         </button>
@@ -416,6 +428,7 @@ const Portfolio = () => {
         </div>
       )}
     </div>
+    </>
   );
 };
 

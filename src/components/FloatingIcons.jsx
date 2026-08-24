@@ -1,7 +1,12 @@
 import { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import styles from './FloatingIcons.module.css';
 
 const FloatingIcons = () => {
+  const location = useLocation();
+  const isTalentSection = location.pathname.startsWith('/talent');
+  const isWorksSection = location.pathname.startsWith('/works');
+  
   const [shareMenuOpen, setShareMenuOpen] = useState(false);
   const [isClosing, setIsClosing] = useState(false);
 
@@ -30,11 +35,7 @@ const FloatingIcons = () => {
     window.open(`https://twitter.com/intent/tweet?url=${url}&text=${text}`, '_blank');
   };
 
-  const shareToBluesky = () => {
-    const url = encodeURIComponent(window.location.href);
-    const text = encodeURIComponent('響-Kyo- 公式サイト');
-    window.open(`https://bsky.app/intent/compose?text=${text} ${url}`, '_blank');
-  };
+
 
   const copyToClipboard = async () => {
     try {
@@ -47,20 +48,20 @@ const FloatingIcons = () => {
 
   return (
     <div className={styles.floatingIcons}>
-      {/* TikTok */}
+      {/* YouTube */}
       <a
-        href="https://www.tiktok.com/@project_kyo"
+        href={isTalentSection ? "https://www.youtube.com/@project_kyo" : "https://www.youtube.com/@kyo_work0630"}
         target="_blank"
         rel="noopener noreferrer"
         className={styles.icon}
-        aria-label="TikTok"
+        aria-label="YouTube"
       >
-        <i className="fa-brands fa-tiktok"></i>
+        <i className="fa-brands fa-youtube"></i>
       </a>
 
-      {/* X (Main) */}
+      {/* X (Twitter) */}
       <a
-        href="https://x.com/project__kyo"
+        href={isTalentSection ? "https://x.com/project__kyo" : "https://x.com/kyo_work0630"}
         target="_blank"
         rel="noopener noreferrer"
         className={styles.icon}
@@ -87,9 +88,6 @@ const FloatingIcons = () => {
             </button>
             <button onClick={shareToX} className={styles.shareItem} title="X (Twitter)">
               <i className="fa-brands fa-x-twitter"></i>
-            </button>
-            <button onClick={shareToBluesky} className={styles.shareItem} title="Bluesky">
-              <i className="fa-brands fa-bluesky"></i>
             </button>
             <button onClick={copyToClipboard} className={styles.shareItem} title="URLコピー">
               <i className="fa-solid fa-link"></i>
