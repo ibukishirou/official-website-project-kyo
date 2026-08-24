@@ -3,19 +3,28 @@ import linksData from '../../data/works/links.json';
 import styles from './WorksHome.module.css';
 
 const WorksHome = () => {
-  // X埋め込みスクリプトをロード
+  // OGP画像を設定
   useEffect(() => {
-    const script = document.createElement('script');
-    script.src = 'https://platform.twitter.com/widgets.js';
-    script.async = true;
-    script.charset = 'utf-8';
-    document.body.appendChild(script);
-
-    return () => {
-      document.body.removeChild(script);
-    };
+    const ogImage = document.querySelector('meta[property="og:image"]');
+    if (ogImage) {
+      ogImage.setAttribute('content', window.location.origin + '/images/works/ogp.webp');
+    } else {
+      const meta = document.createElement('meta');
+      meta.setAttribute('property', 'og:image');
+      meta.setAttribute('content', window.location.origin + '/images/works/ogp.webp');
+      document.head.appendChild(meta);
+    }
+    
+    const twitterImage = document.querySelector('meta[name="twitter:image"]');
+    if (twitterImage) {
+      twitterImage.setAttribute('content', window.location.origin + '/images/works/ogp.webp');
+    } else {
+      const meta = document.createElement('meta');
+      meta.setAttribute('name', 'twitter:image');
+      meta.setAttribute('content', window.location.origin + '/images/works/ogp.webp');
+      document.head.appendChild(meta);
+    }
   }, []);
-
   const getYouTubeVideoId = (url) => {
     const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
     const match = url.match(regExp);
@@ -44,20 +53,6 @@ const WorksHome = () => {
               <p className={styles.profileCredit}>
                 アイコン：桃源ハイリ
               </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 紹介動画 */}
-      <section className={`${styles.section} ${styles.introduction}`}>
-        <div className="container">
-          <h2 className="section-title">紹介</h2>
-          <div className={styles.xEmbedContainer}>
-            <div className={styles.xEmbed}>
-              <blockquote className="twitter-tweet" data-theme="light">
-                <a href="https://x.com/togen_0611"></a>
-              </blockquote>
             </div>
           </div>
         </div>

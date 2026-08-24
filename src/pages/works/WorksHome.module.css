@@ -70,24 +70,6 @@
   padding: var(--spacing-xl) 0;
 }
 
-/* 紹介動画（X埋め込み） */
-.introduction {
-  background: var(--bg-primary);
-}
-
-.xEmbedContainer {
-  max-width: 600px;
-  margin: 0 auto;
-}
-
-.xEmbed {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 400px;
-}
-
 /* プラン紹介 */
 .plans {
   background: var(--bg-secondary);

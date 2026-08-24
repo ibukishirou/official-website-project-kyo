@@ -1,8 +1,31 @@
+import { useEffect } from 'react';
 import songsData from '../../data/talent/songs.json';
 import linksData from '../../data/talent/links.json';
 import styles from './Home.module.css';
 
 const Home = () => {
+  // OGP画像を設定
+  useEffect(() => {
+    const ogImage = document.querySelector('meta[property="og:image"]');
+    if (ogImage) {
+      ogImage.setAttribute('content', window.location.origin + '/images/talent/ogp.webp');
+    } else {
+      const meta = document.createElement('meta');
+      meta.setAttribute('property', 'og:image');
+      meta.setAttribute('content', window.location.origin + '/images/talent/ogp.webp');
+      document.head.appendChild(meta);
+    }
+    
+    const twitterImage = document.querySelector('meta[name="twitter:image"]');
+    if (twitterImage) {
+      twitterImage.setAttribute('content', window.location.origin + '/images/talent/ogp.webp');
+    } else {
+      const meta = document.createElement('meta');
+      meta.setAttribute('name', 'twitter:image');
+      meta.setAttribute('content', window.location.origin + '/images/talent/ogp.webp');
+      document.head.appendChild(meta);
+    }
+  }, []);
 
   const getIconClass = (serviceName) => {
     const iconMap = {

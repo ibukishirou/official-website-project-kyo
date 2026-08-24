@@ -84,6 +84,27 @@
   color: var(--text-white);
 }
 
+/* 相互リンクボタン */
+.crossLinkButton {
+  padding: var(--spacing-sm) var(--spacing-lg);
+  background: linear-gradient(135deg, rgba(127, 255, 212, 0.15) 0%, rgba(255, 105, 180, 0.15) 100%);
+  border: 1px solid rgba(127, 255, 212, 0.3);
+  border-radius: var(--border-radius-full);
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  transition: all var(--transition-base);
+  white-space: nowrap;
+  margin-left: var(--spacing-md);
+}
+
+.crossLinkButton:hover {
+  background: linear-gradient(135deg, rgba(127, 255, 212, 0.25) 0%, rgba(255, 105, 180, 0.25) 100%);
+  border-color: rgba(127, 255, 212, 0.5);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
 /* ハンバーガーメニュー */
 .hamburger {
   display: none;
@@ -174,6 +195,32 @@
 .mobileNavLink.active {
   background: var(--gradient-primary);
   color: var(--text-white);
+}
+
+/* モバイル用相互リンク */
+.mobileCrossLink {
+  padding: var(--spacing-lg);
+  border-top: 1px solid rgba(127, 255, 212, 0.2);
+  margin-top: var(--spacing-md);
+}
+
+.mobileCrossLinkButton {
+  display: block;
+  width: 100%;
+  padding: var(--spacing-md);
+  background: linear-gradient(135deg, rgba(127, 255, 212, 0.15) 0%, rgba(255, 105, 180, 0.15) 100%);
+  border: 1px solid rgba(127, 255, 212, 0.3);
+  border-radius: var(--border-radius-md);
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  text-align: center;
+  transition: all var(--transition-base);
+}
+
+.mobileCrossLinkButton:hover {
+  background: linear-gradient(135deg, rgba(127, 255, 212, 0.25) 0%, rgba(255, 105, 180, 0.25) 100%);
+  border-color: rgba(127, 255, 212, 0.5);
 }
 
 /* オーバーレイ */
