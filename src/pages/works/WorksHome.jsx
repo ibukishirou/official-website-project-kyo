@@ -51,7 +51,7 @@ const WorksHome = () => {
                 メロうける動画制作をモットーに！
               </p>
               <p className={styles.profileCredit}>
-                アイコン：桃源ハイリ
+                アイコン：桃源ハイリ様
               </p>
             </div>
           </div>

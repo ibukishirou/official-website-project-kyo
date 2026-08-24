@@ -20,13 +20,13 @@
   {
     "platform": "Wick",
     "url": "https://wick-share.com/sns/share/bK2UrWFS?v=1787389137323",
-    "icon": "fas fa-link",
+    "icon": "fas fa-fire",
     "color": "#7FFFD4"
   },
   {
     "platform": "つなぐ",
     "url": "https://tsunagu.cloud/users/kyo_work0630",
-    "icon": "fas fa-link",
+    "icon": "fas fa-network-wired",
     "color": "#FF69B4"
   }
 ]
