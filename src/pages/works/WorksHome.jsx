@@ -40,7 +40,7 @@ const WorksHome = () => {
                 メロうける動画制作をモットーに！
               </p>
               <p className={styles.profileCredit}>
-                アイコン：桃源ハイリ様
+                アイコン：<a href="https://x.com/togen_0611" target="_blank" rel="noopener noreferrer" className={styles.creditLink}>桃源ハイリ様</a>
               </p>
             </div>
           </div>

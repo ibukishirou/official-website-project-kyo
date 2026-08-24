@@ -20,7 +20,7 @@
   flex-shrink: 0;
   width: 200px;
   height: 200px;
-  border-radius: 50%;
+  border-radius: var(--border-radius-lg);
   overflow: hidden;
   box-shadow: var(--shadow-xl);
 }
@@ -39,10 +39,11 @@
   font-size: 2.5rem;
   font-weight: 800;
   margin-bottom: var(--spacing-sm);
-  background: var(--gradient-primary);
+  background: linear-gradient(135deg, #7FFFD4 0%, #FF69B4 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  color: transparent;
 }
 
 .profileRole {
@@ -63,6 +64,16 @@
   font-size: 0.9rem;
   color: var(--text-light);
   font-style: italic;
+}
+
+.creditLink {
+  color: var(--text-light);
+  text-decoration: underline;
+  transition: color var(--transition-base);
+}
+
+.creditLink:hover {
+  color: var(--text-primary);
 }
 
 /* セクション */
