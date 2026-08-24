@@ -1,0 +1,39 @@
+[
+  {
+    "year": 2025,
+    "category": "イベント",
+    "items": [
+      {
+        "title": "ときぱれ!Vol.15～VTuber ときめきパレード～",
+        "client": "株式会社Donuts",
+        "url": "https://x.com/tokimeki_vr/status/1946147938994184433?s=20"
+      },
+      {
+        "title": "第二回トークライブ＆レジトーク Fandom Namba",
+        "client": "VTuberコネクション",
+        "url": "https://x.com/Vcone_hoshine/status/1954111055350612019?s=20"
+      },
+      {
+        "title": "東京ゲームショウ2025 クリエイターラウンジ招待",
+        "client": "レッドブルジャパン/TikTokLIVE",
+        "url": "https://tgs.cesa.or.jp/jp"
+      }
+    ]
+  },
+  {
+    "year": 2025,
+    "category": "案件",
+    "items": [
+      {
+        "title": "TikTok LIVE Game Cup パズドラランキング",
+        "client": "TikTokLIVE",
+        "url": "https://www.tiktok.com/@project_kyo/video/7532333333062176007?is_from_webapp=1&sender_device=pc&web_id=7595781179828192784"
+      },
+      {
+        "title": "プロサックPR動画/冷却ファンPR動画",
+        "client": "株式会社しまリス堂",
+        "url": "https://www.tiktok.com/@project_kyo/video/7545647788969725191?is_from_webapp=1&sender_device=pc&web_id=7595781179828192784"
+      }
+    ]
+  }
+]

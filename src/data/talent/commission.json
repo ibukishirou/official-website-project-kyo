@@ -1,0 +1,67 @@
+{
+  "プレミアムMV": {
+    "price": "￥30,000～",
+    "description": "本家再現やリリック系など、凝った演出のMVを作成します。\n素材の量や動画の尺に合わせて価格が変動します。",
+    "specialOptions": [
+      "サムネイル3枚無料作成 YouTubeのABテストに最適！",
+      "SNS用告知動画無料作成！"
+    ],
+    "deliveryTime": "約20日",
+    "referenceUrl": "https://youtu.be/ma38CHcOcM0",
+    "referenceTitle": "プレミアムMV参考動画",
+    "portfolioUrl": "/portfolio/premium"
+  },
+  "ベーシックMV": {
+    "price": "￥8,000～",
+    "description": "華やかな動きのMVを作成します。\n素材の量に合わせて価格が変動します。",
+    "specialOptions": [
+      "サムネイル2枚無料作成！",
+      "SNS用告知動画無料作成！"
+    ],
+    "deliveryTime": "約10日",
+    "referenceUrl": "https://youtu.be/zjVZbKo-19c",
+    "referenceTitle": "ベーシックMV参考動画",
+    "portfolioUrl": "/portfolio/basic"
+  },
+  "シンプルMV": {
+    "price": "￥3,000～",
+    "description": "シンプルな動きのMVを作成します。\n素材の量に合わせて価格が変動します。",
+    "specialOptions": [
+      "サムネイル1枚無料作成！",
+      "SNS用告知動画無料作成！"
+    ],
+    "deliveryTime": "約5日",
+    "referenceUrl": "https://youtu.be/us4q70-YN8Y",
+    "referenceTitle": "シンプルMV参考動画",
+    "portfolioUrl": "/portfolio/simple"
+  },
+  "オプション": {
+    "items": [
+      {
+        "name": "サムネイル",
+        "price": "￥1,000/件",
+        "description": "追加でサムネイルを作成します。YouTubeのABテストなどでパターンが欲しい方は追加でお求めください。"
+      },
+      {
+        "name": "ショート動画作成",
+        "price": "￥3,000/件",
+        "description": "MVを活用してショート動画を作成します。"
+      },
+      {
+        "name": "立ち絵人数の追加",
+        "price": "￥1,000/人",
+        "description": "コラボ歌ってみたなど、複数人を動かす際に必要になります。"
+      },
+      {
+        "name": "素材準備",
+        "price": "￥3,000",
+        "description": "ご依頼主様で準備が難しいもの（背景、フレーム、小物など）を、こちらで準備してMVで使用いたします。"
+      },
+      {
+        "name": "実績非公開",
+        "price": "+ご依頼総額の50%",
+        "description": "ポートフォリオなどで公開を致しません。動画内のクレジット表記に関しましては、ご依頼者様のご意向に沿います。"
+      }
+    ]
+  }
+}

@@ -8,18 +8,18 @@ const Navigation = () => {
 
   // 動画投稿者向けメニュー（響-Kyo-）
   const creatorMenuItems = [
-    { path: '/', label: 'HOME' },
-    { path: '/profile', label: 'プロフィール' },
-    { path: '/events', label: '実績' },
-    { path: '/guidelines', label: 'ガイドライン' },
-    { path: '/qa', label: 'Q&A' },
-    { path: '/contact', label: '問い合わせ' },
+    { path: '/talent', label: 'HOME' },
+    { path: '/talent/profile', label: 'プロフィール' },
+    { path: '/talent/events', label: '実績' },
+    { path: '/talent/guidelines', label: 'ガイドライン' },
+    { path: '/talent/qa', label: 'Q&A' },
+    { path: '/talent/contact', label: '問い合わせ' },
   ];
 
   // 動画編集者向けメニュー（きょー）
   const editorMenuItems = [
-    { path: '/commission', label: 'コミッション' },
-    { path: '/portfolio', label: 'ポートフォリオ' },
+    { path: '/works/commission', label: 'コミッション' },
+    { path: '/works/portfolio', label: 'ポートフォリオ' },
   ];
 
   const toggleMenu = () => {
@@ -35,7 +35,7 @@ const Navigation = () => {
       <div className={styles.container}>
         <Link to="/" className={styles.logo}>
           <img 
-            src="/images/logo-header.webp" 
+            src="/images/talent/logo-header.webp" 
             alt="響-Kyo-" 
             className={styles.logoImage}
           />
