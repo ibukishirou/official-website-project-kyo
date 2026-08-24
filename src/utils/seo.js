@@ -98,7 +98,7 @@ export const getPersonSchema = (type = 'talent') => {
       sameAs: [
         'https://x.com/project__kyo',
         'https://www.tiktok.com/@project__kyo',
-        'https://www.youtube.com/@project__kyo',
+        'https://www.youtube.com/@project_kyo',
         'https://www.instagram.com/project__kyo',
         'https://bsky.app/profile/project-kyo.bsky.social',
       ],

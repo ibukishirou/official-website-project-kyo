@@ -50,7 +50,7 @@ const FloatingIcons = () => {
     <div className={styles.floatingIcons}>
       {/* YouTube */}
       <a
-        href={isTalentSection ? "https://www.youtube.com/@project__kyo" : "https://www.youtube.com/@kyo_work0630"}
+        href={isTalentSection ? "https://www.youtube.com/@project_kyo" : "https://www.youtube.com/@kyo_work0630"}
         target="_blank"
         rel="noopener noreferrer"
         className={styles.icon}
