@@ -1,9 +1,12 @@
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import portfolioData from '../../data/works/portfolio.json';
+import SEO from '../../components/SEO';
+import { seoConfig, getBreadcrumbSchema } from '../../utils/seo';
 import styles from './Portfolio.module.css';
 
 const Portfolio = () => {
+  const pageConfig = seoConfig.works.portfolio;
   const { plan } = useParams();
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState(plan || 'basic');
@@ -190,7 +193,16 @@ const Portfolio = () => {
   }, []);
 
   return (
-    <div className={styles.portfolio}>
+    <>
+      <SEO
+        title={pageConfig.title}
+        description={pageConfig.description}
+        keywords={pageConfig.keywords}
+        ogImage={pageConfig.ogImage}
+        path={pageConfig.path}
+        structuredData={getBreadcrumbSchema(pageConfig.path)}
+      />
+      <div className={styles.portfolio}>
       <h1 className="section-title">ポートフォリオ</h1>
 
       {/* タブナビゲーション */}
@@ -416,6 +428,7 @@ const Portfolio = () => {
         </div>
       )}
     </div>
+    </>
   );
 };
 

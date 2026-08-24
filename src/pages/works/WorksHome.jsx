@@ -1,34 +1,27 @@
-import { useEffect } from 'react';
 import linksData from '../../data/works/links.json';
+import SEO from '../../components/SEO';
+import { seoConfig, getPersonSchema, getBreadcrumbSchema, getWebSiteSchema } from '../../utils/seo';
 import styles from './WorksHome.module.css';
 
 const WorksHome = () => {
-  // OGP画像を設定
-  useEffect(() => {
-    const ogImage = document.querySelector('meta[property="og:image"]');
-    if (ogImage) {
-      ogImage.setAttribute('content', window.location.origin + '/images/works/ogp.webp');
-    } else {
-      const meta = document.createElement('meta');
-      meta.setAttribute('property', 'og:image');
-      meta.setAttribute('content', window.location.origin + '/images/works/ogp.webp');
-      document.head.appendChild(meta);
-    }
-    
-    const twitterImage = document.querySelector('meta[name="twitter:image"]');
-    if (twitterImage) {
-      twitterImage.setAttribute('content', window.location.origin + '/images/works/ogp.webp');
-    } else {
-      const meta = document.createElement('meta');
-      meta.setAttribute('name', 'twitter:image');
-      meta.setAttribute('content', window.location.origin + '/images/works/ogp.webp');
-      document.head.appendChild(meta);
-    }
-  }, []);
+  const pageConfig = seoConfig.works.home;
 
 
   return (
-    <div className={styles.home}>
+    <>
+      <SEO
+        title={pageConfig.title}
+        description={pageConfig.description}
+        keywords={pageConfig.keywords}
+        ogImage={pageConfig.ogImage}
+        path={pageConfig.path}
+        structuredData={[
+          getPersonSchema('works'),
+          getBreadcrumbSchema(pageConfig.path),
+          getWebSiteSchema(),
+        ]}
+      />
+      <div className={styles.home}>
       {/* プロフィールセクション */}
       <section className={styles.profile}>
         <div className="container">
@@ -95,6 +88,7 @@ const WorksHome = () => {
         </div>
       </section>
     </div>
+    </>
   );
 };
 

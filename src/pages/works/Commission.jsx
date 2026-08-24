@@ -1,8 +1,11 @@
 import { Link } from 'react-router-dom';
 import commissionData from '../../data/works/commission.json';
+import SEO from '../../components/SEO';
+import { seoConfig, getBreadcrumbSchema } from '../../utils/seo';
 import styles from './Commission.module.css';
 
 const Commission = () => {
+  const pageConfig = seoConfig.works.commission;
   const getYouTubeVideoId = (url) => {
     if (url.includes('/shorts/')) {
       const match = url.match(/\/shorts\/([^/?]+)/);
@@ -37,7 +40,16 @@ const Commission = () => {
   };
 
   return (
-    <div className={styles.commission}>
+    <>
+      <SEO
+        title={pageConfig.title}
+        description={pageConfig.description}
+        keywords={pageConfig.keywords}
+        ogImage={pageConfig.ogImage}
+        path={pageConfig.path}
+        structuredData={getBreadcrumbSchema(pageConfig.path)}
+      />
+      <div className={styles.commission}>
       <div className="container">
         <h1 className="section-title" style={{ color: '#333333', fontWeight: 800 }}>コミッション</h1>
         <p className={styles.subtitle}>企業・個人問わずご依頼可能です</p>
@@ -213,6 +225,7 @@ const Commission = () => {
         </section>
       </div>
     </div>
+    </>
   );
 };
 

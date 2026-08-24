@@ -1,8 +1,21 @@
+import SEO from '../../components/SEO';
+import { seoConfig, getBreadcrumbSchema } from '../../utils/seo';
 import styles from './Guidelines.module.css';
 
 const Guidelines = () => {
+  const pageConfig = seoConfig.talent.guidelines;
+
   return (
-    <div className={styles.guidelines}>
+    <>
+      <SEO
+        title={pageConfig.title}
+        description={pageConfig.description}
+        keywords={pageConfig.keywords}
+        ogImage={pageConfig.ogImage}
+        path={pageConfig.path}
+        structuredData={getBreadcrumbSchema(pageConfig.path)}
+      />
+      <div className={styles.guidelines}>
       <div className="container">
         <h1 className="section-title" style={{color: '#333333', fontWeight: 800}}>各種ガイドライン</h1>
 
@@ -58,6 +71,7 @@ const Guidelines = () => {
         </section>
       </div>
     </div>
+    </>
   );
 };
 

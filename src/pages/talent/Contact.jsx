@@ -1,7 +1,10 @@
 import { useState } from 'react';
+import SEO from '../../components/SEO';
+import { seoConfig, getBreadcrumbSchema } from '../../utils/seo';
 import styles from './Contact.module.css';
 
 const Contact = () => {
+  const pageConfig = seoConfig.talent.contact;
   const [copied, setCopied] = useState(false);
   const email = 'kyo.work0630@gmail.com';
 
@@ -17,7 +20,16 @@ const Contact = () => {
   };
 
   return (
-    <div className={styles.contact}>
+    <>
+      <SEO
+        title={pageConfig.title}
+        description={pageConfig.description}
+        keywords={pageConfig.keywords}
+        ogImage={pageConfig.ogImage}
+        path={pageConfig.path}
+        structuredData={getBreadcrumbSchema(pageConfig.path)}
+      />
+      <div className={styles.contact}>
       <div className="container">
         <h1 className="section-title" style={{color: '#333333', fontWeight: 800}}>問い合わせ</h1>
 
@@ -62,6 +74,7 @@ const Contact = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 
