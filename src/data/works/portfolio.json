@@ -1,5 +1,19 @@
 [
   {
+    "plan": "basic",
+    "title": "モエチャッカファイア / 弐誠",
+    "client": "伊吹しろう",
+    "date": "2026-08",
+    "mainVideo": "https://youtu.be/gS14bY7PQRw",
+    "subMedia": [
+      "https://youtube.com/shorts/R4cxA15NBrI"
+    ],
+    "tags": [
+      "ダーク",
+      "ロック"
+    ]
+  },
+  {
     "plan": "simple",
     "title": "KING / Kanaria",
     "client": "KUPO",
@@ -255,6 +269,18 @@
     "tags": [
       "ポップ",
       "かわいい"
+    ]
+  },
+  {
+    "plan": "basic",
+    "title": "もっとずっと / 家入えと",
+    "client": "家入えと",
+    "date": "2026-05",
+    "mainVideo": "https://www.youtube.com/watch?v=oQ4IlYgXzOU",
+    "subMedia": [],
+    "tags": [
+      "きれい",
+      "ロック"
     ]
   },
   {
