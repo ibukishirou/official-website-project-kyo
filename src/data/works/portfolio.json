@@ -1,6 +1,30 @@
 [
   {
     "plan": "simple",
+    "title": "烏 / 米津玄師",
+    "client": "青森ぶりたろう",
+    "date": "2026-09",
+    "mainVideo": "https://youtu.be/vuRhzhn-4O0",
+    "subMedia": [],
+    "tags": [
+      "きれい",
+      "バラード"
+    ]
+  },
+  {
+    "plan": "basic",
+    "title": "ダーリン / 須田景凪",
+    "client": "かすみ紫苑",
+    "date": "2026-09",
+    "mainVideo": "https://youtu.be/gyIbEdSwfs4",
+    "subMedia": [],
+    "tags": [
+      "ダーク",
+      "きれい"
+    ]
+  },
+  {
+    "plan": "simple",
     "title": "思想犯 / ヨルシカ",
     "client": "薬袋さいね",
     "date": "2026-08",
