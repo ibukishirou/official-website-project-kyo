@@ -1,5 +1,52 @@
 [
   {
+    "plan": "premium",
+    "title": "F.A.C.E. / キタニタツヤ",
+    "client": "伊吹しろう",
+    "date": "2026-09",
+    "mainVideo": "https://youtu.be/bUnyYEyb7DE",
+    "subMedia": [],
+    "tags": [
+      "かっこいい",
+      "ロック"
+    ]
+  },
+  {
+    "plan": "basic",
+    "title": "24時間シンデレラ",
+    "client": "ジーニアス春田",
+    "date": "2026-09",
+    "mainVideo": "https://www.youtube.com/watch?v=2E_otmV2tc0",
+    "subMedia": [],
+    "tags": [
+      "ポップ"
+    ]
+  },
+  {
+    "plan": "simple",
+    "title": "Bloody Moon / 青葉りんご",
+    "client": "白砂シオ",
+    "date": "2026-09",
+    "mainVideo": "https://youtu.be/NiGYKxagJlg?si=f3KJGozbrRbBRw9W",
+    "subMedia": [],
+    "tags": [
+      "ダーク"
+    ]
+  },
+  {
+    "plan": "simple",
+    "title": "アルビレオ / ロクデナシ",
+    "client": "夢乃かなう",
+    "date": "2026-08",
+    "mainVideo": "https://www.youtube.com/watch?v=l-Co4JmM50c",
+    "subMedia": [
+      "https://x.com/yumeno_kanau_v/status/2099457014435049710?s=20"
+    ],
+    "tags": [
+      "きれい"
+    ]
+  },
+  {
     "plan": "simple",
     "title": "烏 / 米津玄師",
     "client": "青森ぶりたろう",
