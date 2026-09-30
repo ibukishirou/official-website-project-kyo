@@ -15,6 +15,7 @@ const Portfolio = () => {
   const [selectedMediaIndex, setSelectedMediaIndex] = useState(0);
   const [isTabChanging, setIsTabChanging] = useState(false);
   const [isMediaLoading, setIsMediaLoading] = useState(true);
+  const [nicoThumbnails, setNicoThumbnails] = useState({});
 
   // URLパラメータが変更されたらタブを更新
   useEffect(() => {
@@ -33,6 +34,22 @@ const Portfolio = () => {
       navigate('/works/portfolio/basic', { replace: true });
     }
   }, [plan, navigate, activeTab]);
+
+  // ニコニコ動画のサムネイルを事前取得
+  useEffect(() => {
+    // 全てのポートフォリオアイテムからニコニコ動画を抽出
+    const nicoVideos = portfolioData
+      .filter(item => isNicoVideo(item.mainVideo))
+      .map(item => getNicoVideoId(item.mainVideo))
+      .filter(Boolean);
+
+    // 各動画のサムネイルを取得
+    nicoVideos.forEach(videoId => {
+      if (!nicoThumbnails[videoId]) {
+        fetchNicoThumbnail(videoId);
+      }
+    });
+  }, []);
 
   // 選択中のプランでフィルタリング
   const filteredItems = portfolioData.filter(item => item.plan === activeTab);
@@ -113,19 +130,55 @@ const Portfolio = () => {
   };
 
   // ニコニコ動画 サムネイルURLを取得（カード用）
-  // 注意: ニコニコ動画の高画質サムネイルにはランダムなキーが必要で、
-  // クライアントサイドからCORS制限により取得不可能
-  // そのため、nullを返してデフォルトアイコンを表示
   const getNicoThumbnail = (url) => {
-    // サムネイル取得不可のため、nullを返す
-    // カードコンポーネントでデフォルトアイコン（ニコニコ動画ロゴ）を表示
+    const videoId = getNicoVideoId(url);
+    if (!videoId) return null;
+    
+    // キャッシュから取得
+    if (nicoThumbnails[videoId]) {
+      return nicoThumbnails[videoId];
+    }
+    
+    // まだ取得していない場合、非同期で取得
+    fetchNicoThumbnail(videoId);
+    
+    // 取得中はnullを返す（ローディング状態）
     return null;
   };
 
   // ニコニコ動画 サムネイルURLを取得（モーダル用）
   const getNicoThumbnailMQ = (url) => {
-    // モーダルのサムネイル一覧でもnullを返し、ニコニコ動画アイコンを表示
-    return null;
+    return getNicoThumbnail(url);
+  };
+
+  // ニコニコ動画のサムネイルを非同期で取得
+  const fetchNicoThumbnail = async (videoId) => {
+    try {
+      // getthumbinfo APIを呼び出してXMLをパース
+      const response = await fetch(`https://ext.nicovideo.jp/api/getthumbinfo/${videoId}`);
+      const text = await response.text();
+      
+      // XMLからthumbnail_urlを抽出
+      const match = text.match(/<thumbnail_url>([^<]+)<\/thumbnail_url>/);
+      if (match && match[1]) {
+        const baseUrl = match[1];
+        // .L サフィックスを追加（360x270の画質）
+        const thumbnailUrl = `${baseUrl}.L`;
+        
+        // stateに保存
+        setNicoThumbnails(prev => ({
+          ...prev,
+          [videoId]: thumbnailUrl
+        }));
+      }
+    } catch (error) {
+      console.error(`Failed to fetch Nico thumbnail for ${videoId}:`, error);
+      // エラー時はnullを保存（デフォルトアイコンを表示）
+      setNicoThumbnails(prev => ({
+        ...prev,
+        [videoId]: null
+      }));
+    }
   };
 
   // 汎用サムネイル取得（カード用）
@@ -152,9 +205,23 @@ const Portfolio = () => {
   // メディア切り替え時にローディングをリセット
   useEffect(() => {
     if (modalOpen && currentMedia) {
+      // 同じメディアを再クリックした場合でもローディングをリセット
       setIsMediaLoading(true);
     }
   }, [selectedMediaIndex, modalOpen, currentMedia]);
+
+  // ニコニコ動画とYouTube動画のロード完了を処理
+  useEffect(() => {
+    if (modalOpen && currentMedia && !isXPost(currentMedia)) {
+      // iframe のロードを待機するタイムアウトを設定
+      // ニコニコ動画やYouTubeの埋め込みは onLoad が発火しないことがあるため
+      const loadTimeout = setTimeout(() => {
+        setIsMediaLoading(false);
+      }, 2000);
+
+      return () => clearTimeout(loadTimeout);
+    }
+  }, [modalOpen, currentMedia, selectedMediaIndex]);
 
   // X埋め込みスクリプトをロード
   useEffect(() => {
