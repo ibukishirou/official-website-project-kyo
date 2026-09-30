@@ -84,6 +84,17 @@ const Portfolio = () => {
     return match ? match[1] : null;
   };
 
+  // ニコニコ動画IDを抽出
+  const getNicoVideoId = (url) => {
+    const match = url.match(/nicovideo\.jp\/watch\/(sm\d+)/);
+    return match ? match[1] : null;
+  };
+
+  // ニコニコ動画かどうかを判定
+  const isNicoVideo = (url) => {
+    return url.includes('nicovideo.jp');
+  };
+
   // Xポストかどうかを判定
   const isXPost = (url) => {
     return url.includes('x.com') || url.includes('twitter.com');
@@ -99,6 +110,34 @@ const Portfolio = () => {
   const getYouTubeThumbnailMQ = (url) => {
     const videoId = getYouTubeVideoId(url);
     return videoId ? `https://i.ytimg.com/vi/${videoId}/mqdefault.jpg` : null;
+  };
+
+  // ニコニコ動画 サムネイルURLを取得（カード用）
+  const getNicoThumbnail = (url) => {
+    const videoId = getNicoVideoId(url);
+    return videoId ? `https://img.cdn.nimg.jp/s/nicovideo/thumbnails/${videoId.slice(2)}/${videoId}.jpg` : null;
+  };
+
+  // ニコニコ動画 サムネイルURLを取得（モーダル用）
+  const getNicoThumbnailMQ = (url) => {
+    // ニコニコ動画はカード用と同じサムネイルを使用
+    return getNicoThumbnail(url);
+  };
+
+  // 汎用サムネイル取得（カード用）
+  const getThumbnail = (url) => {
+    if (isNicoVideo(url)) {
+      return getNicoThumbnail(url);
+    }
+    return getYouTubeThumbnail(url);
+  };
+
+  // 汎用サムネイル取得（モーダル用）
+  const getThumbnailMQ = (url) => {
+    if (isNicoVideo(url)) {
+      return getNicoThumbnailMQ(url);
+    }
+    return getYouTubeThumbnailMQ(url);
   };
 
   // 現在選択中のアイテムとメディア
@@ -230,7 +269,7 @@ const Portfolio = () => {
       {/* 作品一覧グリッド */}
       <div className={`${styles.grid} ${isTabChanging ? styles.gridFadeIn : ''}`}>
         {filteredItems.map((item, index) => {
-          const thumbnail = getYouTubeThumbnail(item.mainVideo);
+          const thumbnail = getThumbnail(item.mainVideo);
           
           return (
             <div 
@@ -348,6 +387,17 @@ const Portfolio = () => {
                     <div className={styles.xEmbed}>
                       {/* X投稿の埋め込み - JavaScriptで動的に生成 */}
                     </div>
+                  ) : isNicoVideo(currentMedia) ? (
+                    <iframe
+                      key={`nico-${selectedMediaIndex}`}
+                      src={`https://embed.nicovideo.jp/watch/${getNicoVideoId(currentMedia)}`}
+                      title="Niconico video player"
+                      frameBorder="0"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                      allowFullScreen
+                      className={styles.videoFrame}
+                      onLoad={() => setIsMediaLoading(false)}
+                    ></iframe>
                   ) : (
                     <iframe
                       key={`youtube-${selectedMediaIndex}`}
@@ -383,7 +433,7 @@ const Portfolio = () => {
               <div className={styles.modalSidebar}>
                 <div className={styles.mediaThumbnails}>
                   {allMedia.map((media, index) => {
-                    const thumbnail = getYouTubeThumbnailMQ(media);
+                    const thumbnail = getThumbnailMQ(media);
                     const isActive = index === selectedMediaIndex;
                     
                     // ラベル表示ロジック

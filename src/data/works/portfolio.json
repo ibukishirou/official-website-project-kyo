@@ -23,14 +23,42 @@
     ]
   },
   {
+    "plan": "basic",
+    "title": "ぎゅっと。 / もさを。",
+    "client": "雪村ののら",
+    "date": "2026-09",
+    "mainVideo": "https://youtu.be/APOQ0F4VUqg?si=78ASwEVfosqXOBrm",
+    "subMedia": [
+      "https://x.com/YukiNonoV/status/2103076981151818012?s=20"
+    ],
+    "tags": [
+      "きれい",
+      "バラード"
+    ]
+  },
+  {
     "plan": "simple",
     "title": "Bloody Moon / 青葉りんご",
     "client": "白砂シオ",
     "date": "2026-09",
-    "mainVideo": "https://youtu.be/NiGYKxagJlg?si=f3KJGozbrRbBRw9W",
+    "mainVideo": "https://youtu.be/NiGYKxagJlg",
     "subMedia": [],
     "tags": [
       "ダーク"
+    ]
+  },
+  {
+    "plan": "simple",
+    "title": "ミュージック / MIMI",
+    "client": "音苑",
+    "date": "2026-09",
+    "mainVideo": "https://www.nicovideo.jp/watch/sm46827409",
+    "subMedia": [
+      "https://x.com/neon_0717/status/2100887664757297330?s=20"
+    ],
+    "tags": [
+      "ポップ",
+      "きれい"
     ]
   },
   {
@@ -55,6 +83,17 @@
     "tags": [
       "ダーク",
       "きれい"
+    ]
+  },
+  {
+    "plan": "basic",
+    "title": "心臓デモクラシー / みきとP",
+    "client": "しろい山雪",
+    "date": "2026-08",
+    "mainVideo": "https://www.nicovideo.jp/watch/sm46724817",
+    "subMedia": [],
+    "tags": [
+      "ダーク"
     ]
   },
   {
@@ -96,6 +135,18 @@
     "tags": [
       "ダーク",
       "ロック"
+    ]
+  },
+  {
+    "plan": "simple",
+    "title": "口咲きから花言葉 / 一二三",
+    "client": "浅葱史乃",
+    "date": "2026-08",
+    "mainVideo": "https://youtu.be/rkZtn_qo3oY",
+    "subMedia": [],
+    "tags": [
+      "和風",
+      "きれい"
     ]
   },
   {
@@ -150,6 +201,18 @@
     "tags": [
       "ポップ",
       "かわいい"
+    ]
+  },
+  {
+    "plan": "basic",
+    "title": "可愛いあの子が気にゐらない / なるみや",
+    "client": "猫宮あいす",
+    "date": "2026-08",
+    "mainVideo": "https://www.youtube.com/watch?v=dNtOttBAKlQ",
+    "subMedia": [],
+    "tags": [
+      "きれい",
+      "バラード"
     ]
   },
   {
