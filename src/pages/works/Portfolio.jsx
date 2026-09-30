@@ -84,6 +84,17 @@ const Portfolio = () => {
     return match ? match[1] : null;
   };
 
+  // ニコニコ動画IDを抽出
+  const getNicoVideoId = (url) => {
+    const match = url.match(/nicovideo\.jp\/watch\/(sm\d+)/);
+    return match ? match[1] : null;
+  };
+
+  // ニコニコ動画かどうかを判定
+  const isNicoVideo = (url) => {
+    return url.includes('nicovideo.jp');
+  };
+
   // Xポストかどうかを判定
   const isXPost = (url) => {
     return url.includes('x.com') || url.includes('twitter.com');
@@ -101,6 +112,38 @@ const Portfolio = () => {
     return videoId ? `https://i.ytimg.com/vi/${videoId}/mqdefault.jpg` : null;
   };
 
+  // ニコニコ動画 サムネイルURLを取得（カード用）
+  // /public/images/works/niconico_thumbnail/{videoId}.{拡張子} から読み込む
+  const getNicoThumbnail = (url) => {
+    const videoId = getNicoVideoId(url);
+    if (!videoId) return null;
+    
+    // png, jpg, webp の順で試す（最初に見つかった画像を使用）
+    // 実際のフォールバックは img タグの onError で処理される
+    return `/images/works/niconico_thumbnail/${videoId}.png`;
+  };
+
+  // ニコニコ動画 サムネイルURLを取得（モーダル用）
+  const getNicoThumbnailMQ = (url) => {
+    return getNicoThumbnail(url);
+  };
+
+  // 汎用サムネイル取得（カード用）
+  const getThumbnail = (url) => {
+    if (isNicoVideo(url)) {
+      return getNicoThumbnail(url);
+    }
+    return getYouTubeThumbnail(url);
+  };
+
+  // 汎用サムネイル取得（モーダル用）
+  const getThumbnailMQ = (url) => {
+    if (isNicoVideo(url)) {
+      return getNicoThumbnailMQ(url);
+    }
+    return getYouTubeThumbnailMQ(url);
+  };
+
   // 現在選択中のアイテムとメディア
   const selectedItem = selectedItemIndex !== null ? filteredItems[selectedItemIndex] : null;
   const allMedia = selectedItem ? [selectedItem.mainVideo, ...selectedItem.subMedia] : [];
@@ -109,9 +152,23 @@ const Portfolio = () => {
   // メディア切り替え時にローディングをリセット
   useEffect(() => {
     if (modalOpen && currentMedia) {
+      // 同じメディアを再クリックした場合でもローディングをリセット
       setIsMediaLoading(true);
     }
   }, [selectedMediaIndex, modalOpen, currentMedia]);
+
+  // ニコニコ動画とYouTube動画のロード完了を処理
+  useEffect(() => {
+    if (modalOpen && currentMedia && !isXPost(currentMedia)) {
+      // iframe のロードを待機するタイムアウトを設定
+      // ニコニコ動画やYouTubeの埋め込みは onLoad が発火しないことがあるため
+      const loadTimeout = setTimeout(() => {
+        setIsMediaLoading(false);
+      }, 2000);
+
+      return () => clearTimeout(loadTimeout);
+    }
+  }, [modalOpen, currentMedia, selectedMediaIndex]);
 
   // X埋め込みスクリプトをロード
   useEffect(() => {
@@ -230,7 +287,7 @@ const Portfolio = () => {
       {/* 作品一覧グリッド */}
       <div className={`${styles.grid} ${isTabChanging ? styles.gridFadeIn : ''}`}>
         {filteredItems.map((item, index) => {
-          const thumbnail = getYouTubeThumbnail(item.mainVideo);
+          const thumbnail = getThumbnail(item.mainVideo);
           
           return (
             <div 
@@ -241,10 +298,65 @@ const Portfolio = () => {
             >
               <div className={styles.thumbnailWrapper}>
                 {thumbnail ? (
-                  <img src={thumbnail} alt={item.title} className={styles.thumbnail} />
+                  <img 
+                    src={thumbnail} 
+                    alt={item.title} 
+                    className={styles.thumbnail}
+                    onError={(e) => {
+                      // ニコニコ動画のサムネイル読み込み失敗時、別の拡張子を試す
+                      if (isNicoVideo(item.mainVideo)) {
+                        const videoId = getNicoVideoId(item.mainVideo);
+                        if (!videoId) return;
+                        
+                        const currentSrc = e.target.src;
+                        const extensions = ['png', 'jpg', 'webp'];
+                        let triedExtension = null;
+                        
+                        // 現在試した拡張子を特定
+                        for (const ext of extensions) {
+                          if (currentSrc.endsWith(`.${ext}`)) {
+                            triedExtension = ext;
+                            break;
+                          }
+                        }
+                        
+                        // 次の拡張子を試す
+                        if (triedExtension) {
+                          const currentIndex = extensions.indexOf(triedExtension);
+                          const nextIndex = currentIndex + 1;
+                          
+                          if (nextIndex < extensions.length) {
+                            // 次の拡張子で再試行
+                            e.target.src = `/images/works/niconico_thumbnail/${videoId}.${extensions[nextIndex]}`;
+                            return;
+                          }
+                        }
+                        
+                        // すべての拡張子を試した後、デフォルトアイコンを表示
+                        e.target.style.display = 'none';
+                        const wrapper = e.target.parentElement;
+                        if (wrapper && !wrapper.querySelector(`.${styles.defaultThumbnail}`)) {
+                          const fallback = document.createElement('div');
+                          fallback.className = styles.defaultThumbnail;
+                          fallback.innerHTML = `
+                            <i class="fas fa-video" style="font-size: 3rem; margin-bottom: 0.5rem;"></i>
+                            <span style="font-size: 0.9rem; font-weight: bold;">ニコニコ動画</span>
+                          `;
+                          wrapper.insertBefore(fallback, wrapper.firstChild);
+                        }
+                      }
+                    }}
+                  />
                 ) : (
                   <div className={styles.defaultThumbnail}>
-                    <i className="fas fa-play-circle"></i>
+                    {isNicoVideo(item.mainVideo) ? (
+                      <>
+                        <i className="fas fa-video" style={{ fontSize: '3rem', marginBottom: '0.5rem' }}></i>
+                        <span style={{ fontSize: '0.9rem', fontWeight: 'bold' }}>ニコニコ動画</span>
+                      </>
+                    ) : (
+                      <i className="fas fa-play-circle"></i>
+                    )}
                   </div>
                 )}
                 <div className={styles.overlay}>
@@ -348,6 +460,17 @@ const Portfolio = () => {
                     <div className={styles.xEmbed}>
                       {/* X投稿の埋め込み - JavaScriptで動的に生成 */}
                     </div>
+                  ) : isNicoVideo(currentMedia) ? (
+                    <iframe
+                      key={`nico-${selectedMediaIndex}`}
+                      src={`https://embed.nicovideo.jp/watch/${getNicoVideoId(currentMedia)}`}
+                      title="Niconico video player"
+                      frameBorder="0"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                      allowFullScreen
+                      className={styles.videoFrame}
+                      onLoad={() => setIsMediaLoading(false)}
+                    ></iframe>
                   ) : (
                     <iframe
                       key={`youtube-${selectedMediaIndex}`}
@@ -383,7 +506,7 @@ const Portfolio = () => {
               <div className={styles.modalSidebar}>
                 <div className={styles.mediaThumbnails}>
                   {allMedia.map((media, index) => {
-                    const thumbnail = getYouTubeThumbnailMQ(media);
+                    const thumbnail = getThumbnailMQ(media);
                     const isActive = index === selectedMediaIndex;
                     
                     // ラベル表示ロジック
@@ -407,10 +530,58 @@ const Portfolio = () => {
                         }}
                       >
                         {thumbnail ? (
-                          <img src={thumbnail} alt={`Media ${index + 1}`} />
+                          <img 
+                            src={thumbnail} 
+                            alt={`Media ${index + 1}`}
+                            onError={(e) => {
+                              // ニコニコ動画のサムネイル読み込み失敗時、別の拡張子を試す
+                              if (isNicoVideo(media)) {
+                                const videoId = getNicoVideoId(media);
+                                if (!videoId) return;
+                                
+                                const currentSrc = e.target.src;
+                                const extensions = ['png', 'jpg', 'webp'];
+                                let triedExtension = null;
+                                
+                                // 現在試した拡張子を特定
+                                for (const ext of extensions) {
+                                  if (currentSrc.endsWith(`.${ext}`)) {
+                                    triedExtension = ext;
+                                    break;
+                                  }
+                                }
+                                
+                                // 次の拡張子を試す
+                                if (triedExtension) {
+                                  const currentIndex = extensions.indexOf(triedExtension);
+                                  const nextIndex = currentIndex + 1;
+                                  
+                                  if (nextIndex < extensions.length) {
+                                    // 次の拡張子で再試行
+                                    e.target.src = `/images/works/niconico_thumbnail/${videoId}.${extensions[nextIndex]}`;
+                                    return;
+                                  }
+                                }
+                                
+                                // すべての拡張子を試した後、デフォルトアイコンを表示
+                                e.target.style.display = 'none';
+                                const wrapper = e.target.parentElement;
+                                if (wrapper && !wrapper.querySelector(`.${styles.defaultThumb}`)) {
+                                  const fallback = document.createElement('div');
+                                  fallback.className = styles.defaultThumb;
+                                  fallback.innerHTML = '<i class="fas fa-video"></i>';
+                                  wrapper.insertBefore(fallback, wrapper.firstChild);
+                                }
+                              }
+                            }}
+                          />
                         ) : (
                           <div className={styles.defaultThumb}>
-                            <i className="fab fa-x-twitter"></i>
+                            {isNicoVideo(media) ? (
+                              <i className="fas fa-video"></i>
+                            ) : (
+                              <i className="fab fa-x-twitter"></i>
+                            )}
                           </div>
                         )}
                         {label && (
