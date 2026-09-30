@@ -113,15 +113,14 @@ const Portfolio = () => {
   };
 
   // ニコニコ動画 サムネイルURLを取得（カード用）
-  // 直接imgタグで読み込み、エラー時はフォールバック
+  // /public/images/works/niconico_thumbnail/{videoId}.{拡張子} から読み込む
   const getNicoThumbnail = (url) => {
     const videoId = getNicoVideoId(url);
     if (!videoId) return null;
     
-    const numericId = videoId.replace('sm', '');
-    // 一般的なサムネイルURLパターンを返す
-    // 実際のランダム数字は不明だが、デフォルトパターンを試す
-    return `https://nicovideo.cdn.nimg.jp/thumbnails/${numericId}/${numericId}.jpg`;
+    // png, jpg, webp の順で試す（最初に見つかった画像を使用）
+    // 実際のフォールバックは img タグの onError で処理される
+    return `/images/works/niconico_thumbnail/${videoId}.png`;
   };
 
   // ニコニコ動画 サムネイルURLを取得（モーダル用）
@@ -304,8 +303,36 @@ const Portfolio = () => {
                     alt={item.title} 
                     className={styles.thumbnail}
                     onError={(e) => {
-                      // ニコニコ動画のサムネイル読み込み失敗時、デフォルトアイコンを表示
+                      // ニコニコ動画のサムネイル読み込み失敗時、別の拡張子を試す
                       if (isNicoVideo(item.mainVideo)) {
+                        const videoId = getNicoVideoId(item.mainVideo);
+                        if (!videoId) return;
+                        
+                        const currentSrc = e.target.src;
+                        const extensions = ['png', 'jpg', 'webp'];
+                        let triedExtension = null;
+                        
+                        // 現在試した拡張子を特定
+                        for (const ext of extensions) {
+                          if (currentSrc.endsWith(`.${ext}`)) {
+                            triedExtension = ext;
+                            break;
+                          }
+                        }
+                        
+                        // 次の拡張子を試す
+                        if (triedExtension) {
+                          const currentIndex = extensions.indexOf(triedExtension);
+                          const nextIndex = currentIndex + 1;
+                          
+                          if (nextIndex < extensions.length) {
+                            // 次の拡張子で再試行
+                            e.target.src = `/images/works/niconico_thumbnail/${videoId}.${extensions[nextIndex]}`;
+                            return;
+                          }
+                        }
+                        
+                        // すべての拡張子を試した後、デフォルトアイコンを表示
                         e.target.style.display = 'none';
                         const wrapper = e.target.parentElement;
                         if (wrapper && !wrapper.querySelector(`.${styles.defaultThumbnail}`)) {
@@ -507,8 +534,36 @@ const Portfolio = () => {
                             src={thumbnail} 
                             alt={`Media ${index + 1}`}
                             onError={(e) => {
-                              // ニコニコ動画のサムネイル読み込み失敗時
+                              // ニコニコ動画のサムネイル読み込み失敗時、別の拡張子を試す
                               if (isNicoVideo(media)) {
+                                const videoId = getNicoVideoId(media);
+                                if (!videoId) return;
+                                
+                                const currentSrc = e.target.src;
+                                const extensions = ['png', 'jpg', 'webp'];
+                                let triedExtension = null;
+                                
+                                // 現在試した拡張子を特定
+                                for (const ext of extensions) {
+                                  if (currentSrc.endsWith(`.${ext}`)) {
+                                    triedExtension = ext;
+                                    break;
+                                  }
+                                }
+                                
+                                // 次の拡張子を試す
+                                if (triedExtension) {
+                                  const currentIndex = extensions.indexOf(triedExtension);
+                                  const nextIndex = currentIndex + 1;
+                                  
+                                  if (nextIndex < extensions.length) {
+                                    // 次の拡張子で再試行
+                                    e.target.src = `/images/works/niconico_thumbnail/${videoId}.${extensions[nextIndex]}`;
+                                    return;
+                                  }
+                                }
+                                
+                                // すべての拡張子を試した後、デフォルトアイコンを表示
                                 e.target.style.display = 'none';
                                 const wrapper = e.target.parentElement;
                                 if (wrapper && !wrapper.querySelector(`.${styles.defaultThumb}`)) {
