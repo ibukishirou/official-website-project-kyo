@@ -15,7 +15,6 @@ const Portfolio = () => {
   const [selectedMediaIndex, setSelectedMediaIndex] = useState(0);
   const [isTabChanging, setIsTabChanging] = useState(false);
   const [isMediaLoading, setIsMediaLoading] = useState(true);
-  const [nicoThumbnails, setNicoThumbnails] = useState({});
 
   // URLパラメータが変更されたらタブを更新
   useEffect(() => {
@@ -34,22 +33,6 @@ const Portfolio = () => {
       navigate('/works/portfolio/basic', { replace: true });
     }
   }, [plan, navigate, activeTab]);
-
-  // ニコニコ動画のサムネイルを事前取得
-  useEffect(() => {
-    // 全てのポートフォリオアイテムからニコニコ動画を抽出
-    const nicoVideos = portfolioData
-      .filter(item => isNicoVideo(item.mainVideo))
-      .map(item => getNicoVideoId(item.mainVideo))
-      .filter(Boolean);
-
-    // 各動画のサムネイルを取得
-    nicoVideos.forEach(videoId => {
-      if (!nicoThumbnails[videoId]) {
-        fetchNicoThumbnail(videoId);
-      }
-    });
-  }, []);
 
   // 選択中のプランでフィルタリング
   const filteredItems = portfolioData.filter(item => item.plan === activeTab);
@@ -130,55 +113,20 @@ const Portfolio = () => {
   };
 
   // ニコニコ動画 サムネイルURLを取得（カード用）
+  // 直接imgタグで読み込み、エラー時はフォールバック
   const getNicoThumbnail = (url) => {
     const videoId = getNicoVideoId(url);
     if (!videoId) return null;
     
-    // キャッシュから取得
-    if (nicoThumbnails[videoId]) {
-      return nicoThumbnails[videoId];
-    }
-    
-    // まだ取得していない場合、非同期で取得
-    fetchNicoThumbnail(videoId);
-    
-    // 取得中はnullを返す（ローディング状態）
-    return null;
+    const numericId = videoId.replace('sm', '');
+    // 一般的なサムネイルURLパターンを返す
+    // 実際のランダム数字は不明だが、デフォルトパターンを試す
+    return `https://nicovideo.cdn.nimg.jp/thumbnails/${numericId}/${numericId}.jpg`;
   };
 
   // ニコニコ動画 サムネイルURLを取得（モーダル用）
   const getNicoThumbnailMQ = (url) => {
     return getNicoThumbnail(url);
-  };
-
-  // ニコニコ動画のサムネイルを非同期で取得
-  const fetchNicoThumbnail = async (videoId) => {
-    try {
-      // getthumbinfo APIを呼び出してXMLをパース
-      const response = await fetch(`https://ext.nicovideo.jp/api/getthumbinfo/${videoId}`);
-      const text = await response.text();
-      
-      // XMLからthumbnail_urlを抽出
-      const match = text.match(/<thumbnail_url>([^<]+)<\/thumbnail_url>/);
-      if (match && match[1]) {
-        const baseUrl = match[1];
-        // .L サフィックスを追加（360x270の画質）
-        const thumbnailUrl = `${baseUrl}.L`;
-        
-        // stateに保存
-        setNicoThumbnails(prev => ({
-          ...prev,
-          [videoId]: thumbnailUrl
-        }));
-      }
-    } catch (error) {
-      console.error(`Failed to fetch Nico thumbnail for ${videoId}:`, error);
-      // エラー時はnullを保存（デフォルトアイコンを表示）
-      setNicoThumbnails(prev => ({
-        ...prev,
-        [videoId]: null
-      }));
-    }
   };
 
   // 汎用サムネイル取得（カード用）
@@ -351,7 +299,27 @@ const Portfolio = () => {
             >
               <div className={styles.thumbnailWrapper}>
                 {thumbnail ? (
-                  <img src={thumbnail} alt={item.title} className={styles.thumbnail} />
+                  <img 
+                    src={thumbnail} 
+                    alt={item.title} 
+                    className={styles.thumbnail}
+                    onError={(e) => {
+                      // ニコニコ動画のサムネイル読み込み失敗時、デフォルトアイコンを表示
+                      if (isNicoVideo(item.mainVideo)) {
+                        e.target.style.display = 'none';
+                        const wrapper = e.target.parentElement;
+                        if (wrapper && !wrapper.querySelector(`.${styles.defaultThumbnail}`)) {
+                          const fallback = document.createElement('div');
+                          fallback.className = styles.defaultThumbnail;
+                          fallback.innerHTML = `
+                            <i class="fas fa-video" style="font-size: 3rem; margin-bottom: 0.5rem;"></i>
+                            <span style="font-size: 0.9rem; font-weight: bold;">ニコニコ動画</span>
+                          `;
+                          wrapper.insertBefore(fallback, wrapper.firstChild);
+                        }
+                      }
+                    }}
+                  />
                 ) : (
                   <div className={styles.defaultThumbnail}>
                     {isNicoVideo(item.mainVideo) ? (
@@ -535,7 +503,23 @@ const Portfolio = () => {
                         }}
                       >
                         {thumbnail ? (
-                          <img src={thumbnail} alt={`Media ${index + 1}`} />
+                          <img 
+                            src={thumbnail} 
+                            alt={`Media ${index + 1}`}
+                            onError={(e) => {
+                              // ニコニコ動画のサムネイル読み込み失敗時
+                              if (isNicoVideo(media)) {
+                                e.target.style.display = 'none';
+                                const wrapper = e.target.parentElement;
+                                if (wrapper && !wrapper.querySelector(`.${styles.defaultThumb}`)) {
+                                  const fallback = document.createElement('div');
+                                  fallback.className = styles.defaultThumb;
+                                  fallback.innerHTML = '<i class="fas fa-video"></i>';
+                                  wrapper.insertBefore(fallback, wrapper.firstChild);
+                                }
+                              }
+                            }}
+                          />
                         ) : (
                           <div className={styles.defaultThumb}>
                             {isNicoVideo(media) ? (
