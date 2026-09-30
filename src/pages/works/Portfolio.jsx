@@ -113,15 +113,19 @@ const Portfolio = () => {
   };
 
   // ニコニコ動画 サムネイルURLを取得（カード用）
+  // 注意: ニコニコ動画の高画質サムネイルにはランダムなキーが必要で、
+  // クライアントサイドからCORS制限により取得不可能
+  // そのため、nullを返してデフォルトアイコンを表示
   const getNicoThumbnail = (url) => {
-    const videoId = getNicoVideoId(url);
-    return videoId ? `https://img.cdn.nimg.jp/s/nicovideo/thumbnails/${videoId.slice(2)}/${videoId}.jpg` : null;
+    // サムネイル取得不可のため、nullを返す
+    // カードコンポーネントでデフォルトアイコン（ニコニコ動画ロゴ）を表示
+    return null;
   };
 
   // ニコニコ動画 サムネイルURLを取得（モーダル用）
   const getNicoThumbnailMQ = (url) => {
-    // ニコニコ動画はカード用と同じサムネイルを使用
-    return getNicoThumbnail(url);
+    // モーダルのサムネイル一覧でもnullを返し、ニコニコ動画アイコンを表示
+    return null;
   };
 
   // 汎用サムネイル取得（カード用）
@@ -283,7 +287,14 @@ const Portfolio = () => {
                   <img src={thumbnail} alt={item.title} className={styles.thumbnail} />
                 ) : (
                   <div className={styles.defaultThumbnail}>
-                    <i className="fas fa-play-circle"></i>
+                    {isNicoVideo(item.mainVideo) ? (
+                      <>
+                        <i className="fas fa-video" style={{ fontSize: '3rem', marginBottom: '0.5rem' }}></i>
+                        <span style={{ fontSize: '0.9rem', fontWeight: 'bold' }}>ニコニコ動画</span>
+                      </>
+                    ) : (
+                      <i className="fas fa-play-circle"></i>
+                    )}
                   </div>
                 )}
                 <div className={styles.overlay}>
@@ -460,7 +471,11 @@ const Portfolio = () => {
                           <img src={thumbnail} alt={`Media ${index + 1}`} />
                         ) : (
                           <div className={styles.defaultThumb}>
-                            <i className="fab fa-x-twitter"></i>
+                            {isNicoVideo(media) ? (
+                              <i className="fas fa-video"></i>
+                            ) : (
+                              <i className="fab fa-x-twitter"></i>
+                            )}
                           </div>
                         )}
                         {label && (
