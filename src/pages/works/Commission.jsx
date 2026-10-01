@@ -157,8 +157,8 @@ const Commission = () => {
             <ol className={styles.flowList}>
               <li><span className={styles.flowNumber}>1</span><span className={styles.flowText}>ご依頼内容の確認/お見積り</span></li>
               <li><span className={styles.flowNumber}>2</span><span className={styles.flowText}>お支払い</span></li>
-              <li><span className={styles.flowNumber}>3</span><span className={styles.flowText}>着手</span></li>
-              <li><span className={styles.flowNumber}>4</span><span className={styles.flowText}>提出/修正</span></li>
+              <li><span className={styles.flowNumber}>3</span><span className={styles.flowText}>1コーラス提出/修正</span></li>
+              <li><span className={styles.flowNumber}>4</span><span className={styles.flowText}>フル提出/修正</span></li>
               <li><span className={styles.flowNumber}>5</span><span className={styles.flowText}>納品</span></li>
             </ol>
           </div>
@@ -183,7 +183,6 @@ const Commission = () => {
             <div className={styles.noticeSection}>
               <h3 className={styles.notesTitle}>お願い事項</h3>
               <ul className={styles.noticeList}>
-                <li>作成したい動画の縦横比にあった素材をご提出ください<br />※意図的なものは除く(横動画をショートで使用など)</li>
                 <li>音声のみの素材は wavまたはmp3 でご提出ください</li>
                 <li>やり取りが遅くなると納品も遅れます、できる限り迅速なやり取りをお願いします</li>
                 <li>歌ってみたのご依頼で、MIX音源が未完成の状態で依頼をする場合は、MIX前の音源をご提出ください。</li>

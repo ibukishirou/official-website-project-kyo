@@ -54,7 +54,7 @@ const WorksHome = () => {
           <div className={styles.plansContent}>
             <div className={styles.videoWrapper}>
               <iframe
-                src="https://www.youtube.com/embed/JDE0ewe9u0c"
+                src="https://www.youtube.com/embed/FFS6x_oLb_k"
                 title="プラン紹介動画"
                 frameBorder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
